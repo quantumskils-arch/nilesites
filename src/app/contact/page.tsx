@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import CTASection from "@/components/CTASection";
-
-const WHATSAPP_NUMBER = "256778030847";
+import { whatsappLink } from "@/lib/wa";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -48,7 +47,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-medium text-navy-900">WhatsApp</h3>
                     <p className="text-gray-500 text-sm">Fastest response. We typically reply within 2 hours.</p>
-                    <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="text-gold-600 font-medium text-sm hover:text-gold-700">Chat now &rarr;</a>
+                    <a href={whatsappLink("Hi NileSites! I'd like to talk about a website.")} target="_blank" rel="noopener noreferrer" className="text-gold-600 font-medium text-sm hover:text-gold-700">Chat now &rarr;</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -81,7 +80,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium text-navy-900 text-sm">MTN Mobile Money</p>
-                    <p className="text-gray-500 text-xs">Pay via MoMo to 256778030847</p>
+                    <p className="text-gray-500 text-xs">Pay via MoMo to our WhatsApp number</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
@@ -90,7 +89,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium text-navy-900 text-sm">Airtel Money</p>
-                    <p className="text-gray-500 text-xs">Pay via Airtel Money to 256778030847</p>
+                    <p className="text-gray-500 text-xs">Pay via Airtel Money to our WhatsApp number</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
@@ -108,6 +107,72 @@ export default function ContactPage() {
               </p>
             </div>
           </div>
+        </div>
+      </motion.section>
+
+      <motion.section className="py-20 bg-white" {...fadeUp}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-navy-900 text-center mb-4">Send Us a Message</h2>
+          <p className="text-gray-600 text-center max-w-2xl mx-auto mb-12">
+            Prefer a form? Tell us about your project and we&apos;ll get back to you within 2 hours.
+          </p>
+          <form
+            className="bg-gray-50 rounded-xl border border-gray-100 p-8 space-y-5 max-w-2xl mx-auto"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.currentTarget as HTMLFormElement;
+              const data = new FormData(form);
+              const btn = form.querySelector("button[type=submit]") as HTMLButtonElement;
+              btn.disabled = true;
+              btn.textContent = "Sending...";
+              try {
+                const res = await fetch("/api/leads", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    name: data.get("name"),
+                    phone: data.get("phone"),
+                    email: data.get("email"),
+                    message: data.get("message"),
+                  }),
+                });
+                if (res.ok) {
+                  form.innerHTML =
+                    '<div class="text-center py-8"><div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><h3 class="text-xl font-bold text-navy-900 mb-2">Message Sent! 🎉</h3><p class="text-gray-600">We&apos;ll get back to you within 2 hours on WhatsApp.</p></div>';
+                } else {
+                  btn.disabled = false;
+                  btn.textContent = "Send Message";
+                  alert("Something went wrong. Please try again or WhatsApp us directly.");
+                }
+              } catch {
+                btn.disabled = false;
+                btn.textContent = "Send Message";
+                alert("Something went wrong. Please try again or WhatsApp us directly.");
+              }
+            }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-medium text-navy-900 mb-1.5" htmlFor="name">Your Name *</label>
+                <input id="name" name="name" type="text" required placeholder="e.g. Sarah Nakato" className="w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-navy-900 mb-1.5" htmlFor="phone">Phone (WhatsApp) *</label>
+                <input id="phone" name="phone" type="tel" required placeholder="e.g. +256 7XX XXX XXX" className="w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-navy-900 mb-1.5" htmlFor="email">Email (optional)</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" className="w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-navy-900 mb-1.5" htmlFor="message">Tell us about your project</label>
+              <textarea id="message" name="message" rows={4} placeholder="What kind of website do you need?" className="w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gold-400" />
+            </div>
+            <button type="submit" className="w-full bg-gold-500 text-navy-900 py-3 rounded-lg font-semibold hover:bg-gold-400 transition-colors">
+              Send Message
+            </button>
+          </form>
         </div>
       </motion.section>
 

@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "256778030847";
+import { whatsappLink } from "@/lib/wa";
 
 export default function CTASection() {
   return (
@@ -14,7 +14,7 @@ export default function CTASection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20NileSites!%20I'd%20like%20to%20get%20a%20website%20for%20my%20business.`}
+            href={whatsappLink("Hi NileSites! I'd like to get a website for my business.")}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gold-500 text-navy-900 px-8 py-3 rounded-lg font-semibold hover:bg-gold-400 transition-colors"

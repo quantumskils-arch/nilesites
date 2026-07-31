@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import CTASection from "@/components/CTASection";
-
-const WHATSAPP_NUMBER = "256778030847";
+import { whatsappLink } from "@/lib/wa";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -13,9 +12,9 @@ const fadeUp = {
 };
 
 const plans = [
-  { name: "Starter", price: "450,000", desc: "Perfect for new businesses starting their online presence", popular: false, features: ["1–5 page static site", "Mobile responsive design", "WhatsApp contact button", "Basic SEO setup", "1 round of revisions", "1 year hosting included"] },
-  { name: "Standard", price: "900,000", desc: "Best for growing businesses ready to scale", popular: true, features: ["Up to 10 pages with CMS", "MoMo payment integration", "Google Business Profile setup", "Photo gallery & catalog", "Contact form with auto-reply", "SEO optimization", "3 rounds of revisions"] },
-  { name: "Premium", price: "1,500,000", desc: "Industry-specific solutions with custom features", popular: false, features: ["Booking/inventory systems", "E-commerce cart", "Custom forms & workflows", "Advanced SEO package", "Unlimited revisions", "Priority support", "Custom integrations"] },
+  { name: "Starter", price: "450,000", desc: "Perfect for new businesses starting their online presence", popular: false, delivery: "3–5 business days", specs: "1GB storage · SSL · 1 email account", features: ["1–5 page static site", "Mobile responsive design", "WhatsApp contact button", "Basic SEO setup", "1 round of revisions", "1 year hosting included", "Free .com domain (1 year)"] },
+  { name: "Standard", price: "900,000", desc: "Best for growing businesses ready to scale", popular: true, delivery: "5–10 business days", specs: "5GB storage · SSL · 5 email accounts", features: ["Up to 10 pages with CMS", "MoMo payment integration", "Google Business Profile setup", "Photo gallery & catalog", "Contact form with auto-reply", "SEO optimization", "3 rounds of revisions", "Free .com domain (1 year)"] },
+  { name: "Premium", price: "1,500,000", desc: "Industry-specific solutions with custom features", popular: false, delivery: "10–20 business days", specs: "15GB storage · SSL · 10 email accounts", features: ["Booking/inventory systems", "E-commerce cart", "Custom forms & workflows", "Advanced SEO package", "Unlimited revisions", "Priority support", "Custom integrations", "Free .com domain (1 year)"] },
 ];
 
 const addOns = [
@@ -62,10 +61,14 @@ export default function PricingPage() {
                 )}
                 <h3 className="text-lg font-semibold text-navy-900 mb-1">{plan.name}</h3>
                 <p className="text-sm text-gray-500 mb-4">{plan.desc}</p>
-                <p className="text-3xl font-bold text-navy-900 mb-6">
+                <p className="text-3xl font-bold text-navy-900 mb-2">
                   UGX {plan.price}
                   <span className="text-sm font-normal text-gray-500"> starting</span>
                 </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">⏱ {plan.delivery}</span>
+                  <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">💾 {plan.specs}</span>
+                </div>
                 <ul className="space-y-3 mb-8 text-sm">
                   {plan.features.map((item) => (
                     <li key={item} className="flex items-start gap-2">
@@ -77,7 +80,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
                 <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20NileSites!%20I'm%20interested%20in%20the%20${plan.name}%20plan%20(UGX%20${plan.price}).`}
+                  href={whatsappLink(`Hi NileSites! I'm interested in the ${plan.name} plan (UGX ${plan.price}).`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`block w-full text-center px-6 py-3 rounded-lg font-medium transition-all ${
@@ -90,7 +93,7 @@ export default function PricingPage() {
             ))}
           </div>
           <p className="text-center text-sm text-gray-500 mt-6">
-            All prices exclude domain registration (UGX 50,000–100,000/yr). Payable via MTN MoMo or Airtel Money.
+            All plans include a free .com domain for the first year and 1 year of hosting. Subsequent years: domain UGX 50,000–100,000/yr depending on extension. Payable via MTN MoMo or Airtel Money.
           </p>
         </div>
       </motion.section>
@@ -119,6 +122,26 @@ export default function PricingPage() {
         </div>
       </motion.section>
 
+      <motion.section className="py-20 bg-navy-800" {...fadeUp}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="inline-block bg-gold-500/20 text-gold-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-gold-500/30">
+            🤖 Powered by Akiba AI
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Try Our AI Assistant</h2>
+          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+            See it in action — click the gold chat bubble in the bottom-left corner of this page and ask about our services. That&apos;s the same bot we build for your business.
+          </p>
+          <a
+            href={whatsappLink("Hi NileSites! I'd like a demo of the Akiba AI bot for my business.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-gold-500 text-navy-900 px-8 py-3 rounded-lg font-semibold hover:bg-gold-400 transition-colors"
+          >
+            Get a Live Demo
+          </a>
+        </div>
+      </motion.section>
+
       <motion.section className="py-20 bg-navy-900" {...fadeUp}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Need Something Custom?</h2>
@@ -126,7 +149,7 @@ export default function PricingPage() {
             Every business is different. Tell us what you need and we&apos;ll build a plan around it.
           </p>
           <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20NileSites!%20I'd%20like%20a%20custom%20quote%20for%20my%20business%20website.`}
+            href={whatsappLink("Hi NileSites! I'd like a custom quote for my business website.")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-gold-500 text-navy-900 px-8 py-3 rounded-lg font-semibold hover:bg-gold-400 transition-colors"

@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import CTASection from "@/components/CTASection";
-
-const WHATSAPP_NUMBER = "256778030847";
+import { whatsappLink } from "@/lib/wa";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -38,6 +37,8 @@ const stats = [
 const testimonials = [
   { quote: "NileSites built our kindergarten website and handled everything from domain to hosting. Parents love being able to check updates online.", author: "Sarah Nakato", role: "Director, Little Steps Kindergarten" },
   { quote: "Professional work at a fair price. Our church website has increased new visitor inquiries significantly.", author: "Pastor David Okello", role: "Lead Pastor, Victory Chapel" },
+  { quote: "The team set up my shop's website with MTN MoMo payments in under two weeks. Customers are now ordering online every day.", author: "Grace Auma", role: "Owner, Grace Fashion Boutique" },
+  { quote: "I was skeptical about getting a website, but NileSites made the whole process simple. They even set up my Google Business Profile — I'm getting calls from Google Maps now.", author: "James Mugisha", role: "Manager, Mugisha Car Bond" },
 ];
 
 export default function HomePage() {
@@ -69,7 +70,7 @@ export default function HomePage() {
                 See Plans & Pricing
               </Link>
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20NileSites!%20I'd%20like%20to%20get%20a%20website%20for%20my%20business.`}
+                href={whatsappLink("Hi NileSites! I'd like to get a website for my business.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-2 border-gray-500/40 text-gray-300 px-8 py-3.5 rounded-lg font-semibold hover:border-gold-500/60 hover:text-gold-400 transition-all text-center"
@@ -96,6 +97,21 @@ export default function HomePage() {
                 <div className="text-3xl sm:text-4xl font-bold text-gold-500 mb-1">{stat.value}</div>
                 <div className="text-sm text-gray-500">{stat.label}</div>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section className="py-12 bg-navy-900 border-y border-navy-700" {...fadeUp}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-center">
+            {["MTN MoMo", "Airtel Money", "Google Business", "SSL Secured", "99.9% Uptime", "SEO Optimized"].map((item) => (
+              <span key={item} className="text-sm font-medium text-gray-400 flex items-center gap-2">
+                <svg className="w-4 h-4 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                {item}
+              </span>
             ))}
           </div>
         </div>
@@ -181,7 +197,7 @@ export default function HomePage() {
           </div>
           <motion.div className="text-center mt-10" {...fadeUp}>
             <p className="text-gray-500 mb-4">Don&apos;t see your business type? We probably build for it too.</p>
-            <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20NileSites!%20Can%20you%20build%20a%20website%20for%20my%20business%20type?`} target="_blank" rel="noopener noreferrer" className="text-gold-600 font-medium hover:text-gold-700">
+            <a href={whatsappLink("Hi NileSites! Can you build a website for my business type?")} target="_blank" rel="noopener noreferrer" className="text-gold-600 font-medium hover:text-gold-700">
               Ask us &rarr;
             </a>
           </motion.div>
@@ -230,9 +246,9 @@ export default function HomePage() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
-              { name: "Starter", price: "450,000", desc: "Perfect for new businesses", popular: false, features: ["1–5 page static site", "Mobile responsive design", "WhatsApp contact button", "Basic SEO setup", "1 round of revisions", "1 year hosting included"] },
-              { name: "Standard", price: "900,000", desc: "Best for growing businesses", popular: true, features: ["Up to 10 pages with CMS", "MoMo payment integration", "Google Business Profile setup", "Photo gallery & catalog", "Contact form with auto-reply", "SEO optimization", "3 rounds of revisions"] },
-              { name: "Premium", price: "1,500,000", desc: "Industry-specific solutions", popular: false, features: ["Booking/inventory systems", "E-commerce cart", "Custom forms & workflows", "Advanced SEO package", "Unlimited revisions", "Priority support", "Custom integrations"] },
+              { name: "Starter", price: "450,000", desc: "Perfect for new businesses", popular: false, delivery: "3–5 business days", specs: "1GB storage · SSL", features: ["1–5 page static site", "Mobile responsive design", "WhatsApp contact button", "Basic SEO setup", "1 round of revisions", "1 year hosting included", "Free .com domain (1 year)"] },
+              { name: "Standard", price: "900,000", desc: "Best for growing businesses", popular: true, delivery: "5–10 business days", specs: "5GB storage · SSL", features: ["Up to 10 pages with CMS", "MoMo payment integration", "Google Business Profile setup", "Photo gallery & catalog", "Contact form with auto-reply", "SEO optimization", "3 rounds of revisions", "Free .com domain (1 year)"] },
+              { name: "Premium", price: "1,500,000", desc: "Industry-specific solutions", popular: false, delivery: "10–20 business days", specs: "15GB storage · SSL", features: ["Booking/inventory systems", "E-commerce cart", "Custom forms & workflows", "Advanced SEO package", "Unlimited revisions", "Priority support", "Custom integrations", "Free .com domain (1 year)"] },
             ].map((plan, i) => (
               <motion.div
                 key={plan.name}
@@ -253,10 +269,14 @@ export default function HomePage() {
                 )}
                 <h3 className="text-lg font-semibold text-navy-900 mb-1">{plan.name}</h3>
                 <p className="text-sm text-gray-500 mb-4">{plan.desc}</p>
-                <p className="text-3xl font-bold text-navy-900 mb-6">
+                <p className="text-3xl font-bold text-navy-900 mb-2">
                   UGX {plan.price}
                   <span className="text-sm font-normal text-gray-500"> starting</span>
                 </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">⏱ {plan.delivery}</span>
+                  <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">💾 {plan.specs}</span>
+                </div>
                 <ul className="space-y-3 mb-8 text-sm">
                   {plan.features.map((item) => (
                     <li key={item} className="flex items-start gap-2">
@@ -268,7 +288,7 @@ export default function HomePage() {
                   ))}
                 </ul>
                 <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20NileSites!%20I'm%20interested%20in%20the%20${plan.name}%20plan%20(UGX%20${plan.price}).`}
+                  href={whatsappLink(`Hi NileSites! I'm interested in the ${plan.name} plan (UGX ${plan.price}).`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`block w-full text-center px-6 py-3 rounded-lg font-medium transition-all ${
@@ -283,7 +303,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="text-center text-sm text-gray-500 mt-6">
-            All prices exclude domain registration (UGX 50,000–100,000/yr). Payable via MTN MoMo or Airtel Money.
+            All plans include a free .com domain for the first year and 1 year of hosting. Payable via MTN MoMo or Airtel Money.
           </p>
         </div>
       </motion.section>
@@ -298,9 +318,9 @@ export default function HomePage() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Opportunity Radar Africa", tag: "Tech / AI", desc: "AI-powered platform connecting East African businesses with tenders, grants, jobs, and market intelligence.", url: "https://opportunityradar.africa" },
-              { title: "Little Steps Kindergarten", tag: "Education", desc: "Multi-page school site with gallery, events calendar, and parent portal." },
-              { title: "Victory Chapel Church", tag: "Religious", desc: "Full church site with sermon archive, event booking, and donation integration." },
+              { title: "Opportunity Radar Africa", tag: "Tech / AI", desc: "AI-powered platform connecting East African businesses with tenders, grants, jobs, and market intelligence.", url: "https://opportunityradar.africa", img: "/portfolio/opportunityradar.africa.png" },
+              { title: "Chosen Center for Christ", tag: "Religious", desc: "Church site with AI Bible chat, Paystack giving, newsletter, and WhatsApp CTAs.", url: "https://chosen-center-christ.vercel.app", img: "/portfolio/chosen-center-christ.vercel.app.png" },
+              { title: "Uganda Job Vault", tag: "Jobs", desc: "Job aggregator for the Ugandan market with clean searchable interface.", url: "https://uganda-job-vault.vercel.app", img: "/portfolio/uganda-job-vault.vercel.app.png" },
             ].map((project, i) => (
               <motion.div
                 key={project.title}
@@ -311,10 +331,9 @@ export default function HomePage() {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
               >
                 <div className="aspect-video bg-gradient-to-br from-navy-800 to-navy-900 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent" />
-                  <svg className="w-16 h-16 text-gold-500/30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
+                  {project.img && (
+                    <img src={project.img} alt={project.title} className="w-full h-full object-cover object-top" loading="lazy" />
+                  )}
                   {project.url && (
                     <a href={project.url} target="_blank" rel="noopener noreferrer" className="absolute top-3 right-3 z-10 bg-gold-500/90 text-navy-900 text-xs font-medium px-2.5 py-1 rounded-full hover:bg-gold-400 transition-colors">
                       Live &rarr;
@@ -339,6 +358,70 @@ export default function HomePage() {
               View Full Portfolio &rarr;
             </Link>
           </motion.div>
+        </div>
+      </motion.section>
+
+      <motion.section className="py-20 bg-white" {...fadeUp}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div className="text-center mb-16" {...fadeUp}>
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">How It Works</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              From first message to launch in as little as 3 days. No jargon, no surprises.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { step: "1", title: "Chat With Us", desc: "Message us on WhatsApp. Tell us about your business and what you want to achieve." },
+              { step: "2", title: "Get a Fixed Quote", desc: "We send a clear quote and timeline within 24 hours. No hidden fees, ever." },
+              { step: "3", title: "We Build It", desc: "We design, build, and set up your domain, hosting, and payments. You review and approve." },
+              { step: "4", title: "Launch & Grow", desc: "Your site goes live. We keep it updated, secure, and ranking with ongoing support." },
+            ].map((item, i) => (
+              <motion.div
+                key={item.step}
+                className="relative bg-gray-50 rounded-xl p-6 border border-gray-100 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+              >
+                <div className="w-12 h-12 bg-gold-500 rounded-full flex items-center justify-center mx-auto mb-4 text-navy-900 font-bold text-lg">
+                  {item.step}
+                </div>
+                <h3 className="font-semibold text-navy-900 mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-600">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section className="py-20 bg-gray-50" {...fadeUp}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div className="text-center mb-16" {...fadeUp}>
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">Why Not a Freelancer or DIY Builder?</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              We&apos;ve seen too many businesses get burned. Here&apos;s what makes us different.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              { title: "You Get a Team, Not a Ghost", desc: "Freelancers disappear mid-project. We're a registered agency with a team — you always have someone to call." },
+              { title: "Everything Done for You", desc: "Domain, hosting, SSL, email, payments, Google Business — we handle it all. You never touch technical settings." },
+              { title: "We Stay After Launch", desc: "DIY builders stop at 'it's live.' We offer maintenance, updates, and support so your site keeps working and ranking." },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                className="bg-white rounded-xl p-8 border border-gray-200 hover:shadow-md transition-all"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <h3 className="text-lg font-semibold text-navy-900 mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.section>
 

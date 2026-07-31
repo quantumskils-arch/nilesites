@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import CTASection from "@/components/CTASection";
-
-const WHATSAPP_NUMBER = "256778030847";
+import { whatsappLink } from "@/lib/wa";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -107,7 +106,7 @@ export default function AkibaAIPage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Automate Your Customer Conversations?</h2>
           <p className="text-gray-300 mb-8">Set up your Akiba AI bot in days, not weeks. Customers get instant responses. You get more time to focus on your business.</p>
           <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20NileSites!%20I'm%20interested%20in%20Akiba%20AI%20for%20my%20business.`}
+            href={whatsappLink("Hi NileSites! I'm interested in Akiba AI for my business.")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-gold-500 text-navy-900 px-8 py-3 rounded-lg font-semibold hover:bg-gold-400 transition-colors"

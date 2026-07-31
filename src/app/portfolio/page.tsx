@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import CTASection from "@/components/CTASection";
+import { whatsappLink } from "@/lib/wa";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -11,9 +12,13 @@ const fadeUp = {
 };
 
 const projects = [
-  { title: "Little Steps Kindergarten", tag: "Education", desc: "Multi-page school site with gallery, events calendar, and parent portal. Mobile-responsive with WhatsApp inquiry integration.", features: ["Mobile-responsive design", "Photo gallery", "Events calendar", "Parent portal", "WhatsApp integration"], url: null },
-  { title: "Victory Chapel Church", tag: "Religious", desc: "Full church site with sermon archive, event booking, mobile money donation, and ministry pages.", features: ["Sermon archive with audio", "Event booking system", "Mobile money donations", "Ministry pages", "Service times"], url: null },
-  { title: "Opportunity Radar Africa", tag: "Tech / AI", desc: "A comprehensive AI-powered opportunity discovery platform connecting East African businesses with tenders, grants, jobs, and market intelligence across 8 countries.", features: ["AI-powered matching", "Multi-country coverage", "Real-time alerts", "MCP server architecture", "WhatsApp & Telegram integration", "Email digest system"], url: "https://opportunityradar.africa" },
+  { title: "Opportunity Radar Africa", tag: "Tech / AI", desc: "A comprehensive AI-powered opportunity discovery platform connecting East African businesses with tenders, grants, jobs, and market intelligence across 8 countries.", features: ["AI-powered matching", "Multi-country coverage", "Real-time alerts", "MCP server architecture", "WhatsApp & Telegram integration", "Email digest system"], url: "https://opportunityradar.africa", img: "/portfolio/opportunityradar.africa.png" },
+  { title: "Chosen Center for Christ", tag: "Religious", desc: "Full church site with AI Bible chat, sermon content, Paystack giving, newsletter, and WhatsApp CTAs.", features: ["AI Bible chat", "Paystack giving", "Newsletter signup", "WhatsApp CTAs", "Programs & events"], url: "https://chosen-center-christ.vercel.app", img: "/portfolio/chosen-center-christ.vercel.app.png" },
+  { title: "Uganda Job Vault", tag: "Jobs", desc: "A job aggregator for the Ugandan market, aggregating fresh vacancies across sectors with a clean searchable interface.", features: ["Job aggregation", "Category filters", "Mobile-first design", "Fast search"], url: "https://uganda-job-vault.vercel.app", img: "/portfolio/uganda-job-vault.vercel.app.png" },
+  { title: "Kazinga LC1", tag: "Government / Community", desc: "A community information portal for Kazinga LC1, keeping residents informed with news, notices, and local resources.", features: ["Community notices", "Local news", "Contact directory", "Mobile-responsive"], url: "https://kazinga-lc1.vercel.app", img: "/portfolio/kazinga-lc1.vercel.app.png" },
+  { title: "Botanical Vault", tag: "E-commerce / Niche", desc: "A specialized e-commerce storefront with product catalog and streamlined checkout.", features: ["Product catalog", "Responsive storefront", "Clean checkout flow"], url: "https://botanical-vault.vercel.app", img: "/portfolio/botanical-vault.vercel.app.png" },
+  { title: "Little Steps Kindergarten", tag: "Education", desc: "Multi-page school site with gallery, events calendar, and parent portal. Mobile-responsive with WhatsApp inquiry integration.", features: ["Mobile-responsive design", "Photo gallery", "Events calendar", "Parent portal", "WhatsApp integration"], url: null, img: null },
+  { title: "Victory Chapel Church", tag: "Religious", desc: "Full church site with sermon archive, event booking, mobile money donation, and ministry pages.", features: ["Sermon archive with audio", "Event booking system", "Mobile money donations", "Ministry pages", "Service times"], url: null, img: null },
 ];
 
 export default function PortfolioPage() {
@@ -43,10 +48,16 @@ export default function PortfolioPage() {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
               >
                 <div className="aspect-video bg-gradient-to-br from-navy-800 to-navy-900 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent" />
-                  <svg className="w-20 h-20 text-gold-500/30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
+                  {project.img ? (
+                    <img src={project.img} alt={project.title} className="w-full h-full object-cover object-top" loading="lazy" />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center">
+                      <svg className="w-20 h-20 text-gold-500/30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <span className="relative z-10 text-xs text-gold-500/50 mt-2">Screenshot coming soon</span>
+                    </div>
+                  )}
                   {project.url && (
                     <a href={project.url} target="_blank" rel="noopener noreferrer" className="absolute top-3 right-3 z-10 bg-gold-500/90 text-navy-900 text-xs font-medium px-2.5 py-1 rounded-full hover:bg-gold-400 transition-colors">
                       Live &rarr;
@@ -78,7 +89,7 @@ export default function PortfolioPage() {
             <h3 className="text-2xl font-bold text-navy-900 mb-2">Want to Be Our Next Success Story?</h3>
             <p className="text-gray-600 mb-6">Your business could be featured here. Let&apos;s build something great together.</p>
             <a
-              href="https://wa.me/256778030847?text=Hi%20NileSites!%20I'd%20like%20to%20discuss%20a%20new%20project."
+              href={whatsappLink("Hi NileSites! I'd like to discuss a new project.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gold-500 text-navy-900 px-8 py-3 rounded-lg font-semibold hover:bg-gold-400 transition-colors"

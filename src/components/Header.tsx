@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { whatsappLink } from "@/lib/wa";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -37,7 +38,7 @@ export default function Header() {
               </Link>
             ))}
             <a
-              href="https://wa.me/256778030847?text=Hi%20NileSites!%20I'm%20interested%20in%20a%20website."
+              href={whatsappLink("Hi NileSites! I'm interested in a website.")}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gold-500 text-navy-900 px-5 py-2 rounded-lg text-sm font-semibold hover:bg-gold-400 transition-colors"
@@ -75,7 +76,7 @@ export default function Header() {
                 </Link>
               ))}
               <a
-                href="https://wa.me/256778030847?text=Hi%20NileSites!%20I'm%20interested%20in%20a%20website."
+                href={whatsappLink("Hi NileSites! I'm interested in a website.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gold-500 text-navy-900 px-5 py-2 rounded-lg text-sm font-semibold text-center hover:bg-gold-400 transition-colors"
