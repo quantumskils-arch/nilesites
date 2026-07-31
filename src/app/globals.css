@@ -1,35 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #2563eb;
-  --color-primary-600: #1d4ed8;
-  --color-primary-700: #1e40af;
-  --color-primary-800: #1e3a8a;
-  --color-primary-900: #172554;
+  --color-navy-50: #e8eaf0;
+  --color-navy-100: #c5c9d9;
+  --color-navy-200: #9ea4c0;
+  --color-navy-300: #777fa7;
+  --color-navy-400: #5a638e;
+  --color-navy-500: #3d4775;
+  --color-navy-600: #2a3460;
+  --color-navy-700: #1a244a;
+  --color-navy-800: #0e1835;
+  --color-navy-900: #0a1628;
 
-  --color-accent-50: #fffbeb;
-  --color-accent-100: #fef3c7;
-  --color-accent-200: #fde68a;
-  --color-accent-300: #fcd34d;
-  --color-accent-400: #fbbf24;
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
-  --color-accent-700: #b45309;
-  --color-accent-800: #92400e;
-  --color-accent-900: #78350f;
+  --color-gold-50: #fdf8ed;
+  --color-gold-100: #f9edcc;
+  --color-gold-200: #f3dfa3;
+  --color-gold-300: #eccd70;
+  --color-gold-400: #e0b84a;
+  --color-gold-500: #d4a34a;
+  --color-gold-600: #b8893a;
+  --color-gold-700: #966f2d;
+  --color-gold-800: #7a5a24;
+  --color-gold-900: #5c441c;
 
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  @apply bg-white text-gray-900 antialiased;
+  @apply bg-white text-navy-900 antialiased;
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-slide-up { animation: slide-up 0.6s ease-out forwards; }

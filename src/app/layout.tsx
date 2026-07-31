@@ -3,15 +3,15 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import ChatBot from "@/components/ChatBot";
 
 export const metadata: Metadata = {
-  title: "NileSites — Professional Websites in Uganda",
+  title: "NileSites — Premium Web Design for Ugandan Businesses",
   description:
-    "NileSites builds modern, mobile-responsive websites for Ugandan businesses. Websites starting at UGX 450,000. WhatsApp bots, SEO, and hosting included.",
+    "We build websites that bring you more customers, more bookings, and less headache. Starting at UGX 450,000. WhatsApp bots, SEO, and hosting included.",
   openGraph: {
-    title: "NileSites — Professional Websites in Uganda",
-    description:
-      "Modern, affordable websites for Ugandan businesses. Starting at UGX 450,000.",
+    title: "NileSites — Premium Web Design for Ugandan Businesses",
+    description: "Websites that grow your business. Starting at UGX 450,000.",
     type: "website",
   },
 };
@@ -28,6 +28,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <ChatBot />
       </body>
     </html>
   );

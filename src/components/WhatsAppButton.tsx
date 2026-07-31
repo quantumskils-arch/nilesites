@@ -1,10 +1,12 @@
+const WHATSAPP_NUMBER = "256778030847";
+
 export default function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/256700000000?text=Hi%20NileSites!%20I'd%20like%20to%20know%20more%20about%20your%20services."
+      href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20NileSites!%20I'd%20like%20to%20know%20more%20about%20your%20services.`}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition-colors hover:scale-110 active:scale-95"
+      className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition-all hover:scale-110 active:scale-95 shadow-green-500/25"
       aria-label="Chat on WhatsApp"
     >
       <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
