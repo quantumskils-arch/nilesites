@@ -14,6 +14,13 @@ export const metadata: Metadata = {
     description: "Websites that grow your business. Starting at UGX 450,000.",
     type: "website",
   },
+  keywords: [
+    "web design",
+    "uganda",
+    "business website",
+    "nilesites",
+    "premium web design",
+  ],
 };
 
 export default function RootLayout({
@@ -22,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen flex flex-col">
+    <html lang="en" className="class:dark:translate-y-1">
+      <body className="min-h-screen flex flex-col antialiased">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
