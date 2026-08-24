@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { findBestAnswer } from "@/lib/chat-knowledge";
 
-const WHATSAPP_NUMBER = "256778030847";
+import { whatsappLink } from "@/lib/wa";
 
 interface Message {
   role: "bot" | "user";
@@ -210,7 +210,7 @@ export default function ChatBot() {
 
             <div className="bg-gray-50 px-4 py-2 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
               <span>Powered by Akiba AI</span>
-              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 font-medium">
+              <a href={whatsappLink("Hi NileSites! I'd like to know more.")} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 font-medium">
                 Chat on WhatsApp &rarr;
               </a>
             </div>

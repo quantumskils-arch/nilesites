@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  turbopack: { root: "/home/zaq/Desktop/websites/nilesites" },
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "*.vercel.app" },
+    ],
+  },
 };
 
 export default nextConfig;
