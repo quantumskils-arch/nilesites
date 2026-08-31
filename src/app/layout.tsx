@@ -1,9 +1,22 @@
 import type { Metadata } from "next";
+import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ChatBot from "@/components/ChatBot";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "NileSites — Premium Web Design for Ugandan Businesses",
@@ -29,8 +42,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="class:dark:translate-y-1">
-      <body className="min-h-screen flex flex-col antialiased">
+    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{const m=localStorage.getItem('nilesites-dark');const d=window.matchMedia('(prefers-color-scheme:dark)').matches;if(m==='true'||(!m&&d))document.documentElement.classList.add('dark')}catch(e){}`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen flex flex-col antialiased bg-white dark:bg-navy-900 transition-colors">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

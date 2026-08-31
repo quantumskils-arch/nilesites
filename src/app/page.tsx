@@ -44,41 +44,87 @@ const testimonials = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-navy-900 min-h-[90vh] flex items-center">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-gold-500/10 via-navy-900 to-navy-900" />
-        <div className="absolute top-20 right-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute bottom-20 left-0 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
-          <motion.div className="max-w-3xl" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <span className="inline-block bg-gold-500/20 text-gold-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-gold-500/30">
-              Ugandan-owned Web Agency
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
-              More Customers. <br />
-              <span className="text-gold-400">Less Headache.</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl leading-relaxed">
-              You don&apos;t want a website. You want more bookings, more customers, and a business 
-              that runs without you. We build the digital tool that delivers all three.{" "}
-              <span className="text-gold-400 font-semibold">Starting at UGX 450,000</span>.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/pricing"
-                className="bg-gold-500 text-navy-900 px-8 py-3.5 rounded-lg font-semibold hover:bg-gold-400 transition-all hover:shadow-lg hover:shadow-gold-500/25 text-center"
-              >
-                See Plans & Pricing
-              </Link>
-              <a
-                href={whatsappLink("Hi NileSites! I'd like to get a website for my business.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border-2 border-gray-500/40 text-gray-300 px-8 py-3.5 rounded-lg font-semibold hover:border-gold-500/60 hover:text-gold-400 transition-all text-center"
-              >
-                Chat on WhatsApp
-              </a>
-            </div>
-          </motion.div>
+      <section className="relative overflow-hidden bg-navy-900">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-gold-500/15 via-navy-900 to-navy-900" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:56px_56px]" />
+        <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gold-500/10 rounded-full blur-[120px]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-8 items-center">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full pl-1.5 pr-4 py-1.5 mb-6 backdrop-blur">
+                <span className="bg-gold-500 text-navy-900 text-xs font-bold px-2.5 py-1 rounded-full">NEW</span>
+                <span className="text-sm text-gray-200">Ugandan-owned • Built in Kampala</span>
+              </div>
+              <h1 className="text-[40px] sm:text-5xl lg:text-[64px] font-bold text-white leading-[0.95] tracking-tight mb-5" style={{ fontFamily: "var(--font-playfair)" }}>
+                More Customers.
+                <br />
+                <span className="text-gold-400 font-normal italic">Less Headache.</span>
+              </h1>
+              <p className="text-[17px] sm:text-lg text-gray-300 leading-relaxed max-w-xl mb-7">
+                You don&apos;t want a website. You want more bookings and a business that runs without you. We design, host and maintain the tool that delivers it — <span className="text-white font-semibold">from UGX 450,000</span>.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 mb-8">
+                <Link
+                  href="/pricing"
+                  className="bg-gold-500 text-navy-900 px-7 py-3.5 rounded-xl font-semibold hover:bg-gold-400 transition-all hover:shadow-lg hover:shadow-gold-500/20 text-center"
+                >
+                  See Plans & Pricing →
+                </Link>
+                <a
+                  href={whatsappLink("Hi NileSites! I'd like to get a website for my business.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-navy-900 px-7 py-3.5 rounded-xl font-semibold hover:bg-gray-100 transition-all text-center"
+                >
+                  Chat on WhatsApp
+                </a>
+              </div>
+              <div className="flex items-center gap-4 pt-6 border-t border-white/10">
+                <div className="flex -space-x-2">
+                  <img src="https://i.pravatar.cc/100?img=32" alt="" className="w-8 h-8 rounded-full border-2 border-navy-900 object-cover" />
+                  <img src="https://i.pravatar.cc/100?img=12" alt="" className="w-8 h-8 rounded-full border-2 border-navy-900 object-cover" />
+                  <img src="https://i.pravatar.cc/100?img=15" alt="" className="w-8 h-8 rounded-full border-2 border-navy-900 object-cover" />
+                </div>
+                <div className="text-sm">
+                  <div className="flex items-center gap-1 text-gold-400">
+                    <span>★★★★★</span> <span className="text-white font-semibold ml-1">4.9/5</span>
+                  </div>
+                  <p className="text-gray-400 text-xs">Trusted by 8+ Ugandan businesses</p>
+                </div>
+                <div className="hidden sm:flex items-center gap-2 ml-auto text-xs text-gray-400">
+                  <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" /> 3-day avg. delivery
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative lg:pl-6">
+              <div className="relative bg-white rounded-[20px] shadow-2xl shadow-navy-900/30 overflow-hidden border border-white/10">
+                <div className="h-10 bg-gray-50 border-b border-gray-100 flex items-center gap-1.5 px-4">
+                  <span className="w-3 h-3 rounded-full bg-red-400" />
+                  <span className="w-3 h-3 rounded-full bg-yellow-400" />
+                  <span className="w-3 h-3 rounded-full bg-green-400" />
+                  <span className="ml-3 text-xs text-gray-400 font-medium">nilesites.com — Preview</span>
+                </div>
+                <img src="/portfolio/opportunityradar.africa.png" alt="Opportunity Radar preview" className="w-full aspect-[16/10] object-cover object-top" />
+                <div className="p-4 flex items-center justify-between bg-white">
+                  <div>
+                    <p className="text-sm font-semibold text-navy-900">Opportunity Radar Africa</p>
+                    <p className="text-xs text-gray-500">AI platform • Live on Vercel</p>
+                  </div>
+                  <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-medium">Live ✓</span>
+                </div>
+              </div>
+              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 hidden sm:flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gold-500 flex items-center justify-center text-navy-900">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-navy-900">Launch in 3–5 days</p>
+                  <p className="text-xs text-gray-500">Domain + hosting included</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
