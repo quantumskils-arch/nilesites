@@ -18,9 +18,12 @@ export default function Header() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("nilesites-dark");
-    const isDark = stored === "true" || (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    setDarkMode(document.documentElement.classList.contains("dark") || isDark);
+    const updateDarkMode = () => {
+      const stored = localStorage.getItem("nilesites-dark");
+      const isDark = stored === "true" || (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      setDarkMode(document.documentElement.classList.contains("dark") || isDark);
+    };
+    updateDarkMode();
   }, []);
 
   const toggleDarkMode = () => {
