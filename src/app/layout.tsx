@@ -50,7 +50,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col antialiased bg-white dark:bg-navy-900 transition-colors">
+      <body className="min-h-screen flex flex-col antialiased bg-white dark:bg-gray-900 transition-colors">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

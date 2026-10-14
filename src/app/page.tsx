@@ -44,29 +44,34 @@ const testimonials = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-navy-900">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-gold-500/15 via-navy-900 to-navy-900" />
+      <section className="relative overflow-hidden bg-gray-900">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-amber-500/10 to-gray-900" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:56px_56px]" />
-        <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gold-500/10 rounded-full blur-[120px]" />
+        <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 -z-10">
+          {[...Array(20)].map((_, i) => (
+            <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-blue-400/20" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: [0.2, 0.6, 0.2], scale: [0, 1, 0], y: [0, -50, 0] }} transition={{ duration: 4 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 3, ease: "easeInOut" }} />
+          ))}
+        </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-8 items-center">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full pl-1.5 pr-4 py-1.5 mb-6 backdrop-blur">
-                <span className="bg-gold-500 text-navy-900 text-xs font-bold px-2.5 py-1 rounded-full">NEW</span>
+              <motion.div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full pl-1.5 pr-4 py-1.5 mb-6 backdrop-blur" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.5 }}>
+                <span className="bg-gradient-to-r from-blue-500 to-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">✨ PREMIUM</span>
                 <span className="text-sm text-gray-200">Ugandan-owned • Built in Kampala</span>
-              </div>
-              <h1 className="text-[40px] sm:text-5xl lg:text-[64px] font-bold text-white leading-[0.95] tracking-tight mb-5" style={{ fontFamily: "var(--font-playfair)" }}>
+              </motion.div>
+              <motion.h1 className="text-[40px] sm:text-5xl lg:text-[64px] font-bold text-white leading-[0.95] tracking-tight mb-5" style={{ fontFamily: "var(--font-playfair)" }} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }}>
                 More Customers.
                 <br />
-                <span className="text-gold-400 font-normal italic">Less Headache.</span>
-              </h1>
-              <p className="text-[17px] sm:text-lg text-gray-300 leading-relaxed max-w-xl mb-7">
+                <span className="bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent font-normal italic">Less Headache.</span>
+              </motion.h1>
+              <motion.p className="text-[17px] sm:text-lg text-gray-300 leading-relaxed max-w-xl mb-7" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}>
                 You don&apos;t want a website. You want more bookings and a business that runs without you. We design, host and maintain the tool that delivers it — <span className="text-white font-semibold">from UGX 450,000</span>.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 mb-8">
+              </motion.p>
+              <motion.div className="flex flex-col sm:flex-row gap-3 mb-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.6 }}>
                 <Link
                   href="/pricing"
-                  className="bg-gold-500 text-navy-900 px-7 py-3.5 rounded-xl font-semibold hover:bg-gold-400 transition-all hover:shadow-lg hover:shadow-gold-500/20 text-center"
+                  className="bg-gradient-to-r from-blue-500 to-amber-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all text-center"
                 >
                   See Plans & Pricing →
                 </Link>
@@ -74,11 +79,11 @@ export default function HomePage() {
                   href={whatsappLink("Hi NileSites! I'd like to get a website for my business.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white text-navy-900 px-7 py-3.5 rounded-xl font-semibold hover:bg-gray-100 transition-all text-center"
+                  className="bg-white/10 backdrop-blur-md text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-white/20 transition-all text-center border border-white/20"
                 >
                   Chat on WhatsApp
                 </a>
-              </div>
+              </motion.div>
               <div className="flex items-center gap-4 pt-6 border-t border-white/10">
                 <div className="flex -space-x-2">
                   <img src="https://i.pravatar.cc/100?img=32" alt="" className="w-8 h-8 rounded-full border-2 border-navy-900 object-cover" />
@@ -98,7 +103,7 @@ export default function HomePage() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative lg:pl-6">
-              <div className="relative bg-white rounded-[20px] shadow-2xl shadow-navy-900/30 overflow-hidden border border-white/10">
+              <div className="relative bg-white rounded-[20px] shadow-2xl shadow-gray-900/30 overflow-hidden border border-white/10">
                 <div className="h-10 bg-gray-50 border-b border-gray-100 flex items-center gap-1.5 px-4">
                   <span className="w-3 h-3 rounded-full bg-red-400" />
                   <span className="w-3 h-3 rounded-full bg-yellow-400" />
@@ -108,21 +113,21 @@ export default function HomePage() {
                 <img src="/portfolio/opportunityradar.africa.png" alt="Opportunity Radar preview" className="w-full aspect-[16/10] object-cover object-top" />
                 <div className="p-4 flex items-center justify-between bg-white">
                   <div>
-                    <p className="text-sm font-semibold text-navy-900">Opportunity Radar Africa</p>
+                    <p className="text-sm font-semibold text-gray-900">Opportunity Radar Africa</p>
                     <p className="text-xs text-gray-500">AI platform • Live on Vercel</p>
                   </div>
                   <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-medium">Live ✓</span>
                 </div>
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 hidden sm:flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gold-500 flex items-center justify-center text-navy-900">
+              <motion.div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 hidden sm:flex items-center gap-3" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.5 }}>
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-amber-500 flex items-center justify-center text-white">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-navy-900">Launch in 3–5 days</p>
+                  <p className="text-sm font-bold text-gray-900">Launch in 3–5 days</p>
                   <p className="text-xs text-gray-500">Domain + hosting included</p>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -140,7 +145,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
               >
-                <div className="text-3xl sm:text-4xl font-bold text-gold-500 mb-1">{stat.value}</div>
+                <motion.div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-500 to-amber-500 bg-clip-text text-transparent mb-1" initial={{ scale: 0.8 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.15, duration: 0.5 }}>{stat.value}</motion.div>
                 <div className="text-sm text-gray-500">{stat.label}</div>
               </motion.div>
             ))}
@@ -148,16 +153,16 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      <motion.section className="py-12 bg-navy-900 border-y border-navy-700" {...fadeUp}>
+      <motion.section className="py-12 bg-gray-900 border-y border-gray-700" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-center">
-            {["MTN MoMo", "Airtel Money", "Google Business", "SSL Secured", "99.9% Uptime", "SEO Optimized"].map((item) => (
-              <span key={item} className="text-sm font-medium text-gray-400 flex items-center gap-2">
-                <svg className="w-4 h-4 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {["MTN MoMo", "Airtel Money", "Google Business", "SSL Secured", "99.9% Uptime", "SEO Optimized"].map((item, i) => (
+              <motion.span key={item} className="text-sm font-medium text-gray-400 flex items-center gap-2" initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                <motion.svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" animate={{ rotate: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+                </motion.svg>
                 {item}
-              </span>
+              </motion.span>
             ))}
           </div>
         </div>
@@ -166,41 +171,66 @@ export default function HomePage() {
       <motion.section className="py-20 bg-gray-50" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">What We Build</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Every service is designed to solve one problem: bringing you more customers with less work.
-            </p>
+            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>What We Build</motion.h2>
+            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>Every service is designed to solve one problem: bringing you more customers with less work.</motion.p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, i) => (
               <motion.div
                 key={service.title}
-                className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1"
+                className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.5 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <div className="h-40 bg-gray-100 relative overflow-hidden">
+                <div className="h-40 bg-gradient-to-br from-blue-100 to-amber-100 relative overflow-hidden">
                   <img
                     src={service.img}
                     alt={service.title}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-3 w-10 h-10 bg-gold-500 rounded-lg flex items-center justify-center shadow-lg">
-                    <svg className="w-5 h-5 text-navy-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
+                  <motion.div className="absolute bottom-3 left-3 w-10 h-10 bg-gradient-to-br from-blue-500 to-amber-500 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform" initial={{ scale: 0.8, rotate: -10 }} whileInView={{ scale: 1, rotate: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }}>
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={service.icon} />
                     </svg>
-                  </div>
+                  </motion.div>
                 </div>
                 <div className="p-5">
-                  <h3 className="text-lg font-semibold text-navy-900 mb-2">{service.title}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{service.desc}</p>
                 </div>
               </motion.div>
             ))}
+            <motion.div
+              className="rounded-xl overflow-hidden border-2 border-transparent bg-gradient-to-br from-blue-500 to-amber-500 p-[2px] hover:-translate-y-1 group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.48, duration: 0.5 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <Link href="/ai-agents" className="block bg-navy-900 rounded-[10px] overflow-hidden h-full">
+                <div className="h-40 relative overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop&auto=format"
+                    alt="NileSites AI Agents"
+                    className="w-full h-full object-cover opacity-80"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/30 to-transparent" />
+                  <span className="absolute top-3 left-3 bg-gradient-to-r from-blue-500 to-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">🤖 NEW</span>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-semibold text-white mb-2">AI Agents That Never Sleep</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed mb-3">24/7 website watchdogs, WhatsApp agents & rival radars. From UGX 80,000/mo.</p>
+                  <span className="text-amber-400 text-sm font-semibold group-hover:text-amber-300">Meet the agents →</span>
+                </div>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </motion.section>
@@ -208,10 +238,8 @@ export default function HomePage() {
       <motion.section className="py-20 bg-white" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">Perfect For</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              We build websites for every type of Ugandan business. Here are 15 we specialize in.
-            </p>
+            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>Perfect For</motion.h2>
+            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>We build websites for every type of Ugandan business. Here are 15 we specialize in.</motion.p>
           </motion.div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
@@ -230,20 +258,20 @@ export default function HomePage() {
               { name: "Clinics & Healthcare", icon: "M4.5 12H4a1 1 0 01-1-1V9a1 1 0 011-1h.5m0 4h1m0 0v4h-1m1-4h1.5M12 3l9 5v4a9 9 0 01-18 0V8l9-5z" },
               { name: "Law Firms & Legal", icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" },
               { name: "Photographers & Creatives", icon: "M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" },
-            ].map((biz) => (
-              <div key={biz.name} className="bg-gray-50 rounded-xl p-4 text-center hover:bg-gold-50 hover:border-gold-200 border border-gray-100 transition-all hover:-translate-y-0.5">
-                <div className="w-10 h-10 bg-gold-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <svg className="w-5 h-5 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            ].map((biz, i) => (
+              <motion.div key={biz.name} className="bg-gray-50 rounded-xl p-4 text-center hover:bg-amber-50 hover:border-amber-200 border border-gray-100 transition-all hover:-translate-y-0.5 group" initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.5 }} whileHover={{ scale: 1.05 }}>
+                <motion.div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-amber-100 rounded-lg flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform" initial={{ scale: 0.8, rotate: -10 }} whileInView={{ scale: 1, rotate: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.5 }}>
+                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={biz.icon} />
                   </svg>
-                </div>
-                <p className="text-sm font-medium text-navy-900">{biz.name}</p>
-              </div>
+                </motion.div>
+                <p className="text-sm font-medium text-gray-900">{biz.name}</p>
+              </motion.div>
             ))}
           </div>
           <motion.div className="text-center mt-10" {...fadeUp}>
             <p className="text-gray-500 mb-4">Don&apos;t see your business type? We probably build for it too.</p>
-            <a href={whatsappLink("Hi NileSites! Can you build a website for my business type?")} target="_blank" rel="noopener noreferrer" className="text-gold-600 font-medium hover:text-gold-700">
+            <a href={whatsappLink("Hi NileSites! Can you build a website for my business type?")} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-medium hover:text-blue-700">
               Ask us &rarr;
             </a>
           </motion.div>
@@ -253,10 +281,8 @@ export default function HomePage() {
       <motion.section className="py-20 bg-gray-50" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">What Our Clients Say</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Real results from real Ugandan business owners.
-            </p>
+            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>What Our Clients Say</motion.h2>
+            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>Real results from real Ugandan business owners.</motion.p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {testimonials.map((t, i) => (
@@ -266,14 +292,15 @@ export default function HomePage() {
                 initial={{ opacity: 0, x: i === 0 ? -20 : 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -5, scale: 1.02 }}
               >
-                <svg className="w-8 h-8 text-gold-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                <motion.svg className="w-8 h-8 text-blue-400 mb-4" fill="currentColor" viewBox="0 0 24 24" initial={{ scale: 0.8 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}>
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-                <p className="text-gray-700 mb-4 leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
+                </motion.svg>
+                <motion.p className="text-gray-700 mb-4 leading-relaxed" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }}>&ldquo;{t.quote}&rdquo;</motion.p>
                 <div>
-                  <p className="font-semibold text-navy-900">{t.author}</p>
+                  <p className="font-semibold text-gray-900">{t.author}</p>
                   <p className="text-sm text-gray-500">{t.role}</p>
                 </div>
               </motion.div>
@@ -285,10 +312,8 @@ export default function HomePage() {
       <motion.section className="py-20 bg-gray-50" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">Transparent Pricing</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              No hidden fees. Pay via MTN MoMo or Airtel Money.
-            </p>
+            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>Transparent Pricing</motion.h2>
+            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>No hidden fees. Pay via MTN MoMo or Airtel Money.</motion.p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
@@ -300,22 +325,23 @@ export default function HomePage() {
                 key={plan.name}
                 className={`relative bg-white rounded-xl p-8 transition-all hover:-translate-y-1 ${
                   plan.popular
-                    ? "border-2 border-gold-500 shadow-lg shadow-gold-500/10"
+                    ? "border-2 border-blue-500 shadow-lg shadow-blue-500/10"
                     : "border border-gray-200 shadow-sm hover:shadow-lg"
                 }`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
+                whileHover={{ scale: 1.02 }}
               >
                 {plan.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold-500 text-navy-900 text-xs font-bold px-4 py-1 rounded-full">
+                  <motion.span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-500 to-amber-500 text-white text-xs font-bold px-4 py-1 rounded-full" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }}>
                     Most Popular
-                  </span>
+                  </motion.span>
                 )}
-                <h3 className="text-lg font-semibold text-navy-900 mb-1">{plan.name}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">{plan.name}</h3>
                 <p className="text-sm text-gray-500 mb-4">{plan.desc}</p>
-                <p className="text-3xl font-bold text-navy-900 mb-2">
+                <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-2">
                   UGX {plan.price}
                   <span className="text-sm font-normal text-gray-500"> starting</span>
                 </p>
@@ -324,13 +350,13 @@ export default function HomePage() {
                   <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">💾 {plan.specs}</span>
                 </div>
                 <ul className="space-y-3 mb-8 text-sm">
-                  {plan.features.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <svg className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {plan.features.map((item, j) => (
+                    <motion.li key={item} className="flex items-start gap-2" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: j * 0.05 }}>
+                      <motion.svg className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1, repeat: Infinity, delay: j * 0.1 }}>
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      </motion.svg>
                       {item}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
                 <a
@@ -339,8 +365,8 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className={`block w-full text-center px-6 py-3 rounded-lg font-medium transition-all ${
                     plan.popular
-                      ? "bg-gold-500 text-navy-900 hover:bg-gold-400"
-                      : "bg-navy-900 text-white hover:bg-navy-800"
+                      ? "bg-gradient-to-r from-blue-500 to-amber-500 text-white hover:shadow-lg hover:shadow-blue-500/30"
+                      : "bg-gray-900 text-white hover:bg-gray-800"
                   }`}
                 >
                   Get Started
@@ -357,10 +383,8 @@ export default function HomePage() {
       <motion.section className="py-20 bg-white" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">Recent Work</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              See what we&apos;ve built for Ugandan and East African businesses.
-            </p>
+            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>Recent Work</motion.h2>
+            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>See what we&apos;ve built for Ugandan and East African businesses.</motion.p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
@@ -375,32 +399,34 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <div className="aspect-video bg-gradient-to-br from-navy-800 to-navy-900 flex items-center justify-center relative overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-blue-600 to-amber-600 flex items-center justify-center relative overflow-hidden">
                   {project.img && (
                     <img src={project.img} alt={project.title} className="w-full h-full object-cover object-top" loading="lazy" />
                   )}
                   {project.url && (
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="absolute top-3 right-3 z-10 bg-gold-500/90 text-navy-900 text-xs font-medium px-2.5 py-1 rounded-full hover:bg-gold-400 transition-colors">
+                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="absolute top-3 right-3 z-10 bg-white/90 backdrop-blur-lg text-gray-700 text-xs font-medium px-2.5 py-1 rounded-full hover:bg-white transition-colors">
                       Live &rarr;
                     </a>
                   )}
+                  <motion.div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }} />
                 </div>
                 <div className="p-6">
-                  <span className="text-xs font-medium text-gold-700 bg-gold-100 px-2.5 py-1 rounded-full">{project.tag}</span>
-                  <h3 className="text-lg font-semibold text-navy-900 mt-3 mb-1">{project.title}</h3>
-                  <p className="text-sm text-gray-600">{project.desc}</p>
+                  <motion.span className="text-xs font-medium bg-gradient-to-r from-blue-500 to-amber-500 bg-clip-text text-transparent" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.25 }}>{project.tag}</motion.span>
+                  <motion.h3 className="text-lg font-semibold text-gray-900 mt-3 mb-1" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.3 }}>{project.title}</motion.h3>
+                  <motion.p className="text-sm text-gray-600" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.35 }}>{project.desc}</motion.p>
                   {project.url && (
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-sm text-gold-600 font-medium mt-3 inline-block hover:text-gold-700">
+                    <motion.a href={project.url} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 font-medium mt-3 inline-block hover:text-blue-700" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.4 }}>
                       Visit Site &rarr;
-                    </a>
+                    </motion.a>
                   )}
                 </div>
               </motion.div>
             ))}
           </div>
           <motion.div className="text-center mt-12" {...fadeUp}>
-            <Link href="/portfolio" className="text-gold-600 font-medium hover:text-gold-700">
+            <Link href="/portfolio" className="text-blue-600 font-medium hover:text-blue-700">
               View Full Portfolio &rarr;
             </Link>
           </motion.div>
@@ -410,10 +436,8 @@ export default function HomePage() {
       <motion.section className="py-20 bg-white" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">How It Works</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              From first message to launch in as little as 3 days. No jargon, no surprises.
-            </p>
+            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>How It Works</motion.h2>
+            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>From first message to launch in as little as 3 days. No jargon, no surprises.</motion.p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
@@ -429,12 +453,13 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
+                whileHover={{ y: -5, scale: 1.02 }}
               >
-                <div className="w-12 h-12 bg-gold-500 rounded-full flex items-center justify-center mx-auto mb-4 text-navy-900 font-bold text-lg">
+                <motion.div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg shadow-lg" initial={{ scale: 0.8, rotate: -180 }} whileInView={{ scale: 1, rotate: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15, duration: 0.5 }} whileHover={{ scale: 1.1, rotate: 5 }}>
                   {item.step}
-                </div>
-                <h3 className="font-semibold text-navy-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600">{item.desc}</p>
+                </motion.div>
+                <motion.h3 className="font-semibold text-gray-900 mb-2" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }}>{item.title}</motion.h3>
+                <motion.p className="text-sm text-gray-600" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.25 }}>{item.desc}</motion.p>
               </motion.div>
             ))}
           </div>
@@ -444,10 +469,8 @@ export default function HomePage() {
       <motion.section className="py-20 bg-gray-50" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">Why Not a Freelancer or DIY Builder?</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              We&apos;ve seen too many businesses get burned. Here&apos;s what makes us different.
-            </p>
+            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>Why Not a Freelancer or DIY Builder?</motion.h2>
+            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>We&apos;ve seen too many businesses get burned. Here&apos;s what makes us different.</motion.p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
@@ -462,9 +485,10 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -5, scale: 1.02 }}
               >
-                <h3 className="text-lg font-semibold text-navy-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                <motion.h3 className="text-lg font-semibold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-2" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}>{item.title}</motion.h3>
+                <motion.p className="text-sm text-gray-600 leading-relaxed" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }}>{item.desc}</motion.p>
               </motion.div>
             ))}
           </div>

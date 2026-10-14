@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import CTASection from "@/components/CTASection";
 
 const fadeUp = {
@@ -34,6 +35,18 @@ export default function ServicesPage() {
       </section>
 
       <div className="divide-y divide-gray-100">
+      <section className="bg-navy-900 py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-8">
+          <div className="flex-1 text-center lg:text-left">
+            <span className="inline-block bg-gradient-to-r from-blue-500 to-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">🤖 NEW SERVICE LINE</span>
+            <h2 className="text-3xl font-bold text-white mb-3">NileSites AI Agents</h2>
+            <p className="text-gray-300 leading-relaxed max-w-xl">Full-time agents that watch your website, rivals and reviews 24/7 — and report to you on WhatsApp. From UGX 80,000/month.</p>
+          </div>
+          <Link href="/ai-agents" className="shrink-0 bg-gradient-to-r from-blue-500 to-amber-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all">
+            Meet the agents →
+          </Link>
+        </div>
+      </section>
         {services.map((service, index) => (
           <motion.section key={service.title} className="py-20" {...fadeUp}>
             <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-12 items-center`}>
