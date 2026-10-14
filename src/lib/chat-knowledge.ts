@@ -12,15 +12,36 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["hello", "hi", "hey", "good morning", "good afternoon", "good evening", "howdy"],
     answer: {
-      text: "Hello! Welcome to NileSites 👋 I'm the Akiba AI assistant. I can answer questions about our web design services, pricing, process, and more. What would you like to know?",
-      followUp: ["What services do you offer?", "How much does a website cost?", "How long does it take to build a site?", "Do you work with churches?"],
+      text: "Hello! Welcome to NileSites 👋 I'm the Akiba AI assistant. I can answer questions about our websites, AI agents, pricing, process, and more. What would you like to know?",
+      followUp: ["What services do you offer?", "Tell me about AI Agents", "How much does a website cost?", "I want a free website check"],
     },
   },
   {
     keywords: ["what do you do", "services", "what services", "offer", "what can you", "help with", "capabilities"],
     answer: {
-      text: "We build professional websites for Ugandan businesses. Our services include:\n\n🌐 Web Design & Development — Mobile-responsive, modern sites\n☁️ Hosting & Domain Setup — 99.9% uptime, SSL, email\n🤖 WhatsApp & Telegram Bots — Akiba AI-powered 24/7 automation\n💳 Mobile Money Integration — MTN MoMo & Airtel Money\n📍 Google Business Profile Setup — Get found on Google Maps\n📈 SEO & Maintenance — Keep your site ranking and fresh\n\nStarting at just UGX 450,000. Which service interests you most?",
-      followUp: ["Tell me about web design", "How does Akiba AI work?", "What is included in hosting?"],
+      text: "We build professional websites AND run full-time AI agents for Ugandan businesses:\n\n🌐 Web Design & Development — Mobile-responsive, modern sites\n🤖 NileSites AI Agents — watchdogs, WhatsApp agents & radars that work 24/7 (from UGX 80,000/month)\n☁️ Hosting & Domain Setup — 99.9% uptime, SSL, email\n💳 Mobile Money Integration — MTN MoMo & Airtel Money\n📍 Google Business Profile Setup — Get found on Google Maps\n📈 SEO & Maintenance — Keep your site ranking and fresh\n\nWebsites from UGX 450,000. Which interests you most — a website, or an AI agent?",
+      followUp: ["Tell me about AI Agents", "How much does a website cost?", "I want a free website check"],
+    },
+  },
+  {
+    keywords: ["ai agents", "agents", "agent", "ai", "watchdog", "website watchdog", "monitoring", "monitor my site", "radar", "competitor", "never sleep", "24/7"],
+    answer: {
+      text: "NileSites AI Agents are full-time agents that work for your business 24/7:\n\n🟢 Website Health Watchdog (LIVE NOW) — weekly 0–100 scorecard on WhatsApp + instant alert if your site goes down. UGX 150,000 audit, UGX 80,000/month.\n🤖 Akiba WhatsApp Agent (LIVE NOW) — answers customers and takes orders while you sleep. From UGX 900,000 + UGX 100,000/month.\n🟡 Custom builds (2–4 weeks) — Competitor Radar, Review Watcher, Proposal-Deck Automation, Shorts Engine. From UGX 500,000.\n\nNo tech skills needed — if you can use WhatsApp, you can run agents. See the full team on our AI Agents page!",
+      followUp: ["How does the Website Watchdog work?", "I want a free website check", "How much do agents cost?", "Tell me about Akiba AI"],
+    },
+  },
+  {
+    keywords: ["free check", "free website check", "check my website", "website check", "health check", "audit", "score my site", "free audit"],
+    answer: {
+      text: "Yes! We offer a FREE website health check:\n\n🔍 We run your site through our watchdog agent and score it 0–100\n📋 You get the real findings — title, speed, mobile view, broken links\n💬 Delivered on WhatsApp in plain English, no jargon\n\nTap the WhatsApp button and send us your website link with the words \"FREE CHECK\" — we'll run it and reply with your score, usually the same day.",
+      followUp: ["How much do agents cost?", "What is the Website Watchdog?", "I want to get started"],
+    },
+  },
+  {
+    keywords: ["review watcher", "reviews", "reputation", "proposal deck", "shorts", "tiktok", "reels", "custom build", "custom agent", "inbox", "triage"],
+    answer: {
+      text: "Our custom-built agents (ready in 2–4 weeks):\n\n⭐ Review & Reputation Watcher — every Google review answered, none missed. UGX 80,000/month.\n🎯 Client & Competitor Radar — rival price/stock alerts + new-lead alerts. From UGX 500,000 + UGX 300,000/month.\n📑 Proposal-Deck Automation — branded quotes out the same day. From UGX 900,000.\n🎬 Shorts Engine — one recording becomes a month of TikTok/Reels/Shorts. From UGX 600,000/month.\n\nTell us which one fits, and we'll scope it on WhatsApp.",
+      followUp: ["How much do agents cost?", "I want to get started", "What services do you offer?"],
     },
   },
   {
@@ -33,7 +54,7 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["price", "pricing", "cost", "how much", "how much does it cost", "fee", "payment", "plan", "plans", "package", "packages"],
     answer: {
-      text: "Our pricing is simple and transparent:\n\n🚀 Starter — UGX 450,000\n1–5 page site, mobile responsive, WhatsApp button, basic SEO, 1yr hosting\n\n⭐ Standard — UGX 900,000 (Most Popular)\nUp to 10 pages with CMS, MoMo payments, Google Business setup, gallery, 3 revisions\n\n💎 Premium — UGX 1,500,000\nBooking/inventory systems, e-commerce, custom workflows, unlimited revisions, priority support\n\nAll payable via MTN MoMo or Airtel Money. 50% deposit to start, 50% on completion.",
+      text: "Our pricing is simple and transparent:\n\n🚀 Starter — UGX 450,000\n1–5 page site, mobile responsive, WhatsApp button, basic SEO, 1yr hosting\n\n⭐ Standard — UGX 900,000 (Most Popular)\nUp to 10 pages with CMS, MoMo payments, Google Business setup, gallery, 3 revisions\n\n💎 Premium — UGX 1,500,000\nBooking/inventory systems, e-commerce, custom workflows, unlimited revisions, priority support\n\nAll payable via MTN MoMo or Airtel Money. 50% deposit to start, 50% on completion.\n\n🤖 AI Agents: Watchdog UGX 80,000/month (audit UGX 150,000 once) · Akiba bots from UGX 900,000 · Custom agents from UGX 500,000. See the AI Agents page for the full team.",
       followUp: ["What's included in hosting?", "Do you offer payment plans?", "What are the add-ons?"],
     },
   },
@@ -343,7 +364,7 @@ export function findBestAnswer(query: string): Answer {
   }
 
   return {
-    text: "I'm not sure I understand. Could you try asking differently? Here are things I can help with:\n\n💻 Web design & development\n💰 Pricing & packages\n🤖 Akiba AI chatbot\n📅 Timeline & process\n💳 Payment options\n\nOr just ask me anything about NileSites!",
-    followUp: ["What services do you offer?", "How much does a website cost?", "Tell me about Akiba AI", "How long does it take?"],
+    text: "I'm not sure I understand. Could you try asking differently? Here are things I can help with:\n\n💻 Web design & development\n🤖 AI Agents (watchdog, bots, radar)\n💰 Pricing & packages\n📅 Timeline & process\n💳 Payment options\n\nOr just ask me anything about NileSites!",
+      followUp: ["What services do you offer?", "Tell me about AI Agents", "How much does a website cost?", "I want a free website check"],
   };
 }

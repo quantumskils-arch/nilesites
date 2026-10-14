@@ -27,6 +27,7 @@ export default function ChatBot() {
   const [saving, setSaving] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const transcriptSent = useRef(false);
 
   useEffect(() => {
     if (open && inputRef.current) {
@@ -70,10 +71,27 @@ export default function ChatBot() {
     if (e.key === "Enter") handleSend();
   };
 
+  const toggleChat = () => {
+    if (open && messages.length > 0 && !transcriptSent.current) {
+      transcriptSent.current = true;
+      fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: lead.name,
+          phone: lead.phone,
+          type: "transcript",
+          messages: messages.map((m) => ({ role: m.role, text: m.text })),
+        }),
+      }).catch(() => {});
+    }
+    setOpen(!open);
+  };
+
   return (
     <>
       <motion.button
-        onClick={() => setOpen(!open)}
+        onClick={toggleChat}
         className="fixed bottom-6 left-6 z-50 w-14 h-14 bg-gradient-to-br from-blue-500 to-amber-500 rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all hover:scale-110 active:scale-95 shadow-blue-500/25"
         aria-label="Open Akiba AI Chat"
         initial={{ scale: 0, opacity: 0 }}

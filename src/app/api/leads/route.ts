@@ -83,10 +83,43 @@ async function notifyEmail(lead: Lead): Promise<void> {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, phone, email, message } = body;
+    const { name, phone, email, message, type, messages } = body;
 
     if (!name || !phone) {
       return NextResponse.json({ error: "Name and phone are required" }, { status: 400 });
+    }
+
+    if (type === "transcript" && Array.isArray(messages)) {
+      const lines = messages
+        .slice(-14)
+        .map((m: { role: string; text: string }) =>
+          `${m.role === "user" ? "V" : "A"}: ${String(m.text).slice(0, 300)}`
+        )
+        .join("\n");
+      const text = [
+        "💬 Site chat transcript",
+        `👤 ${String(name).slice(0, 120)}`,
+        `📱 ${String(phone).slice(0, 40)}`,
+        "",
+        lines,
+      ].join("\n").slice(0, 3800);
+      if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+        try {
+          await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text }),
+          });
+        } catch {}
+      }
+      await persistLead({
+        name: String(name).slice(0, 120),
+        phone: String(phone).slice(0, 40),
+        email: "",
+        message: `[transcript] ${lines}`.slice(0, 1000),
+        timestamp: new Date().toISOString(),
+      });
+      return NextResponse.json({ success: true, message: "Transcript saved" });
     }
 
     const lead: Lead = {
