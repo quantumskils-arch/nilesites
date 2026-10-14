@@ -51,6 +51,20 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased bg-white dark:bg-gray-900 transition-colors">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "NileSites",
+              url: "https://nilesites.vercel.app",
+              areaServed: "Uganda",
+              address: { "@type": "PostalAddress", addressLocality: "Kampala", addressCountry: "UG" },
+              priceRange: "UGX 450,000+",
+            }),
+          }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
