@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import FreeCheckForm from "@/components/FreeCheckForm";
 import { motion, AnimatePresence } from "framer-motion";
 import CTASection from "@/components/CTASection";
 import { whatsappLink } from "@/lib/wa";
@@ -176,8 +177,7 @@ export default function AgentsPage() {
               </motion.p>
               <motion.div className="flex flex-col sm:flex-row gap-3 mb-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.6 }}>
                 <a
-                  href={whatsappLink("Hi NileSites! I'd like a FREE website health check.")}
-                  target="_blank" rel="noopener noreferrer"
+                  href="#free-check"
                   className="bg-gradient-to-r from-blue-500 to-amber-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all text-center"
                 >
                   Get a Free Website Check →
@@ -315,6 +315,19 @@ export default function AgentsPage() {
               <p className="mt-3 text-gray-500 text-sm">— sent by your website team</p>
               <p className="mt-2 text-right text-xs text-gray-400">07:00 ✓✓</p>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FREE CHECK */}
+      <section id="free-check" className="pb-20 scroll-mt-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div className="text-center mb-8" {...fadeUp}>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-3" style={{ fontFamily: "var(--font-playfair)" }}>Try it free, <span className="bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent italic">right now</span></h2>
+            <p className="text-gray-400">Drop your site below. Our watchdog audits it and we WhatsApp you the score.</p>
+          </motion.div>
+          <motion.div {...fadeUp}>
+            <FreeCheckForm />
           </motion.div>
         </div>
       </section>
