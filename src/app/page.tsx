@@ -216,7 +216,7 @@ export default function HomePage() {
               <Link href="/ai-agents" className="block bg-navy-900 rounded-[10px] overflow-hidden h-full">
                 <div className="h-40 relative overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop&auto=format"
+                    src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&h=400&fit=crop&auto=format"
                     alt="NileSites AI Agents"
                     className="w-full h-full object-cover opacity-80"
                     loading="lazy"

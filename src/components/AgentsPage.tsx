@@ -2,9 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import CTASection from "@/components/CTASection";
 import { whatsappLink } from "@/lib/wa";
+
+const AgentGlobe = dynamic(() => import("@/components/AgentGlobe"), {
+  ssr: false,
+  loading: () => <div className="w-full h-[420px] lg:h-[560px]" aria-hidden />,
+});
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -110,7 +116,7 @@ const agents = [
     rhythm: "Instant: new-review alert with a drafted reply for you to approve.",
     price: "UGX 80,000/mo add-on",
     wa: "Hi NileSites! I'd like the Review Watcher for my business.",
-    img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=500&fit=crop&auto=format",
+    img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop&auto=format",
   },
   {
     status: "custom", name: "Proposal-Deck Automation",
@@ -186,7 +192,11 @@ export default function AgentsPage() {
                 <span className="text-gray-600">•</span><span>MTN MoMo & Airtel accepted</span>
               </motion.div>
             </div>
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}>
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }} className="relative">
+              <div className="pointer-events-none absolute -top-24 -right-24 w-[480px] h-[480px] lg:w-[620px] lg:h-[620px] opacity-70" aria-hidden>
+                <AgentGlobe />
+              </div>
+              <div className="relative">
               <LiveFeed />
               <div className="grid grid-cols-2 gap-3 mt-3">
                 <div className="bg-white/[0.04] border border-white/10 rounded-xl p-4">
@@ -197,6 +207,7 @@ export default function AgentsPage() {
                   <p className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">WhatsApp</p>
                   <p className="text-xs text-gray-400 mt-1">reports in plain English, zero jargon</p>
                 </div>
+              </div>
               </div>
             </motion.div>
           </div>
