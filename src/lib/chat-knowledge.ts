@@ -213,7 +213,7 @@ const knowledge: KnowledgeEntry[] = [
     },
   },
   {
-    keywords: ["thank", "thanks", "helpful", "great", "good", "awesome", "perfect", "appreciate"],
+    keywords: ["thank", "thanks", "thank you", "thanks bye", "thank you bye", "helpful", "great", "good", "awesome", "perfect", "appreciate"],
     answer: {
       text: "You're very welcome! 😊 Is there anything else I can help you with? You can also:\n\n📞 Chat with us on WhatsApp for a personalized consultation\n📄 Check our Pricing page for detailed plans\n🖼️ Browse our Portfolio to see past work\n\nOr just keep asking me questions!",
       followUp: ["I'd like to get a quote", "Can I see your pricing?", "Tell me more about your services"],
@@ -283,6 +283,27 @@ const knowledge: KnowledgeEntry[] = [
     },
   },
   {
+    keywords: ["expensive", "too much", "costly", "can't afford", "cheaper", "discount", "reduce price", "lower price", "budget"],
+    answer: {
+      text: "I understand budget matters. A few honest options:\n\n💡 Start with a free website check — costs nothing and shows exactly what you need\n📦 Starter site (UGX 450,000) covers the essentials; you can add features later\n🤖 Watchdog (UGX 80,000/month) protects what you already have\n💬 Tell us your budget on WhatsApp — we'll scope the most valuable version of it",
+      followUp: ["I want a free website check", "How much does a website cost?", "I want to get started"],
+    },
+  },
+  {
+    keywords: ["human", "real person", "someone real", "talk to someone", "call me", "phone call", "agent person", "customer care"],
+    answer: {
+      text: "Of course — I'm just the assistant! 👩🏾‍💻 Chat with a real human right now on WhatsApp: wa.me/256778030847 (typically replies in under 2 hours).\n\nOr tell me your question here and I'll make sure the team sees it with your details.",
+      followUp: ["I want to get started", "I want a free website check"],
+    },
+  },
+  {
+    keywords: ["oli otya", "gyoli", "gyoli otya", "habari", "hujambo", "mambo", "webale", "tusanyukidde", "osibye", "bye bye"],
+    answer: {
+      text: "Tusanyukidde! 😊 (I mostly chat in English — drop me a message in English anytime.) I'm the NileSites assistant — I can help with websites, AI agents, and pricing. What do you need?",
+      followUp: ["What services do you offer?", "Tell me about AI Agents", "How much does a website cost?"],
+    },
+  },
+  {
     keywords: ["i have a", "my business", "my company", "i run", "i operate", "i own"],
     answer: {
       text: "Tell me what type of business you have and I'll tell you exactly what we can build for you! We work with retail shops, restaurants, hotels, churches, schools, car bonds, transport companies, salons, farms, real estate, gyms, NGOs, clinics, law firms, photographers, and more.\n\nWhat's your business?",
@@ -299,8 +320,26 @@ function tokenize(text: string): string[] {
   return normalize(text).split(/\s+/).filter(Boolean);
 }
 
+// Filler words carry no intent. Single letters/digits match everything
+// ("i" hides inside "ai", "monitor", "pricing") and must never score.
+const STOPWORDS = new Set([
+  "a", "an", "the", "i", "you", "he", "she", "it", "we", "they", "them",
+  "me", "him", "her", "us", "my", "your", "his", "our", "their",
+  "is", "are", "was", "were", "am", "be", "been", "do", "does", "did",
+  "have", "has", "had", "will", "would", "should", "could", "can",
+  "what", "who", "how", "when", "where", "which",
+  "to", "of", "in", "on", "at", "for", "from", "by", "with", "about",
+  "and", "or", "but", "as", "if", "so", "too", "very",
+  "this", "that", "these", "those", "there",
+  "not", "no", "yes", "please", "just", "like", "get", "got",
+]);
+
+function contentTokens(text: string): string[] {
+  return tokenize(text).filter((t) => t.length >= 2 && !STOPWORDS.has(t));
+}
+
 function scoreMatch(query: string, entry: KnowledgeEntry): number {
-  const queryTokens = tokenize(query);
+  const queryTokens = contentTokens(query);
   const queryNorm = normalize(query);
   const entryTokens = entry.keywords.map(k => normalize(k));
   const entryFull = entry.keywords.join(" ").toLowerCase();
@@ -349,18 +388,35 @@ export function findBestAnswer(query: string): Answer {
   }
 
   let bestScore = 0;
+  let secondScore = 0;
   let bestEntry: KnowledgeEntry | null = null;
 
   for (const entry of knowledge) {
     const score = scoreMatch(trimmed, entry);
     if (score > bestScore) {
+      secondScore = bestScore;
       bestScore = score;
       bestEntry = entry;
+    } else if (score > secondScore) {
+      secondScore = score;
     }
   }
 
+  // Confident match: clears the bar AND stands clear of the runner-up.
+  // Close calls and weak matches fall back honestly instead of pitching blindly.
+  // Tie-break: an exact word match beats substring containment
+  // ("price" means the pricing page, not the budget talk).
   if (bestEntry && bestScore >= 3) {
-    return bestEntry.answer;
+    if (bestScore - secondScore >= 3) return bestEntry.answer;
+    const singleWords = (entry: KnowledgeEntry) =>
+      entry.keywords.filter((k) => !k.includes(" ")).map((k) => normalize(k));
+    const exacts = (entry: KnowledgeEntry) =>
+      contentTokens(trimmed).filter((qt) => singleWords(entry).includes(qt)).length;
+    if (
+      exacts(bestEntry) > Math.max(...knowledge.filter((e) => e !== bestEntry).map(exacts))
+    ) {
+      return bestEntry.answer;
+    }
   }
 
   return {
