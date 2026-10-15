@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
-const QUEUE_BOT_TOKEN = process.env.QUEUE_BOT_TOKEN || "";
-const QUEUE_CHAT_ID = process.env.QUEUE_CHAT_ID || "";
+const GH_TOKEN = process.env.GITHUB_QUEUE_TOKEN || "";
+const GH_REPO = process.env.GITHUB_QUEUE_REPO || ""; // owner/repo, private
 
 function badHost(host: string): boolean {
   const h = host.toLowerCase();
@@ -36,17 +36,25 @@ export async function POST(request: Request) {
     if (badHost(host)) {
       return NextResponse.json({ error: "Invalid URL" }, { status: 400 });
     }
-    if (!QUEUE_BOT_TOKEN || !QUEUE_CHAT_ID) {
+    if (!GH_TOKEN || !GH_REPO) {
       return NextResponse.json({ error: "Check service not configured yet" }, { status: 503 });
     }
 
-    const text = ["🔎 CHECK", `👤 ${name}`, `📱 ${phone}`, `🌐 ${url}`].join("\n");
-    const r = await fetch(`https://api.telegram.org/bot${QUEUE_BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: QUEUE_CHAT_ID, text }),
+    const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    const content = Buffer.from(
+      JSON.stringify({ name, phone, url, at: new Date().toISOString() }),
+      "utf8"
+    ).toString("base64");
+    const r = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/requests/${id}.json`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${GH_TOKEN}`,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: `check request ${id}`, content }),
     });
-    if (!r.ok) throw new Error("queue send failed");
+    if (!r.ok) throw new Error("queue write failed");
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Could not queue your check" }, { status: 500 });
