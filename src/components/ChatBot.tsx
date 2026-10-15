@@ -25,6 +25,7 @@ export default function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [saving, setSaving] = useState(false);
+  const [typing, setTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const transcriptSent = useRef(false);
@@ -37,7 +38,7 @@ export default function ChatBot() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, typing]);
 
   const handleSubmitLead = async () => {
     if (!lead.name.trim() || !lead.phone.trim()) return;
@@ -55,16 +56,37 @@ export default function ChatBot() {
     setMessages([{ role: "bot", text: `Hi ${lead.name}! 👋 Welcome to NileSites. Ask me anything about our services.`, followUp: greeting.followUp }]);
   };
 
-  const handleSend = (text?: string) => {
+  const handleSend = async (text?: string) => {
     const msg = (text || input).trim();
-    if (!msg) return;
+    if (!msg || typing) return;
     setInput("");
 
     const userMsg: Message = { role: "user", text: msg };
-    const botAnswer = findBestAnswer(msg);
-    const botMsg: Message = { role: "bot", text: botAnswer.text, followUp: botAnswer.followUp };
+    const history = [...messages, userMsg]
+      .slice(-6)
+      .map((m) => ({ role: m.role === "user" ? "user" : "assistant" as const, text: m.text }));
+    setMessages((prev) => [...prev, userMsg]);
+    setTyping(true);
 
-    setMessages(prev => [...prev, userMsg, botMsg]);
+    try {
+      const r = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg, history }),
+      });
+      if (!r.ok) throw new Error();
+      const data = await r.json();
+      if (!data.reply) throw new Error();
+      const botMsg: Message = { role: "bot", text: String(data.reply) };
+      setMessages((prev) => [...prev, botMsg]);
+    } catch {
+      // Offline fallback: instant keyword brain, no network needed.
+      const botAnswer = findBestAnswer(msg);
+      const botMsg: Message = { role: "bot", text: botAnswer.text, followUp: botAnswer.followUp };
+      setMessages((prev) => [...prev, botMsg]);
+    } finally {
+      setTyping(false);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -191,7 +213,7 @@ export default function ChatBot() {
                         </div>
                       </div>
                     ))}
-                    {messages.length > 0 && messages[messages.length - 1].followUp && (
+                      {messages.length > 0 && messages[messages.length - 1].followUp && !typing && (
                       <div className="flex flex-wrap gap-1.5 pt-1">
                         {messages[messages.length - 1].followUp!.map((suggestion) => (
                           <button
@@ -204,7 +226,16 @@ export default function ChatBot() {
                         ))}
                       </div>
                     )}
-                    <div ref={messagesEndRef} />
+                      {typing && (
+                        <div className="flex justify-start">
+                          <div className="bg-gray-100 rounded-xl px-4 py-3 flex gap-1">
+                            {[0, 1, 2].map((d) => (
+                              <span key={d} className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: `${d * 0.15}s` }} />
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      <div ref={messagesEndRef} />
                   </div>
 
                   <div className="border-t border-gray-100 p-3 flex gap-2">
