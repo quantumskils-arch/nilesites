@@ -3,13 +3,21 @@
 import { motion } from "framer-motion";
 import { whatsappLink } from "@/lib/wa";
 
+// Precomputed at module scope so render stays pure (React Compiler lint).
+const ctaParticles = Array.from({ length: 15 }, () => ({
+  left: `${Math.random() * 100}%`,
+  top: `${Math.random() * 100}%`,
+  duration: 4 + Math.random() * 2,
+  delay: Math.random() * 3,
+}));
+
 export default function CTASection() {
   return (
     <section className="bg-gray-900 py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-amber-500/10 to-transparent" />
       <div className="absolute inset-0 -z-10">
-        {[...Array(15)].map((_, i) => (
-          <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-blue-400/20" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: [0.2, 0.6, 0.2], scale: [0, 1, 0], y: [0, -50, 0] }} transition={{ duration: 4 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 3, ease: "easeInOut" }} />
+        {ctaParticles.map((p, i) => (
+          <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-blue-400/20" style={{ left: p.left, top: p.top }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: [0.2, 0.6, 0.2], scale: [0, 1, 0], y: [0, -50, 0] }} transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }} />
         ))}
       </div>
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

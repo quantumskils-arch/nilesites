@@ -18,6 +18,20 @@ interface LeadForm {
   email: string;
 }
 
+// Audit intent + a website address in the same message → queue a real check.
+const AUDIT_INTENT =
+  /\b(audit|health\s*check|website\s*check|check\s*(my|this|the|your)?\s*(site|website|page)?|seo\s*check|score\s*(my|this|the)?\s*(site|website)?|run\s+(a|an)\s+(check|audit)|what'?s\s+missing|analy[sz]e)\b/i;
+const URL_RE = /(?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?/i;
+
+function findAuditUrl(text: string): string | null {
+  if (!AUDIT_INTENT.test(text)) return null;
+  const m = text.match(URL_RE);
+  if (!m) return null;
+  let url = m[0].replace(/[.,;:!?)\]]+$/, "");
+  if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+  return url;
+}
+
 export default function ChatBot() {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<"lead" | "chat">("lead");
@@ -67,6 +81,31 @@ export default function ChatBot() {
       .map((m) => ({ role: m.role === "user" ? "user" : "assistant" as const, text: m.text }));
     setMessages((prev) => [...prev, userMsg]);
     setTyping(true);
+
+    // Audit request with a pasted link → queue a REAL check (same pipeline as
+    // the Free Check form) instead of letting the brain promise one.
+    const auditUrl = findAuditUrl(msg);
+    const validPhone = /^\+?\d{7,15}$/.test(lead.phone.replace(/[\s-]/g, ""));
+    if (auditUrl && lead.name.trim().length >= 2 && validPhone) {
+      try {
+        const r = await fetch("/api/check-request", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: lead.name.trim(), phone: lead.phone.trim(), url: auditUrl }),
+        });
+        if (r.ok) {
+          const botMsg: Message = {
+            role: "bot",
+            text: `✅ Queued! I've logged a free health check for ${auditUrl} using your WhatsApp number ${lead.phone}.\n\nOur watchdog agent scores it 0–100 — title, speed, mobile view, broken links, security — and the team WhatsApps you the findings, usually within the hour.`,
+            followUp: ["What does the score include?", "How much does the Watchdog cost?", "I'd like to get started"],
+          };
+          setMessages((prev) => [...prev, botMsg]);
+          setTyping(false);
+          return;
+        }
+      } catch {}
+      // Queue failed — fall through to the brain (it will redirect honestly).
+    }
 
     try {
       const r = await fetch("/api/chat", {

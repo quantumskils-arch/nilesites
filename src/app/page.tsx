@@ -1,9 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import { useMemo } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import CTASection from "@/components/CTASection";
 import { whatsappLink } from "@/lib/wa";
+
+const AgentGlobe = dynamic(() => import("@/components/AgentGlobe"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full rounded-full bg-[radial-gradient(circle_at_35%_35%,#3b82f6_0%,transparent_55%),radial-gradient(circle_at_65%_65%,#f59e0b_0%,transparent_55%)] opacity-40" />
+  ),
+});
+
+// Precomputed at module scope (render must stay pure — React Compiler lint).
+const heroParticles = Array.from({ length: 20 }, () => ({
+  left: `${Math.random() * 100}%`,
+  top: `${Math.random() * 100}%`,
+  duration: 4 + Math.random() * 2,
+  delay: Math.random() * 3,
+}));
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -28,20 +45,21 @@ const services = [
 ];
 
 const stats = [
-  { label: "Websites Built", value: "10+" },
-  { label: "Happy Clients", value: "8+" },
-  { label: "Uptime", value: "99.9%" },
-  { label: "Avg. Response", value: "< 2hrs" },
+  { label: "Starter Launch", value: "3–5 days" },
+  { label: "Plans, Fixed Price", value: "3" },
+  { label: "Avg. Reply Time", value: "< 2hrs" },
+  { label: "Based In", value: "Kampala" },
 ];
 
-const testimonials = [
-  { quote: "NileSites built our kindergarten website and handled everything from domain to hosting. Parents love being able to check updates online.", author: "Sarah Nakato", role: "Director, Little Steps Kindergarten" },
-  { quote: "Professional work at a fair price. Our church website has increased new visitor inquiries significantly.", author: "Pastor David Okello", role: "Lead Pastor, Victory Chapel" },
-  { quote: "The team set up my shop's website with MTN MoMo payments in under two weeks. Customers are now ordering online every day.", author: "Grace Auma", role: "Owner, Grace Fashion Boutique" },
-  { quote: "I was skeptical about getting a website, but NileSites made the whole process simple. They even set up my Google Business Profile — I'm getting calls from Google Maps now.", author: "James Mugisha", role: "Manager, Mugisha Car Bond" },
+const processSteps = [
+  { n: "01", title: "Tell us about your business", desc: "Chat on WhatsApp or book a call. We learn what you sell and who your customers are — no forms, no jargon." },
+  { n: "02", title: "Get a fixed quote & plan", desc: "You pick a plan, we confirm the scope and delivery date in writing. 50% deposit starts the build." },
+  { n: "03", title: "We build & you review", desc: "Your site goes live on a preview link in days, not months. You request changes until it's right." },
+  { n: "04", title: "Launch & we maintain it", desc: "Domain, hosting, SSL and Google Business all set up. We stay on for updates and monitoring." },
 ];
 
 export default function HomePage() {
+  const reduceMotion = useReducedMotion();
   return (
     <>
       <section className="relative overflow-hidden bg-gray-900">
@@ -49,8 +67,8 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:56px_56px]" />
         <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px]" />
         <div className="absolute inset-0 -z-10">
-          {[...Array(20)].map((_, i) => (
-            <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-blue-400/20" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: [0.2, 0.6, 0.2], scale: [0, 1, 0], y: [0, -50, 0] }} transition={{ duration: 4 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 3, ease: "easeInOut" }} />
+          {heroParticles.map((p, i) => (
+            <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-blue-400/20" style={{ left: p.left, top: p.top }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: [0.2, 0.6, 0.2], scale: [0, 1, 0], y: [0, -50, 0] }} transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }} />
           ))}
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
@@ -84,26 +102,25 @@ export default function HomePage() {
                   Chat on WhatsApp
                 </a>
               </motion.div>
-              <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                <div className="flex -space-x-2">
-                  <img src="https://i.pravatar.cc/100?img=32" alt="" className="w-8 h-8 rounded-full border-2 border-navy-900 object-cover" />
-                  <img src="https://i.pravatar.cc/100?img=12" alt="" className="w-8 h-8 rounded-full border-2 border-navy-900 object-cover" />
-                  <img src="https://i.pravatar.cc/100?img=15" alt="" className="w-8 h-8 rounded-full border-2 border-navy-900 object-cover" />
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-6 border-t border-white/10">
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" /> Kampala-based team
                 </div>
-                <div className="text-sm">
-                  <div className="flex items-center gap-1 text-gold-400">
-                    <span>★★★★★</span> <span className="text-white font-semibold ml-1">4.9/5</span>
-                  </div>
-                  <p className="text-gray-400 text-xs">Trusted by 8+ Ugandan businesses</p>
-                </div>
+                <div className="text-sm text-gray-300">Fixed-price plans</div>
+                <div className="text-sm text-gray-300">MoMo &amp; Airtel accepted</div>
                 <div className="hidden sm:flex items-center gap-2 ml-auto text-xs text-gray-400">
-                  <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" /> 3-day avg. delivery
+                  3–5 day Starter launch
                 </div>
               </div>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative lg:pl-6">
-              <div className="relative bg-white rounded-[20px] shadow-2xl shadow-gray-900/30 overflow-hidden border border-white/10">
+              {!reduceMotion && (
+                <div className="absolute -inset-8 sm:-inset-12 pointer-events-none z-0" aria-hidden="true">
+                  <AgentGlobe />
+                </div>
+              )}
+              <div className="relative z-10 bg-white rounded-[20px] shadow-2xl shadow-gray-900/30 overflow-hidden border border-white/10">
                 <div className="h-10 bg-gray-50 border-b border-gray-100 flex items-center gap-1.5 px-4">
                   <span className="w-3 h-3 rounded-full bg-red-400" />
                   <span className="w-3 h-3 rounded-full bg-yellow-400" />
@@ -281,28 +298,23 @@ export default function HomePage() {
       <motion.section className="py-20 bg-gray-50" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" {...fadeUp}>
-            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>What Our Clients Say</motion.h2>
-            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>Real results from real Ugandan business owners.</motion.p>
+            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>How It Works</motion.h2>
+            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>Four steps from first chat to live website. No surprises, no hidden fees.</motion.p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {testimonials.map((t, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {processSteps.map((step, i) => (
               <motion.div
-                key={t.author}
-                className="bg-gray-50 rounded-xl p-8 border border-gray-100"
-                initial={{ opacity: 0, x: i === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={step.n}
+                className="relative bg-white rounded-xl p-6 border border-gray-100"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
+                whileHover={{ y: -5 }}
               >
-                <motion.svg className="w-8 h-8 text-blue-400 mb-4" fill="currentColor" viewBox="0 0 24 24" initial={{ scale: 0.8 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}>
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </motion.svg>
-                <motion.p className="text-gray-700 mb-4 leading-relaxed" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }}>&ldquo;{t.quote}&rdquo;</motion.p>
-                <div>
-                  <p className="font-semibold text-gray-900">{t.author}</p>
-                  <p className="text-sm text-gray-500">{t.role}</p>
-                </div>
+                <span className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-amber-500 bg-clip-text text-transparent block mb-3">{step.n}</span>
+                <h3 className="font-semibold text-gray-900 mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{step.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -434,39 +446,6 @@ export default function HomePage() {
       </motion.section>
 
       <motion.section className="py-20 bg-white" {...fadeUp}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div className="text-center mb-16" {...fadeUp}>
-            <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>How It Works</motion.h2>
-            <motion.p className="text-gray-600 max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>From first message to launch in as little as 3 days. No jargon, no surprises.</motion.p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { step: "1", title: "Chat With Us", desc: "Message us on WhatsApp. Tell us about your business and what you want to achieve." },
-              { step: "2", title: "Get a Fixed Quote", desc: "We send a clear quote and timeline within 24 hours. No hidden fees, ever." },
-              { step: "3", title: "We Build It", desc: "We design, build, and set up your domain, hosting, and payments. You review and approve." },
-              { step: "4", title: "Launch & Grow", desc: "Your site goes live. We keep it updated, secure, and ranking with ongoing support." },
-            ].map((item, i) => (
-              <motion.div
-                key={item.step}
-                className="relative bg-gray-50 rounded-xl p-6 border border-gray-100 text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-              >
-                <motion.div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg shadow-lg" initial={{ scale: 0.8, rotate: -180 }} whileInView={{ scale: 1, rotate: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15, duration: 0.5 }} whileHover={{ scale: 1.1, rotate: 5 }}>
-                  {item.step}
-                </motion.div>
-                <motion.h3 className="font-semibold text-gray-900 mb-2" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }}>{item.title}</motion.h3>
-                <motion.p className="text-sm text-gray-600" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.25 }}>{item.desc}</motion.p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      <motion.section className="py-20 bg-gray-50" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-16" {...fadeUp}>
             <motion.h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-4" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>Why Not a Freelancer or DIY Builder?</motion.h2>

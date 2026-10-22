@@ -1,33 +1,35 @@
 "use client";
 
-import { useMemo, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
+// Precomputed at module scope so component render stays pure.
+function buildSpherePositions(count: number, radius: number): Float32Array {
+  const pts: number[] = [];
+  for (let i = 0; i < count; i++) {
+    const t = Math.random() * Math.PI * 2;
+    const p = Math.acos(2 * Math.random() - 1);
+    pts.push(
+      radius * Math.sin(p) * Math.cos(t),
+      radius * Math.sin(p) * Math.sin(t),
+      radius * Math.cos(p)
+    );
+  }
+  return new Float32Array(pts);
+}
+
+const GLOBE_POSITIONS = buildSpherePositions(850, 2.1);
+
 function GlobePoints() {
   const ref = useRef<THREE.Points>(null);
-  const positions = useMemo(() => {
-    const pts: number[] = [];
-    const COUNT = 850;
-    for (let i = 0; i < COUNT; i++) {
-      const t = Math.random() * Math.PI * 2;
-      const p = Math.acos(2 * Math.random() - 1);
-      const r = 2.1;
-      pts.push(
-        r * Math.sin(p) * Math.cos(t),
-        r * Math.sin(p) * Math.sin(t),
-        r * Math.cos(p)
-      );
-    }
-    return new Float32Array(pts);
-  }, []);
   useFrame((_, delta) => {
     if (ref.current) ref.current.rotation.y += delta * 0.12;
   });
   return (
     <points ref={ref}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+        <bufferAttribute attach="attributes-position" args={[GLOBE_POSITIONS, 3]} />
       </bufferGeometry>
       <pointsMaterial size={0.035} color="#60a5fa" transparent opacity={0.85} sizeAttenuation depthWrite={false} />
     </points>

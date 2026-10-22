@@ -33,7 +33,7 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["free check", "free website check", "check my website", "website check", "health check", "audit", "score my site", "free audit"],
     answer: {
-      text: "Yes! We offer a FREE website health check:\n\n🔍 Our watchdog agent scores your site 0–100 (title, speed, mobile view, broken links, security)\n📋 You get the real findings in plain English — no jargon\n💬 We WhatsApp you the score, usually within the hour\n\nTap \"Get a Free Website Check\" on our AI Agents page and drop your site link — or send your website address here on WhatsApp with the words \"FREE CHECK\".",
+      text: "Yes! We offer a FREE website health check:\n\n🔍 Our watchdog agent scores your site 0–100 (title, speed, mobile view, broken links, security)\n📋 You get the real findings in plain English — no jargon\n💬 The team WhatsApps you the score, usually within the hour\n\nJust paste your website address right here in the chat and I'll queue it for you — or use the \"Get a Free Website Check\" form on our AI Agents page.",
       followUp: ["How much do agents cost?", "What is the Website Watchdog?", "I want to get started"],
     },
   },
