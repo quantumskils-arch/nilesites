@@ -54,8 +54,15 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["price", "pricing", "cost", "how much", "how much does it cost", "fee", "payment", "plan", "plans", "package", "packages"],
     answer: {
-      text: "Our pricing is simple and transparent:\n\n🚀 Starter — UGX 450,000\n1–5 page site, mobile responsive, WhatsApp button, basic SEO, 1yr hosting\n\n⭐ Standard — UGX 900,000 (Most Popular)\nUp to 10 pages with CMS, MoMo payments, Google Business setup, gallery, 3 revisions\n\n💎 Premium — UGX 1,500,000\nBooking/inventory systems, e-commerce, custom workflows, unlimited revisions, priority support\n\nAll payable via MTN MoMo or Airtel Money. 50% deposit to start, 50% on completion.\n\n🤖 AI Agents: Watchdog UGX 80,000/month (audit UGX 150,000 once) · Akiba bots from UGX 900,000 · Custom agents from UGX 500,000. See the AI Agents page for the full team.",
-      followUp: ["What's included in hosting?", "Do you offer payment plans?", "What are the add-ons?"],
+      text: "Our pricing is simple and transparent:\n\n⚡ Website Rescue Sprint — UGX 350,000\nOne perfect page, live in 5 days. Domain, hosting, Google setup all included. Best if you have no site yet.\n\n🚀 Starter — UGX 450,000\n1–5 page site, mobile responsive, WhatsApp button, basic SEO, 1yr hosting\n\n⭐ Standard — UGX 900,000 (Most Popular)\nUp to 10 pages with CMS, MoMo payments, Google Business setup, gallery, 3 revisions\n\n💎 Premium — UGX 1,500,000\nBooking/inventory systems, e-commerce, custom workflows, unlimited revisions, priority support\n\nAll payable via MTN MoMo or Airtel Money. 50% deposit to start, 50% on completion.\n\n🤖 AI Agents: Watchdog UGX 80,000/month (audit UGX 150,000 once) · Akiba bots from UGX 900,000 · Custom agents from UGX 500,000. See the AI Agents page for the full team.",
+      followUp: ["What's the Rescue Sprint?", "What's included in hosting?", "Do you offer payment plans?"],
+    },
+  },
+  {
+    keywords: ["rescue", "rescue sprint", "website rescue", "350", "350k", "350,000", "no website", "dead website", "fix my website", "teardown", "free audit", "free check", "health check"],
+    answer: {
+      text: "The Website Rescue Sprint is our entry offer for businesses with no site (or a dead one):\n\n⚡ UGX 350,000 all-in — one perfect page, live in 5 working days\n✅ Domain + hosting + SSL (year 1)\n✅ Google-ready: local SEO + schema\n✅ WhatsApp click-to-chat button\n✅ 50% to start, 50% on go-live (MoMo / Airtel)\n\nNot happy by day 7? We keep working free until you are.\n\nFull details: nilesites.vercel.app/rescue — or paste your current website link here and we'll queue a free teardown score.",
+      followUp: ["How does the free teardown work?", "How is the Sprint different from Starter?", "I want to book the Sprint"],
     },
   },
   {

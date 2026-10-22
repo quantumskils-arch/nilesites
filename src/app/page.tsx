@@ -14,6 +14,8 @@ const AgentGlobe = dynamic(() => import("@/components/AgentGlobe"), {
   ),
 });
 
+import ServiceArt, { type ServiceArtKind } from "@/components/ServiceArt";
+
 // Precomputed at module scope (render must stay pure — React Compiler lint).
 const heroParticles = Array.from({ length: 20 }, () => ({
   left: `${Math.random() * 100}%`,
@@ -35,13 +37,13 @@ const stagger = {
   viewport: { once: true },
 };
 
-const services = [
-  { title: "Website Design & Build", desc: "Mobile-responsive, modern websites that turn visitors into customers. From 1-page to full multi-page with CMS.", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&auto=format", icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
-  { title: "Hosting & Domain Setup", desc: "Reliable hosting with 99.9% uptime, custom domain, SSL, and email. We handle all the technical setup so you don't have to.", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop&auto=format", icon: "M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" },
-  { title: "WhatsApp & Telegram Bots", desc: "Akiba AI-powered bots that handle customer inquiries, take orders, and answer FAQs automatically — 24/7, even while you sleep.", img: "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=600&h=400&fit=crop&auto=format", icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" },
-  { title: "Google Business Profile", desc: "Get found on Google Maps and Search. We handle verification, optimization, and listing management start to finish.", img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&h=400&fit=crop&auto=format", icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z" },
-  { title: "Mobile Money Integration", desc: "Accept MTN MoMo and Airtel Money payments directly on your site. Your customers pay the way they already know.", img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop&auto=format", icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" },
-  { title: "SEO & Maintenance", desc: "Ongoing updates, content changes, SEO optimization, and monitoring. Your site stays fresh, fast, and ranking.", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&auto=format", icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" },
+const services: { title: string; desc: string; kind: ServiceArtKind; icon: string }[] = [
+  { title: "Website Design & Build", desc: "Mobile-responsive, modern websites that turn visitors into customers. From 1-page to full multi-page with CMS.", kind: "design", icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
+  { title: "Hosting & Domain Setup", desc: "Reliable hosting with 99.9% uptime, custom domain, SSL, and email. We handle all the technical setup so you don't have to.", kind: "hosting", icon: "M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" },
+  { title: "WhatsApp & Telegram Bots", desc: "Akiba AI-powered bots that handle customer inquiries, take orders, and answer FAQs automatically — 24/7, even while you sleep.", kind: "bots", icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" },
+  { title: "Google Business Profile", desc: "Get found on Google Maps and Search. We handle verification, optimization, and listing management start to finish.", kind: "gbp", icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z" },
+  { title: "Mobile Money Integration", desc: "Accept MTN MoMo and Airtel Money payments directly on your site. Your customers pay the way they already know.", kind: "momo", icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" },
+  { title: "SEO & Maintenance", desc: "Ongoing updates, content changes, SEO optimization, and monitoring. Your site stays fresh, fast, and ranking.", kind: "seo", icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" },
 ];
 
 const stats = [
@@ -66,12 +68,17 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-amber-500/10 to-gray-900" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:56px_56px]" />
         <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px]" />
+        {!reduceMotion && (
+          <div className="absolute inset-y-0 right-0 w-full lg:w-[62%] z-0 pointer-events-none" aria-hidden="true">
+            <AgentGlobe />
+          </div>
+        )}
         <div className="absolute inset-0 -z-10">
           {heroParticles.map((p, i) => (
             <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-blue-400/20" style={{ left: p.left, top: p.top }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: [0.2, 0.6, 0.2], scale: [0, 1, 0], y: [0, -50, 0] }} transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }} />
           ))}
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-8 items-center">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
               <motion.div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full pl-1.5 pr-4 py-1.5 mb-6 backdrop-blur" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.5 }}>
@@ -115,11 +122,6 @@ export default function HomePage() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative lg:pl-6">
-              {!reduceMotion && (
-                <div className="absolute -inset-8 sm:-inset-12 pointer-events-none z-0" aria-hidden="true">
-                  <AgentGlobe />
-                </div>
-              )}
               <div className="relative z-10 bg-white rounded-[20px] shadow-2xl shadow-gray-900/30 overflow-hidden border border-white/10">
                 <div className="h-10 bg-gray-50 border-b border-gray-100 flex items-center gap-1.5 px-4">
                   <span className="w-3 h-3 rounded-full bg-red-400" />
@@ -203,12 +205,7 @@ export default function HomePage() {
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="h-40 bg-gradient-to-br from-blue-100 to-amber-100 relative overflow-hidden">
-                  <img
-                    src={service.img}
-                    alt={service.title}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
+                  <ServiceArt kind={service.kind} className="w-full h-full" />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
                   <motion.div className="absolute bottom-3 left-3 w-10 h-10 bg-gradient-to-br from-blue-500 to-amber-500 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform" initial={{ scale: 0.8, rotate: -10 }} whileInView={{ scale: 1, rotate: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }}>
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -232,12 +229,7 @@ export default function HomePage() {
             >
               <Link href="/ai-agents" className="block bg-navy-900 rounded-[10px] overflow-hidden h-full">
                 <div className="h-40 relative overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&h=400&fit=crop&auto=format"
-                    alt="NileSites AI Agents"
-                    className="w-full h-full object-cover opacity-80"
-                    loading="lazy"
-                  />
+                  <ServiceArt kind="agents" className="w-full h-full" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/30 to-transparent" />
                   <span className="absolute top-3 left-3 bg-gradient-to-r from-blue-500 to-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">🤖 NEW</span>
                 </div>
@@ -471,6 +463,27 @@ export default function HomePage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </motion.section>
+
+      <motion.section className="py-14 bg-gradient-to-r from-blue-600 via-blue-700 to-navy-900 relative overflow-hidden" {...fadeUp}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_50%,rgba(251,191,36,0.18)_0%,transparent_45%)]" />
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+          <div className="flex-1">
+            <span className="inline-block bg-amber-400/20 border border-amber-300/40 text-amber-200 text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Website Rescue Sprint</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
+              No website yet? Live in 5 days for UGX 350,000.
+            </h2>
+            <p className="text-blue-100/90 text-sm sm:text-base max-w-xl">
+              One perfect page — domain, hosting, Google setup and WhatsApp button included. Built for busy owners who need results, not a six-week project.
+            </p>
+          </div>
+          <Link
+            href="/rescue"
+            className="shrink-0 bg-white text-blue-700 px-7 py-3.5 rounded-xl font-semibold hover:bg-amber-50 transition-colors"
+          >
+            See how the Sprint works →
+          </Link>
         </div>
       </motion.section>
 

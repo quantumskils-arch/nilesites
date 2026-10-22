@@ -43,6 +43,7 @@ export default function Footer() {
               {[
                 { href: "/services", label: "Services" },
                 { href: "/pricing", label: "Pricing" },
+                { href: "/rescue", label: "Rescue Sprint" },
                 { href: "/portfolio", label: "Portfolio" },
                 { href: "/akiba-ai", label: "Akiba AI" },
                 { href: "/locations/kampala", label: "Web Design Kampala" },

@@ -31,7 +31,7 @@ function GlobePoints() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[GLOBE_POSITIONS, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.035} color="#60a5fa" transparent opacity={0.85} sizeAttenuation depthWrite={false} />
+      <pointsMaterial size={0.05} color="#7dd3fc" transparent opacity={0.95} sizeAttenuation depthWrite={false} />
     </points>
   );
 }
@@ -47,7 +47,7 @@ function CoreWire() {
   return (
     <mesh ref={ref}>
       <icosahedronGeometry args={[1.05, 1]} />
-      <meshBasicMaterial color="#f59e0b" wireframe transparent opacity={0.5} />
+      <meshBasicMaterial color="#f59e0b" wireframe transparent opacity={0.65} />
     </mesh>
   );
 }
@@ -60,7 +60,7 @@ function OrbitRing() {
   return (
     <mesh ref={ref} rotation={[Math.PI / 2.4, 0.2, 0]}>
       <torusGeometry args={[2.8, 0.012, 8, 128]} />
-      <meshBasicMaterial color="#38bdf8" transparent opacity={0.45} />
+      <meshBasicMaterial color="#38bdf8" transparent opacity={0.6} />
     </mesh>
   );
 }
