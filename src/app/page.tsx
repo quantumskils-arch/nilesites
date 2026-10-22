@@ -115,9 +115,6 @@ export default function HomePage() {
                 </div>
                 <div className="text-sm text-gray-300">Fixed-price plans</div>
                 <div className="text-sm text-gray-300">MoMo &amp; Airtel accepted</div>
-                <div className="hidden sm:flex items-center gap-2 ml-auto text-xs text-gray-400">
-                  3–5 day Starter launch
-                </div>
               </div>
             </motion.div>
 
