@@ -74,15 +74,15 @@ export default function Footer() {
           >
             <h3 className="text-xl font-semibold text-white dark:text-gray-900 mb-4">Services</h3>
             <ul className="space-y-2 text-sm">
-              {[
+                {[
                 "Website Design & Build",
                 "Hosting & Domain Setup",
-                "Telegram Bot Setup",
+                <Link key="telegram" href="/telegram-bot" className="text-white hover:text-amber-400 transition-colors">Telegram Bot Setup</Link>,
                 "SEO & Google Business",
                 "Mobile Money Integration",
               ].map((service, index) => (
                 <motion.li
-                  key={service}
+                  key={typeof service === "string" ? service : "telegram"}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}

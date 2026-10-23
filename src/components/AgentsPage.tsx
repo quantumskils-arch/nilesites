@@ -98,6 +98,7 @@ const agents = [
     outcome: "Telegram bot that answers FAQs and captures order details.",
     rhythm: "FAQs, order intake, lead capture — messages queue to your phone. English (Luganda/Swahili coming).",
     price: "From UGX 900,000 + UGX 100,000/mo",
+    href: "/telegram-bot",
     wa: "Hi NileSites! I'd like an Akiba Telegram Agent for my business.",
     img: "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=800&h=500&fit=crop&auto=format",
   },
@@ -256,7 +257,7 @@ export default function AgentsPage() {
                   <p className="text-gray-400 text-sm leading-relaxed mb-4">{agent.rhythm}</p>
                   <p className="text-amber-400 font-semibold text-sm mb-5">{agent.price}</p>
                   <a
-                    href={whatsappLink(agent.wa)}
+                    href={agent.href || whatsappLink(agent.wa)}
                     target="_blank" rel="noopener noreferrer"
                     className="mt-auto block text-center bg-white/10 hover:bg-gradient-to-r hover:from-blue-500 hover:to-amber-500 border border-white/15 text-white px-5 py-3 rounded-xl text-sm font-semibold transition-all"
                   >
