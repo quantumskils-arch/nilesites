@@ -203,7 +203,7 @@ export default function HomePage() {
                 </div>
                 <div className="p-5">
                   <h3 className="text-lg font-semibold text-white mb-2">AI Agents That Never Sleep</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">24/7 website watchdogs, WhatsApp agents & rival radars. From UGX 80,000/mo.</p>
+                  <p className="text-gray-300 text-sm leading-relaxed mb-3">24/7 website watchdogs, Telegram bots & rival radars. From UGX 80,000/mo.</p>
                   <span className="text-amber-400 text-sm font-semibold group-hover:text-amber-300">Meet the agents →</span>
                 </div>
               </Link>

@@ -77,7 +77,7 @@ export default function Footer() {
               {[
                 "Website Design & Build",
                 "Hosting & Domain Setup",
-                "WhatsApp Bot Setup",
+                "Telegram Bot Setup",
                 "SEO & Google Business",
                 "Mobile Money Integration",
               ].map((service, index) => (

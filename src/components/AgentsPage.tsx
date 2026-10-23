@@ -94,11 +94,11 @@ const agents = [
     img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&auto=format",
   },
   {
-    status: "live", name: "Akiba WhatsApp Agent",
-    outcome: "Answer customers and take orders while you sleep.",
-    rhythm: "24/7: FAQs, catalog, orders, MoMo follow-ups — in English, Luganda, Swahili.",
+    status: "custom", name: "Akiba Telegram Agent",
+    outcome: "Telegram bot that answers FAQs and captures order details.",
+    rhythm: "FAQs, order intake, lead capture — messages queue to your phone. English (Luganda/Swahili coming).",
     price: "From UGX 900,000 + UGX 100,000/mo",
-    wa: "Hi NileSites! I'd like an Akiba WhatsApp Agent for my business.",
+    wa: "Hi NileSites! I'd like an Akiba Telegram Agent for my business.",
     img: "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=800&h=500&fit=crop&auto=format",
   },
   {
@@ -142,7 +142,7 @@ const steps = [
 ];
 
 const faqs = [
-  { q: "Do I need any technical skills?", a: "None. If you can use WhatsApp, you can use our agents. We handle setup, hosting and maintenance — you just read short reports and approve actions." },
+  { q: "Do I need any technical skills?", a: "None. If you can use Telegram or WhatsApp, you can run our agents. We handle setup, hosting and maintenance — you just read short reports and approve actions." },
   { q: "What happens when my site goes down?", a: "Our watchdog checks every morning. The moment your site stops responding, you get an instant alert — usually before your customers even notice. We then help you get it back up." },
   { q: "How do I pay?", a: "MTN MoMo or Airtel Money, monthly. No contracts — cancel anytime with a WhatsApp message. Setups are one-time payments." },
   { q: "Are these robots messaging my customers?", a: "No. Agents draft, humans approve. Nothing goes to your customers without your say-so — and every outreach carries an opt-out." },
@@ -274,7 +274,7 @@ export default function AgentsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div className="text-center mb-12" {...fadeUp}>
             <h2 className="text-3xl sm:text-4xl font-bold mb-3" style={{ fontFamily: "var(--font-playfair)" }}>Running in 3 steps. Zero tech skills.</h2>
-            <p className="text-gray-400">If you can use WhatsApp, you can run AI agents.</p>
+            <p className="text-gray-400">If you can use Telegram or WhatsApp, you can run AI agents.</p>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-6">
             {steps.map((step, i) => (

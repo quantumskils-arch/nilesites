@@ -21,7 +21,7 @@ const addOns = [
   { name: "Website Health Watchdog", price: "80,000/mo", desc: "Weekly 0–100 scorecard + instant down-alerts (audit 150,000 once)" },
   { name: "Review & Reputation Watcher", price: "80,000/mo", desc: "New-review alerts with drafted replies for your approval" },
   { name: "Custom AI Agent", price: "from 500,000", desc: "Radar, decks, shorts engine or inbox triage — built for your workflow" },
-  { name: "Akiba AI WhatsApp Bot", price: "150,000/mo", desc: "Automated customer support and order taking" },
+  { name: "Akiba AI Telegram Bot", price: "150,000/mo", desc: "Telegram bot: FAQs, order intake, lead capture — messages queue to your phone" },
   { name: "Additional Page", price: "50,000", desc: "Extra page beyond your plan's limit" },
   { name: "Custom Domain (.ug)", price: "80,000/yr", desc: "Professional .ug domain for your business" },
   { name: "Business Email Setup", price: "60,000/yr", desc: "Professional email (@yourbusiness.com)" },

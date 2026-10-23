@@ -26,7 +26,7 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["ai agents", "agents", "agent", "ai", "watchdog", "website watchdog", "monitoring", "monitor my site", "radar", "competitor", "never sleep", "24/7"],
     answer: {
-      text: "NileSites AI Agents are full-time agents that work for your business 24/7:\n\n🟢 Website Health Watchdog (LIVE NOW) — weekly 0–100 scorecard on WhatsApp + instant alert if your site goes down. UGX 150,000 audit, UGX 80,000/month.\n🤖 Akiba WhatsApp Agent (LIVE NOW) — answers customers and takes orders while you sleep. From UGX 900,000 + UGX 100,000/month.\n🟡 Custom builds (2–4 weeks) — Competitor Radar, Review Watcher, Proposal-Deck Automation, Shorts Engine. From UGX 500,000.\n\nNo tech skills needed — if you can use WhatsApp, you can run agents. See the full team on our AI Agents page!",
+      text: "NileSites AI Agents are full-time agents that work for your business 24/7:\n\n🟢 Website Health Watchdog (LIVE NOW) — weekly 0–100 scorecard on WhatsApp + instant alert if your site goes down. UGX 150,000 audit, UGX 80,000/month.\n🤖 Akiba Telegram Agent (BUILD TO ORDER) — Telegram bot that answers FAQs and captures order details; messages queue to your phone. From UGX 900,000 + UGX 100,000/month.\n🟡 Custom builds (2–4 weeks) — Competitor Radar, Review Watcher, Proposal-Deck Automation, Shorts Engine. From UGX 500,000.\n\nNo tech skills needed — if you can use Telegram or WhatsApp, you can run agents. See the full team on our AI Agents page!",
       followUp: ["How does the Website Watchdog work?", "I want a free website check", "How much do agents cost?", "Tell me about Akiba AI"],
     },
   },
@@ -73,9 +73,9 @@ const knowledge: KnowledgeEntry[] = [
     },
   },
   {
-    keywords: ["akiba", "akiba ai", "bot", "chatbot", "whatsapp bot", "telegram bot", "automation", "automated", "ai assistant", "ai bot"],
+    keywords: ["akiba", "akiba ai", "bot", "chatbot", "telegram bot", "automation", "automated", "ai assistant", "ai bot"],
     answer: {
-      text: "Akiba AI is our 24/7 automated assistant for WhatsApp and Telegram. It can:\n\n🤖 Answer customer inquiries instantly — day or night\n🛒 Take orders and show your catalog\n🌍 Speak English, Luganda, and Swahili\n🎯 Capture and qualify leads automatically\n🔗 Integrate with your website\n📊 Show analytics dashboard\n\nYour customers start conversations on WhatsApp — Akiba AI handles them from start to finish. Starting at UGX 150,000/month.",
+      text: "Akiba AI is our Telegram bot for Ugandan businesses. It can:\n\n🤖 Answer customer FAQs instantly — day or night\n📝 Take order details and capture leads — messages queue to your phone\n🇺🇬 Speak English (Luganda/Swahili coming)\n🔗 Integrate with your website\n\nCustomers message your bot on Telegram. You confirm orders and payment by MoMo/Airtel yourself. Starting at UGX 900,000 + UGX 100,000/month.",
       followUp: ["How is Akiba AI different from a regular chatbot?", "Which businesses can use Akiba AI?", "Can I try Akiba AI?"],
     },
   },
