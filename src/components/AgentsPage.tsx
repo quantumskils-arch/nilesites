@@ -21,12 +21,10 @@ const fadeUp = {
 };
 
 const feedEvents = [
-  { icon: "🔍", text: "Watchdog checked 12 client sites", sub: "11 up • 1 slow — owner notified" },
-  { icon: "📊", text: "Monday scorecard sent", sub: "87/100 🟢 — forwarded on WhatsApp" },
-  { icon: "🎯", text: "Radar found 3 weak rival sites", sub: "Outreach drafts ready for review" },
-  { icon: "💬", text: "Akiba answered 48 customer questions", sub: "2 orders taken while owner slept" },
-  { icon: "⭐", text: "New 5-star Google review detected", sub: "Thank-you reply drafted" },
-  { icon: "🔒", text: "SSL renewed automatically", sub: "Client site stays trusted" },
+  { icon: "🔍", text: "Watchdog scored our own sites", sub: "nilesites.vercel.app 100/100 · opportunityradar.africa 95/100" },
+  { icon: "📊", text: "Monday scorecard delivered", sub: "0–100 + week-over-week trend, straight to WhatsApp" },
+  { icon: "📡", text: "Rival Radar watched 6 Kampala agencies", sub: "Kico 900K–3.5M · TechMarket from 470K — changes alert us" },
+  { icon: "💬", text: "Free website checks flow through the queue", sub: "Visitor pastes link → team gets it → score on WhatsApp" },
 ];
 
 function LiveFeed() {
@@ -90,7 +88,7 @@ const agents = [
   {
     status: "live", name: "Website Health Watchdog",
     outcome: "Never lose a customer to a broken website again.",
-    rhythm: "Every Monday: 0–100 scorecard on WhatsApp. Instant alert if your site goes down.",
+    rhythm: "Every Monday: 0–100 scorecard on WhatsApp. Instant alert if your site goes down. Runs on nilesites.vercel.app itself — ask us for this week's scorecard.",
     price: "UGX 150,000 audit · UGX 80,000/mo",
     wa: "Hi NileSites! I'd like the Website Health Watchdog for my business.",
     img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&auto=format",
