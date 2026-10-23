@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import CTASection from "@/components/CTASection";
 import { whatsappLink } from "@/lib/wa";
@@ -116,34 +115,6 @@ export default function HomePage() {
                 <div className="text-sm text-gray-300">Fixed-price plans</div>
                 <div className="text-sm text-gray-300">MoMo &amp; Airtel accepted</div>
               </div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative lg:pl-6">
-              <div className="relative z-10 bg-white rounded-[20px] shadow-2xl shadow-gray-900/30 overflow-hidden border border-white/10">
-                <div className="h-10 bg-gray-50 border-b border-gray-100 flex items-center gap-1.5 px-4">
-                  <span className="w-3 h-3 rounded-full bg-red-400" />
-                  <span className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <span className="w-3 h-3 rounded-full bg-green-400" />
-                  <span className="ml-3 text-xs text-gray-400 font-medium">nilesites.com — Preview</span>
-                </div>
-                <img src="/portfolio/opportunityradar.africa.png" alt="Opportunity Radar preview" className="w-full aspect-[16/10] object-cover object-top" />
-                <div className="p-4 flex items-center justify-between bg-white">
-                  <div>
-                    <p className="text-sm font-semibold text-gray-900">Opportunity Radar Africa</p>
-                    <p className="text-xs text-gray-500">AI platform • Live on Vercel</p>
-                  </div>
-                  <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-medium">Live ✓</span>
-                </div>
-              </div>
-              <motion.div className="absolute -bottom-4 -left-4 z-20 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 hidden sm:flex items-center gap-3" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.8, duration: 0.5 }}>
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-amber-500 flex items-center justify-center text-white">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-gray-900">Launch in 3–5 days</p>
-                  <p className="text-xs text-gray-500">Domain + hosting included</p>
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </div>

@@ -31,7 +31,46 @@ body {
 
 .dark {
   @apply bg-gray-900 text-white;
+  color-scheme: dark;
 }
+
+/* ---- Site-wide dark mode -------------------------------------------------
+   Pages are built with the flat light palette (bg-white, text-gray-900, ...).
+   These unlayered rules remap those exact utilities under .dark so the
+   toggle actually transforms every page. Utilities using dark: variants
+   or dark-section colors (bg-gray-900, text-gray-300/400, ...) are untouched. */
+.dark body,
+.dark .bg-white { background-color: #0f172a; }
+.dark .bg-gray-50 { background-color: #131f35; }
+.dark .bg-gray-100 { background-color: #1a2740; }
+.dark .bg-gray-200 { background-color: #24334f; }
+
+.dark .text-gray-900 { color: #f1f5f9; }
+.dark .text-gray-800 { color: #e2e8f0; }
+.dark .text-gray-700 { color: #cbd5e1; }
+.dark .text-gray-600 { color: #9aa8bf; }
+.dark .text-gray-500 { color: #7e8da6; }
+
+.dark .border-gray-100,
+.dark .border-gray-200,
+.dark .border-gray-300 { border-color: #24334f; }
+.dark .divide-gray-100 > :not([hidden]),
+.dark .divide-gray-200 > :not([hidden]) { border-color: #24334f; }
+
+/* White CTA buttons keep a filled look in dark mode (they carry dark text). */
+.dark .bg-white.text-blue-700 { background-color: #1d4ed8; color: #fff; }
+.dark .bg-white.text-blue-700:hover { background-color: #1e40af; }
+
+/* Form controls: browser-default white fields would glare on dark pages. */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #0b1526;
+  color: #e2e8f0;
+  border-color: #334155;
+}
+.dark input::placeholder,
+.dark textarea::placeholder { color: #64748b; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
