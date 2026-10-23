@@ -31,6 +31,13 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.vercel.app" },
     ],
   },
+  async redirects() {
+    return [
+      { source: "/sprint", destination: "/rescue", permanent: true },
+      { source: "/web-rescue", destination: "/rescue", permanent: true },
+      { source: "/website-rescue", destination: "/rescue", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
