@@ -313,10 +313,10 @@ export default function HomePage() {
                 )}
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">{plan.name}</h3>
                 <p className="text-sm text-gray-500 mb-4">{plan.desc}</p>
-                <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-2">
+                <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent mb-1">
                   UGX {plan.price}
-                  <span className="text-sm font-normal text-gray-500"> starting</span>
                 </p>
+                <span className="block text-xs font-normal text-gray-500 mb-3">starting price</span>
                 <div className="flex flex-wrap gap-2 mb-6">
                   <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">⏱ {plan.delivery}</span>
                   <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">💾 {plan.specs}</span>

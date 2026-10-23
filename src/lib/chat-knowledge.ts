@@ -33,7 +33,7 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["free check", "free website check", "check my website", "website check", "health check", "audit", "score my site", "free audit"],
     answer: {
-      text: "Yes! We offer a FREE website health check:\n\n🔍 Our watchdog agent scores your site 0–100 (title, speed, mobile view, broken links, security)\n📋 You get the real findings in plain English — no jargon\n💬 The team WhatsApps you the score, usually within the hour\n\nJust paste your website address right here in the chat and I'll queue it for you — or use the \"Get a Free Website Check\" form on our AI Agents page.",
+      text: "Yes! We offer a FREE website health check:\n\n🔍 Our watchdog agent scores your site 0–100 (title, speed, mobile view, broken links, security)\n📋 You get the real findings in plain English — no jargon\n💬 The team WhatsApps you the score, usually within the hour\n\nPaste your website address right here in the chat and we'll start the check — your score is WhatsApp'd to your number. If it doesn't start automatically, use the \"Get a Free Website Check\" form on our AI Agents page or WhatsApp us at wa.me/256778030847.",
       followUp: ["How much do agents cost?", "What is the Website Watchdog?", "I want to get started"],
     },
   },
@@ -61,7 +61,7 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["rescue", "rescue sprint", "website rescue", "350", "350k", "350,000", "no website", "dead website", "fix my website", "teardown", "free audit", "free check", "health check"],
     answer: {
-      text: "The Website Rescue Sprint is our entry offer for businesses with no site (or a dead one):\n\n⚡ UGX 350,000 all-in — one perfect page, live in 5 working days\n✅ Domain + hosting + SSL (year 1)\n✅ Google-ready: local SEO + schema\n✅ WhatsApp click-to-chat button\n✅ 50% to start, 50% on go-live (MoMo / Airtel)\n\nNot happy by day 7? We keep working free until you are.\n\nFull details: nilesites.vercel.app/rescue — or paste your current website link here and we'll queue a free teardown score.",
+      text: "The Website Rescue Sprint is our entry offer for businesses with no site (or a dead one):\n\n⚡ UGX 350,000 all-in — one perfect page, live in 5 working days\n✅ Domain + hosting + SSL (year 1)\n✅ Google-ready: local SEO + schema\n✅ WhatsApp click-to-chat button\n✅ 50% to start, 50% on go-live (MoMo / Airtel)\n\nNot happy by day 7? We keep working free until you are.\n\nFull details: nilesites.vercel.app/rescue — or paste your current website link here in the chat and we'll start a free teardown score (WhatsApp'd to your number).",
       followUp: ["How does the free teardown work?", "How is the Sprint different from Starter?", "I want to book the Sprint"],
     },
   },

@@ -16,6 +16,15 @@ function badHost(host: string): boolean {
   );
 }
 
+// Read-only health probe: tells the chat widget (and monitoring) whether the
+// queue is actually wired up, without writing anything to the queue repo.
+export async function GET() {
+  return NextResponse.json({
+    configured: Boolean(GH_TOKEN && GH_REPO),
+    service: "check-request",
+  });
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();

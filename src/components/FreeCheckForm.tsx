@@ -44,7 +44,7 @@ export default function FreeCheckForm() {
         <p className="text-4xl mb-3">✅</p>
         <h3 className="text-xl font-bold text-white mb-2">Check requested, {name.split(" ")[0]}!</h3>
         <p className="text-gray-300 text-[15px] leading-relaxed">
-          Our watchdog agent is auditing your site right now. We&apos;ll WhatsApp your 0–100 score
+          We have your details. The team runs the check and WhatsApps your 0–100 score
           to {phone} — usually within the hour.
         </p>
       </div>

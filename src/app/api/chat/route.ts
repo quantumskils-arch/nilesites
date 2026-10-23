@@ -22,14 +22,15 @@ const SYSTEM = `You are Akiba, the WhatsApp-style assistant for NileSites (niles
 WHAT WE SELL (never invent other prices, products, testimonials, or figures):
 - Website Rescue Sprint: UGX 350,000 all-in — one perfect page, live in 5 working days, domain+hosting+SSL year 1, Google-ready. Entry offer for businesses with no/dead website. When mentioning where to read more, say exactly: nilesites.vercel.app/rescue (never shorten, misspell, or alter this path).
 - Websites: Starter UGX 450,000 (1-5 pages) · Standard UGX 900,000 (CMS, MoMo, Google Business) · Premium UGX 1,500,000 (booking/e-commerce). 50% deposit, 50% on launch. MTN MoMo / Airtel Money.
-- AI Agents: Website Health Watchdog — free audit, UGX 80,000/month; Akiba WhatsApp bot from UGX 900,000 + 100K/mo; custom agents (radar, review watcher, proposal decks, shorts) from UGX 500,000.
-- Free website health check: automated 0-100 score (title, speed, mobile, broken links, security). When a visitor pastes a website link in this chat, the chat queues the check automatically; our team then WhatsApps the score, usually within the hour.
+- AI Agents: Website Health Watchdog — UGX 80,000/month (one-off audit UGX 150,000; the basic health check above is free); Akiba WhatsApp bot from UGX 900,000 + 100K/mo; custom agents (radar, review watcher, proposal decks, shorts) from UGX 500,000.
+- Free website health check: automated 0-100 score (title, speed, mobile, broken links, security). Deliveries happen ONLY through the check queue: the chat widget posts its own "✅ Queued" confirmation message when a check really starts, and our team then WhatsApps the score, usually within the hour.
 - Process: chat → plan → 50% deposit → build (3-20 days by plan) → review → launch. Contact: WhatsApp wa.me/256778030847 (<2hrs), hello@nilesites.com, Kampala.
 
 WHAT YOU MUST NEVER DO (hard rules):
 - You have NO tools. Never claim you are running, performing, scanning, or scheduling anything yourself — no audits "right now", no checks "in progress".
 - Never say you will WhatsApp, SMS, email, call, or notify anyone. No future-tense action promises: "I'll run it", "I'll send the results", "expect a message within the hour" are all forbidden.
-- If the user asks for an audit/health check: the chat queues it automatically when they paste a link — if a link was pasted, confirm briefly that it's queued; if not, ask them to paste the website address. Describing what the team's service does in the third person ("our team WhatsApps the score") is fine — claiming YOU will do it is not.
+- NEVER claim a check is queued or started unless an "✅ Queued" confirmation from the widget already appears in the conversation. Checks that reach you were NOT queued (a successful queue never calls you). If the visitor pasted a link expecting a check and there is no ✅ Queued message above, say the automatic check couldn't be started and offer the team on WhatsApp at wa.me/256778030847, or the free-check form on the AI Agents page (nilesites.vercel.app/ai-agents — never alter this path).
+- If asked for an audit/health check and no link has been pasted yet: ask them to paste the website address here in the chat, and tell them the team delivers the score on WhatsApp to their number. Describing what the team does in the third person ("our team WhatsApps the score") is fine — claiming YOU will do it is not.
 
 HOW TO TALK:
 - Short replies, under 120 words, plain text, simple English. No tables, no heavy markdown.
@@ -52,6 +53,16 @@ export async function POST(request: Request) {
     }
     const body = await request.json();
     const message = String(body.message || "").slice(0, 500).trim();
+    const visitor = (body.visitor && typeof body.visitor === "object" ? body.visitor : {}) as {
+      name?: unknown;
+      phone?: unknown;
+    };
+    const visitorName = String(visitor.name || "").slice(0, 60).trim();
+    const visitorPhone = String(visitor.phone || "").slice(0, 20).trim();
+    const visitorLine =
+      visitorName || visitorPhone
+        ? `\n\nCURRENT VISITOR (from the chat welcome form): name=${visitorName || "unknown"}, WhatsApp number=${visitorPhone || "not given"}. When it helps, you may refer to their number as the delivery destination the TEAM uses (third person).`
+        : "";
     const rawHistory: Msg[] = Array.isArray(body.history) ? body.history : [];
     const history = rawHistory
       .filter((m) => m && (m.role === "user" || m.role === "assistant") && m.text)
@@ -75,7 +86,7 @@ export async function POST(request: Request) {
           model: GROQ_MODEL,
           temperature: 0.4,
           max_tokens: 350,
-          messages: [{ role: "system", content: SYSTEM }, ...history, { role: "user", content: message }],
+          messages: [{ role: "system", content: SYSTEM + visitorLine }, ...history, { role: "user", content: message }],
         }),
         signal: ctrl.signal,
       });

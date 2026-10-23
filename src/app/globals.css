@@ -39,7 +39,7 @@ body {
    These unlayered rules remap those exact utilities under .dark so the
    toggle actually transforms every page. Utilities using dark: variants
    or dark-section colors (bg-gray-900, text-gray-300/400, ...) are untouched. */
-.dark body,
+.dark body { background-color: #0f172a; color: #f1f5f9; }
 .dark .bg-white { background-color: #0f172a; }
 .dark .bg-gray-50 { background-color: #131f35; }
 .dark .bg-gray-100 { background-color: #1a2740; }
@@ -56,6 +56,19 @@ body {
 .dark .border-gray-300 { border-color: #24334f; }
 .dark .divide-gray-100 > :not([hidden]),
 .dark .divide-gray-200 > :not([hidden]) { border-color: #24334f; }
+
+/* Navy text is designed for light surfaces — flip it in dark mode. Text on
+   gold/emerald/amber FILLS (buttons, badges, chips) must stay dark. */
+.dark .text-navy-900 { color: #f1f5f9; }
+.dark .bg-gold-500.text-navy-900,
+.dark .bg-gold-500\/90.text-navy-900,
+.dark .bg-gold-500 .text-navy-900,
+.dark .bg-emerald-400\/90.text-navy-900,
+.dark .bg-amber-400\/90.text-navy-900 { color: #0a1628; }
+
+/* Non-popular CTA buttons: keep a visible fill against dark cards. */
+.dark .bg-gray-900 { background-color: #1e293b; }
+.dark .bg-gray-900:hover { background-color: #334155; }
 
 /* White CTA buttons keep a filled look in dark mode (they carry dark text). */
 .dark .bg-white.text-blue-700 { background-color: #1d4ed8; color: #fff; }

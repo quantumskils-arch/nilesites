@@ -19,14 +19,18 @@ interface LeadForm {
 }
 
 // Audit intent + a website address in the same message → queue a real check.
+// The URL also queues if OUR last message asked the visitor to paste their
+// link (they're answering us, intent words may be absent).
 const AUDIT_INTENT =
-  /\b(audit|health\s*check|website\s*check|check\s*(my|this|the|your)?\s*(site|website|page)?|seo\s*check|score\s*(my|this|the)?\s*(site|website)?|run\s+(a|an)\s+(check|audit)|what'?s\s+missing|analy[sz]e)\b/i;
+  /\b(audit|health\s*check|website\s*check|check\s*(my|this|the|your)?\s*(site|website|page)?|seo\s*check|score\s*(my|this|the)?\s*(site|website)?|run\s+(a|an)\s+(check|audit)|free\s*check|teardown|scan|what'?s\s+missing|what'?s\s+wrong|analy[sz]e|look\s+at)\b/i;
 const URL_RE = /(?:https?:\/\/)?(?:www\.)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?/i;
+const BOT_ASKED_FOR_LINK =
+  /(paste|send|share|drop)[\s\S]{0,80}(link|address|website|url)|(website|site|link)[\s\S]{0,40}(here|below|in the chat)/i;
 
-function findAuditUrl(text: string): string | null {
-  if (!AUDIT_INTENT.test(text)) return null;
+function findAuditUrl(text: string, botAskedForLink: boolean): string | null {
   const m = text.match(URL_RE);
   if (!m) return null;
+  if (!AUDIT_INTENT.test(text) && !botAskedForLink) return null;
   let url = m[0].replace(/[.,;:!?)\]]+$/, "");
   if (!/^https?:\/\//i.test(url)) url = "https://" + url;
   return url;
@@ -84,7 +88,8 @@ export default function ChatBot() {
 
     // Audit request with a pasted link → queue a REAL check (same pipeline as
     // the Free Check form) instead of letting the brain promise one.
-    const auditUrl = findAuditUrl(msg);
+    const lastBotMsg = [...messages].reverse().find((m) => m.role === "bot")?.text || "";
+    const auditUrl = findAuditUrl(msg, BOT_ASKED_FOR_LINK.test(lastBotMsg));
     const validPhone = /^\+?\d{7,15}$/.test(lead.phone.replace(/[\s-]/g, ""));
     if (auditUrl && lead.name.trim().length >= 2 && validPhone) {
       try {
@@ -103,15 +108,44 @@ export default function ChatBot() {
           setTyping(false);
           return;
         }
-      } catch {}
-      // Queue failed — fall through to the brain (it will redirect honestly).
+        // Queue refused (e.g. service not live yet) — tell the truth. Never
+        // hand this to the brain, where it could claim a check is running.
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "bot",
+            text:
+              r.status === 503
+                ? `The automatic check isn't live yet — sorry about that. Fastest path: WhatsApp our team directly at wa.me/256778030847 with your link (${auditUrl}) and this number, and they'll run it right away.`
+                : `I couldn't start the check for ${auditUrl} just now — the queue hiccuped. Please send your link to our team on WhatsApp at wa.me/256778030847 and they'll run it right away.`,
+            followUp: ["What does the score include?", "How much does the Watchdog cost?"],
+          },
+        ]);
+        setTyping(false);
+        return;
+      } catch {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "bot",
+            text: `I couldn't reach the check queue from here. Please send your link to our team on WhatsApp at wa.me/256778030847 and they'll run it right away.`,
+            followUp: ["What does the score include?", "How much does the Watchdog cost?"],
+          },
+        ]);
+        setTyping(false);
+        return;
+      }
     }
 
     try {
       const r = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: msg, history }),
+        body: JSON.stringify({
+          message: msg,
+          history,
+          visitor: { name: lead.name.trim(), phone: lead.phone.trim() },
+        }),
       });
       if (!r.ok) throw new Error();
       const data = await r.json();
@@ -199,7 +233,7 @@ export default function ChatBot() {
                       </svg>
                     </div>
                     <h3 className="text-navy-900 font-semibold mb-1">Chat with Akiba AI</h3>
-                    <p className="text-gray-500 text-sm mb-4">Leave your details so we can follow up if needed.</p>
+                    <p className="text-gray-500 text-sm mb-4">Leave your details — we use your WhatsApp number to send anything you request (like a free website score).</p>
                   </div>
                   <input
                     type="text"
@@ -211,7 +245,7 @@ export default function ChatBot() {
                   />
                   <input
                     type="tel"
-                    placeholder="Phone number *"
+                    placeholder="Your WhatsApp number *"
                     value={lead.phone}
                     onChange={e => setLead(prev => ({ ...prev, phone: e.target.value }))}
                     className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
