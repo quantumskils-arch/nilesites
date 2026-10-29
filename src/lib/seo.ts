@@ -7,14 +7,13 @@ export const defaultMetadata = {
     template: `%s | ${SITE.name}`,
   },
   description:
-    "We build websites that bring you more customers, more bookings, and less headache. Starting at UGX 450,000. WhatsApp bots, SEO, hosting, and mobile money integration included.",
+    "We build websites that bring you more customers, more bookings, and less headache. Starting at UGX 450,000. Telegram bots, SEO, and hosting included.",
   keywords: [
     "web design Uganda",
     "web designer Kampala",
     "affordable websites Uganda",
     "NileSites",
-    "WhatsApp bot Uganda",
-    "mobile money integration",
+    "Telegram bot Uganda",
     "website cost Uganda",
   ],
   openGraph: {
@@ -24,7 +23,7 @@ export const defaultMetadata = {
     siteName: SITE.name,
     title: `${SITE.name} — Premium Web Design for Ugandan Businesses`,
     description:
-      "Websites that grow your business. Starting at UGX 450,000. Hosting, SEO, WhatsApp bots & mobile money included.",
+      "Websites that grow your business. Starting at UGX 450,000. Hosting, SEO, and Telegram bots included.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: SITE.name }],
   },
   twitter: {
@@ -43,7 +42,7 @@ export function localBusinessJsonLd() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: SITE.name,
-    description: "Web design agency in Kampala, Uganda. Websites, WhatsApp bots, SEO, and mobile money integration.",
+    description: "Web design agency in Kampala, Uganda. Websites, Telegram bots, SEO.",
     url: SITE.url,
     email: SITE.email,
     telephone: `+${SITE.whatsapp}`,
