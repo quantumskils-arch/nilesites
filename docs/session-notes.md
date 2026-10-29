@@ -49,3 +49,16 @@ NEXT STEPS (user action required):
 - Tested: sample PDF generated (31KB, 3 pages)
 
 Both agent scripts committed to main (2246bc2).
+
+2026-10-29 PR #2: remove unfulfillable claims + 3D globe:
+- Home page: removed AgentGlobe 3D globe (bad on mobile), removed "registered agency with a team" claim, changed "we handle it all" to "guide you through setup", changed AI agents card from "24/7 watchdogs/radars from 80K" to "watchdog & Telegram bots from 80K"
+- Services: GBP changed "verification handled for you" to "guide you through verification"
+- Pricing: removed "MoMo payment integration" from Standard plan (no MoMo service)
+- AgentsPage: removed "24/7 monitoring"/"around the clock"/"works 24/7" (Watchdog is daily 08:15 EAT + weekly Mon 07:00 EAT)
+- chat-knowledge.ts: removed 24/7, 99.9% uptime, MoM integration claims, Little Steps/Victory Chapel portfolio names, Luganda/Swahili, instant replies
+- seo.ts: removed WhatsApp bot/mobile money keywords and descriptions
+- Build green on preview + production. Deploy script output empty on all 11 pages (pass).
+- NOTE: page titles not all unique (pre-existing metadata issue: home/services/pricing/contact/telegram-bot/akiba-ai share default title). Not introduced by this PR.
+
+Production deployed: https://nilesites-czwogrydo-quantumskils-archs-projects.vercel.app (aliased nilesites.vercel.app)
+Rollback ID: nilesites-6t77daga2-quantumskils-archs-projects.vercel.app (commit f0b34bc)
