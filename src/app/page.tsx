@@ -38,17 +38,15 @@ const stagger = {
 
 const services: { title: string; desc: string; kind: ServiceArtKind; icon: string }[] = [
   { title: "Website Design & Build", desc: "Mobile-responsive, modern websites that turn visitors into customers. From 1-page to full multi-page with CMS.", kind: "design", icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
-  { title: "Hosting & Domain Setup", desc: "Reliable hosting with 99.9% uptime, custom domain, SSL, and email. We handle all the technical setup so you don't have to.", kind: "hosting", icon: "M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" },
-  { title: "WhatsApp & Telegram Bots", desc: "Akiba AI-powered bots that handle customer inquiries, take orders, and answer FAQs automatically — 24/7, even while you sleep.", kind: "bots", icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" },
+  { title: "Hosting & Domain Setup", desc: "Reliable hosting with custom domain, SSL, and email. We handle all the technical setup so you don't have to.", kind: "hosting", icon: "M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" },
+  { title: "Telegram Bot", desc: "Akiba AI-powered Telegram bot that answers FAQs, takes orders, and captures leads — messages queue to your phone.", kind: "bots", icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" },
   { title: "Google Business Profile", desc: "Get found on Google Maps and Search. We handle verification, optimization, and listing management start to finish.", kind: "gbp", icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z" },
-  { title: "Mobile Money Integration", desc: "Accept MTN MoMo and Airtel Money payments directly on your site. Your customers pay the way they already know.", kind: "momo", icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" },
   { title: "SEO & Maintenance", desc: "Ongoing updates, content changes, SEO optimization, and monitoring. Your site stays fresh, fast, and ranking.", kind: "seo", icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" },
 ];
 
 const stats = [
   { label: "Starter Launch", value: "3–5 days" },
   { label: "Plans, Fixed Price", value: "3" },
-  { label: "Avg. Reply Time", value: "< 2hrs" },
   { label: "Based In", value: "Kampala" },
 ];
 
@@ -143,7 +141,7 @@ export default function HomePage() {
       <motion.section className="py-12 bg-gray-900 border-y border-gray-700" {...fadeUp}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-center">
-            {["MTN MoMo", "Airtel Money", "Google Business", "SSL Secured", "99.9% Uptime", "SEO Optimized"].map((item, i) => (
+            {["MTN MoMo", "Airtel Money", "Google Business", "SSL Secured", "SEO Optimized"].map((item, i) => (
               <motion.span key={item} className="text-sm font-medium text-gray-400 flex items-center gap-2" initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
                 <motion.svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" animate={{ rotate: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -361,7 +359,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: "Opportunity Radar Africa", tag: "Tech / AI", desc: "AI-powered platform connecting East African businesses with tenders, grants, jobs, and market intelligence.", url: "https://opportunityradar.africa", img: "/portfolio/opportunityradar.africa.png" },
-              { title: "Chosen Center for Christ", tag: "Religious", desc: "Church site with AI Bible chat, Paystack giving, newsletter, and WhatsApp CTAs.", url: "https://chosen-center-christ.vercel.app", img: "/portfolio/chosen-center-christ.vercel.app.png" },
+              { title: "Chosen Center for Christ", tag: "Religious", desc: "Church site with sermon archive, newsletter, and ministry pages.", url: "https://chosen-center-christ.vercel.app", img: "/portfolio/chosen-center-christ.vercel.app.png" },
               { title: "Uganda Job Vault", tag: "Jobs", desc: "Job aggregator for the Ugandan market with clean searchable interface.", url: "https://uganda-job-vault.vercel.app", img: "/portfolio/uganda-job-vault.vercel.app.png" },
             ].map((project, i) => (
               <motion.div
