@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/rescue", label: "Rescue Sprint" },
   { href: "/ai-agents", label: "AI Agents" },
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/akiba-ai", label: "Akiba AI" },
+  { href: "/telegram-bot", label: "Telegram Bot" },
   { href: "/contact", label: "Contact" },
 ];
 

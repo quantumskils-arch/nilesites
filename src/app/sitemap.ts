@@ -8,7 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/pricing",
     "/portfolio",
     "/about",
-    "/akiba-ai",
     "/contact",
     "/locations/kampala",
     "/locations/ntinda",

@@ -45,7 +45,7 @@ export default function Footer() {
                 { href: "/pricing", label: "Pricing" },
                 { href: "/rescue", label: "Rescue Sprint" },
                 { href: "/portfolio", label: "Portfolio" },
-                { href: "/akiba-ai", label: "Akiba AI" },
+                { href: "/telegram-bot", label: "Telegram Bot" },
                 { href: "/locations/kampala", label: "Web Design Kampala" },
                 { href: "/locations/ntinda", label: "Web Design Ntinda" },
               ].map((item) => (
@@ -79,7 +79,6 @@ export default function Footer() {
                 "Hosting & Domain Setup",
                 <Link key="telegram" href="/telegram-bot" className="text-white hover:text-amber-400 transition-colors">Telegram Bot Setup</Link>,
                 "SEO & Google Business",
-                "Mobile Money Integration",
               ].map((service, index) => (
                 <motion.li
                   key={typeof service === "string" ? service : "telegram"}
