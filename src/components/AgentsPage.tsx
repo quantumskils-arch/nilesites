@@ -20,67 +20,8 @@ const fadeUp = {
   transition: { duration: 0.6 },
 };
 
-const feedEvents = [
-  { icon: "🔍", text: "Watchdog scored our own sites", sub: "nilesites.vercel.app 100/100 · opportunityradar.africa 95/100" },
-  { icon: "📊", text: "Monday scorecard delivered", sub: "0–100 + week-over-week trend, straight to WhatsApp" },
-  { icon: "📡", text: "Rival Radar watched 6 Kampala agencies", sub: "Kico 900K–3.5M · TechMarket from 470K — changes alert us" },
-  { icon: "💬", text: "Free website checks flow through the queue", sub: "Visitor pastes link → team gets it → score on WhatsApp" },
-];
-
-function LiveFeed() {
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % feedEvents.length), 2800);
-    return () => clearInterval(t);
-  }, []);
-  const event = feedEvents[index];
-  return (
-    <div className="relative bg-navy-800/80 backdrop-blur border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
-      <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/10 bg-white/[0.03]">
-        <span className="w-3 h-3 rounded-full bg-red-400" />
-        <span className="w-3 h-3 rounded-full bg-yellow-400" />
-        <span className="w-3 h-3 rounded-full bg-green-400" />
-        <span className="ml-3 text-xs text-gray-400 font-mono">agents.nilesites.com — live</span>
-        <span className="ml-auto flex items-center gap-1.5 text-xs text-emerald-400 font-semibold">
-          <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" /> LIVE
-        </span>
-      </div>
-      <div className="p-5 min-h-[132px]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -14 }}
-            transition={{ duration: 0.35 }}
-            className="flex items-start gap-4"
-          >
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-amber-500 flex items-center justify-center text-xl shrink-0">
-              {event.icon}
-            </div>
-            <div>
-              <p className="text-white font-semibold text-[15px] leading-snug">{event.text}</p>
-              <p className="text-gray-400 text-sm mt-1 font-mono">{event.sub}</p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-        <div className="flex gap-1.5 mt-4">
-          {feedEvents.map((_, i) => (
-            <button
-              key={i}
-              aria-label={`Show event ${i + 1}`}
-              onClick={() => setIndex(i)}
-              className={`h-1.5 rounded-full transition-all ${i === index ? "w-6 bg-amber-400" : "w-1.5 bg-white/20 hover:bg-white/40"}`}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 const marqueeItems = [
-  "24/7 monitoring", "WhatsApp reports", "No tech skills needed", "UGX pricing",
+  "24/7 monitoring", "Telegram reports", "No tech skills needed", "UGX pricing",
   "MoMo payments", "Same-week setup", "Human review always", "Cancel anytime",
 ];
 
@@ -88,7 +29,7 @@ const agents = [
   {
     status: "live", name: "Website Health Watchdog",
     outcome: "Never lose a customer to a broken website again.",
-    rhythm: "Every Monday: 0–100 scorecard on WhatsApp. Instant alert if your site goes down. Runs on nilesites.vercel.app itself — ask us for this week's scorecard.",
+    rhythm: "Daily check at 08:15 EAT, weekly audit every Monday at 07:00 EAT, reports sent to your Telegram. Not instant — human review happens manually in the Telegram queue.",
     price: "UGX 150,000 audit · UGX 80,000/mo",
     wa: "Hi NileSites! I'd like the Website Health Watchdog for my business.",
     img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&auto=format",
@@ -96,7 +37,7 @@ const agents = [
   {
     status: "custom", name: "Akiba Telegram Agent",
     outcome: "Telegram bot that answers FAQs and captures order details.",
-    rhythm: "FAQs, order intake, lead capture — messages queue to your phone. English (Luganda/Swahili coming).",
+    rhythm: "FAQs, order intake, lead capture — messages queue to your phone. English only.",
     price: "From UGX 900,000 + UGX 100,000/mo",
     href: "/telegram-bot",
     wa: "Hi NileSites! I'd like an Akiba Telegram Agent for my business.",
@@ -139,7 +80,7 @@ const agents = [
 const steps = [
   { n: "01", title: "We plug in", desc: "You share your website and WhatsApp number. Setup takes days, not months — no tech skills needed from you." },
   { n: "02", title: "Agents watch 24/7", desc: "They check your site, rivals, reviews and inbox around the clock — including Sundays and public holidays." },
-  { n: "03", title: "You get WhatsApp reports", desc: "Short, plain-English updates with exactly what to do. Forward them, approve them, or ignore them." },
+  { n: "03", title: "You get Telegram reports", desc: "Short, plain-English updates with exactly what to do. Forward them, approve them, or ignore them." },
 ];
 
 const faqs = [
@@ -186,8 +127,7 @@ export default function AgentsPage() {
                 </a>
               </motion.div>
               <motion.div className="flex items-center gap-4 text-sm text-gray-400" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-                <span className="flex items-center gap-2"><span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" /> 2 agents live now</span>
-                <span className="text-gray-600">•</span><span>4 more on custom order</span>
+                <span className="flex items-center gap-2"><span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" /> 1 live, 5 build-to-order</span>
                 <span className="text-gray-600">•</span><span>MTN MoMo & Airtel accepted</span>
               </motion.div>
             </div>
@@ -196,11 +136,10 @@ export default function AgentsPage() {
                 <AgentGlobe />
               </div>
               <div className="relative">
-              <LiveFeed />
               <div className="grid grid-cols-2 gap-3 mt-3">
                 <div className="bg-white/[0.04] border border-white/10 rounded-xl p-4">
-                  <p className="text-2xl font-bold text-white">24/7</p>
-                  <p className="text-xs text-gray-400 mt-1">monitoring, incl. Sundays & holidays</p>
+                  <p className="text-2xl font-bold text-white">Daily 08:15 EAT</p>
+                  <p className="text-xs text-gray-400 mt-1">Watchdog check, reports on Telegram</p>
                 </div>
                 <div className="bg-white/[0.04] border border-white/10 rounded-xl p-4">
                   <p className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">WhatsApp</p>

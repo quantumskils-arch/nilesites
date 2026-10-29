@@ -34,7 +34,6 @@ export default function AkibaAIPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-block bg-gold-500/20 text-gold-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-gold-500/30">
-              Powered by Opportunity Radar
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">Akiba AI</h1>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto">

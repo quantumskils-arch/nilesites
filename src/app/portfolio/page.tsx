@@ -12,13 +12,11 @@ const fadeUp = {
 };
 
 const projects = [
-  { title: "Opportunity Radar Africa", tag: "Tech / AI", desc: "A comprehensive AI-powered opportunity discovery platform connecting East African businesses with tenders, grants, jobs, and market intelligence across 8 countries.", features: ["AI-powered matching", "Multi-country coverage", "Real-time alerts", "MCP server architecture", "WhatsApp & Telegram integration", "Email digest system"], url: "https://opportunityradar.africa", img: "/portfolio/opportunityradar.africa.png" },
-  { title: "Chosen Center for Christ", tag: "Religious", desc: "Full church site with AI Bible chat, sermon content, Paystack giving, newsletter, and WhatsApp CTAs.", features: ["AI Bible chat", "Paystack giving", "Newsletter signup", "WhatsApp CTAs", "Programs & events"], url: "https://chosen-center-christ.vercel.app", img: "/portfolio/chosen-center-christ.vercel.app.png" },
-  { title: "Uganda Job Vault", tag: "Jobs", desc: "A job aggregator for the Ugandan market, aggregating fresh vacancies across sectors with a clean searchable interface.", features: ["Job aggregation", "Category filters", "Mobile-first design", "Fast search"], url: "https://uganda-job-vault.vercel.app", img: "/portfolio/uganda-job-vault.vercel.app.png" },
-  { title: "Kazinga LC1", tag: "Government / Community", desc: "A community information portal for Kazinga LC1, keeping residents informed with news, notices, and local resources.", features: ["Community notices", "Local news", "Contact directory", "Mobile-responsive"], url: "https://kazinga-lc1.vercel.app", img: "/portfolio/kazinga-lc1.vercel.app.png" },
+  { title: "Opportunity Radar Africa", tag: "Our own products", desc: "Search and filter tenders, grants and jobs, free while we validate.", features: ["Tender search", "Grant listings", "Job vacancies", "Mobile-first design"], url: "https://opportunityradar.africa", img: "/portfolio/opportunityradar.africa.png" },
+  { title: "Chosen Center for Christ", tag: "Religious", desc: "Full church site with sermon archive, newsletter, and ministry pages.", features: ["Sermon archive with audio", "Newsletter signup", "Ministry pages", "Service times"], url: "https://chosen-center-christ.vercel.app", img: "/portfolio/chosen-center-christ.vercel.app.png" },
+  { title: "Uganda Job Vault", tag: "Our own products", desc: "Career-prep store: past papers, CV templates, MoMo checkout.", features: ["Past papers", "CV templates", "Mobile-first design", "MoMo checkout"], url: "https://uganda-job-vault.vercel.app", img: "/portfolio/uganda-job-vault.vercel.app.png" },
+  { title: "Kazinga LC1", tag: "Government / Community", desc: "A community information portal for Kazinga LC1, keeping residents informed with notices and local resources.", features: ["Community notices", "Contact directory", "Mobile-responsive"], url: "https://kazinga-lc1.vercel.app", img: "/portfolio/kazinga-lc1.vercel.app.png" },
   { title: "Botanical Vault", tag: "E-commerce / Niche", desc: "A specialized e-commerce storefront with product catalog and streamlined checkout.", features: ["Product catalog", "Responsive storefront", "Clean checkout flow"], url: "https://botanical-vault.vercel.app", img: "/portfolio/botanical-vault.vercel.app.png" },
-  { title: "Little Steps Kindergarten", tag: "Education", desc: "Multi-page school site with gallery, events calendar, and parent portal. Mobile-responsive with WhatsApp inquiry integration.", features: ["Mobile-responsive design", "Photo gallery", "Events calendar", "Parent portal", "WhatsApp integration"], url: null, img: null },
-  { title: "Victory Chapel Church", tag: "Religious", desc: "Full church site with sermon archive, event booking, mobile money donation, and ministry pages.", features: ["Sermon archive with audio", "Event booking system", "Mobile money donations", "Ministry pages", "Service times"], url: null, img: null },
 ];
 
 export default function PortfolioPage() {
@@ -27,7 +25,7 @@ export default function PortfolioPage() {
       <section className="bg-navy-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1 className="text-4xl sm:text-5xl font-bold text-white mb-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            Our Work
+            Selected work, including our own products
           </motion.h1>
           <motion.p className="text-gray-300 text-lg max-w-2xl mx-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
             Real websites and platforms we&apos;ve built for Ugandan and East African businesses.

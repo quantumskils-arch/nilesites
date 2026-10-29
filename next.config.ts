@@ -36,6 +36,7 @@ const nextConfig: NextConfig = {
       { source: "/sprint", destination: "/rescue", permanent: true },
       { source: "/web-rescue", destination: "/rescue", permanent: true },
       { source: "/website-rescue", destination: "/rescue", permanent: true },
+      { source: "/akiba-ai", destination: "/telegram-bot", permanent: true },
     ];
   },
   async headers() {

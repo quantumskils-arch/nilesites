@@ -21,7 +21,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "NileSites — Premium Web Design for Ugandan Businesses",
   description:
-    "We build websites that bring you more customers, more bookings, and less headache. Starting at UGX 450,000. WhatsApp bots, SEO, and hosting included.",
+    "Websites for Ugandan businesses. Starting at UGX 450,000. Hosting included for the first year.",
   openGraph: {
     title: "NileSites — Premium Web Design for Ugandan Businesses",
     description: "Websites that grow your business. Starting at UGX 450,000.",
