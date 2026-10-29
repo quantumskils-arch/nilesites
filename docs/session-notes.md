@@ -62,3 +62,13 @@ Both agent scripts committed to main (2246bc2).
 
 Production deployed: https://nilesites-czwogrydo-quantumskils-archs-projects.vercel.app (aliased nilesites.vercel.app)
 Rollback ID: nilesites-6t77daga2-quantumskils-archs-projects.vercel.app (commit f0b34bc)
+
+## 2026-10-30 — Unique page titles shipped (fix/unique-page-titles → main)
+- Commit dffd933: server/client split for home, services, pricing, telegram-bot, akiba-ai; removed 3D globe from home; removed pycache/test artifacts from git tracking (commit 0615a45 prep).
+- Commit 0615a45: unique `<title>` on all 14 routes via server page.tsx (metadata) + client wrapper (framer-motion); about + portfolio split too; akiba-ai "Multi-Language Luganda/Swahili" claim replaced with honest "Human Handoff" (bot is English-only per claims register); 2 unescaped-apostrophe lint errors fixed.
+- Pattern used: `page.tsx` = server component with `export const metadata` importing `./ClientX.tsx` (`"use client"` + framer-motion content). Fixed earlier mistake of placing Client*.tsx at src/app root (wrong relative import) — they live in each route dir.
+- akiba-ai is a 308 redirect to /telegram-bot (by config) — redirect target carries the unique title.
+- Verification: build green, lint 0 errors, gate grep = zero matches on build output, preview (nilesites-724ku7ftv) and production (nilesites-l78s6kezm) — 14/14 routes 200/308, titles all unique, no duplicates.
+
+Production deployed: https://nilesites-l78s6kezm-quantumskils-archs-projects.vercel.app (aliased nilesites.vercel.app)
+Rollback ID: nilesites-czwogrydo-quantumskils-archs-projects.vercel.app (commit a295b7c)
