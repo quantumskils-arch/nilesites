@@ -1,18 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import CTASection from "@/components/CTASection";
 import { whatsappLink } from "@/lib/wa";
-
-const AgentGlobe = dynamic(() => import("@/components/AgentGlobe"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full rounded-full bg-[radial-gradient(circle_at_35%_35%,#3b82f6_0%,transparent_55%),radial-gradient(circle_at_65%_65%,#f59e0b_0%,transparent_55%)] opacity-40" />
-  ),
-});
-
 import ServiceArt, { type ServiceArtKind } from "@/components/ServiceArt";
 
 // Precomputed at module scope (render must stay pure — React Compiler lint).
@@ -58,23 +49,12 @@ const processSteps = [
 ];
 
 export default function HomePage() {
-  const reduceMotion = useReducedMotion();
   return (
     <>
       <section className="relative overflow-hidden bg-gray-900">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-amber-500/10 to-gray-900" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:56px_56px]" />
         <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[120px]" />
-        {!reduceMotion && (
-          <div className="absolute inset-y-0 right-0 w-full lg:w-[62%] z-0 pointer-events-none" aria-hidden="true">
-            <AgentGlobe />
-          </div>
-        )}
-        <div className="absolute inset-0 -z-10">
-          {heroParticles.map((p, i) => (
-            <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-blue-400/20" style={{ left: p.left, top: p.top }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: [0.2, 0.6, 0.2], scale: [0, 1, 0], y: [0, -50, 0] }} transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }} />
-          ))}
-        </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-8 items-center">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
@@ -201,7 +181,7 @@ export default function HomePage() {
                 </div>
                 <div className="p-5">
                   <h3 className="text-lg font-semibold text-white mb-2">AI Agents That Never Sleep</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">24/7 website watchdogs, Telegram bots & rival radars. From UGX 80,000/mo.</p>
+                  <p className="text-gray-300 text-sm leading-relaxed mb-3">Website watchdog & Telegram bots. From UGX 80,000/mo.</p>
                   <span className="text-amber-400 text-sm font-semibold group-hover:text-amber-300">Meet the agents →</span>
                 </div>
               </Link>
@@ -411,8 +391,8 @@ export default function HomePage() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
-              { title: "You Get a Team, Not a Ghost", desc: "Freelancers disappear mid-project. We're a registered agency with a team — you always have someone to call." },
-              { title: "Everything Done for You", desc: "Domain, hosting, SSL, email, payments, Google Business — we handle it all. You never touch technical settings." },
+              { title: "You Get a Team, Not a Ghost", desc: "Freelancers disappear mid-project. We're a small team — you always have someone to call." },
+              { title: "Everything Done for You", desc: "Domain, hosting, SSL, email, Google Business — we guide you through setup. You never touch technical settings." },
               { title: "We Stay After Launch", desc: "DIY builders stop at 'it's live.' We offer maintenance, updates, and support so your site keeps working and ranking." },
             ].map((item, i) => (
               <motion.div
