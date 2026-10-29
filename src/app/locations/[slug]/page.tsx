@@ -40,7 +40,7 @@ export async function generateMetadata({
   if (!loc) return { title: "Web Designer in Uganda" };
   return {
     title: `Web Design in ${loc.name} — NileSites Uganda`,
-    description: `Professional, affordable websites for ${loc.name} businesses. Mobile-responsive design, WhatsApp bots, MTN MoMo payments, and SEO. Starting at UGX 450,000.`,
+    description: `Professional, affordable websites for ${loc.name} businesses. Mobile-responsive design, SEO, and WhatsApp click-to-chat. Starting at UGX 450,000.`,
     alternates: { canonical: `https://nilesites.com/locations/${slug}` },
   };
 }

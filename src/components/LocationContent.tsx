@@ -42,7 +42,7 @@ export default function LocationContent({ name, blurb }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               { title: "Websites That Work on Phones", desc: "Most Ugandans browse on mobile. Every site we build is mobile-first and loads fast on 4G." },
-              { title: "Payments Your Customers Know", desc: "MTN MoMo and Airtel Money integration built in — your customers pay the way they already pay." },
+              { title: "Payments Your Customers Know", desc: "Your customers pay the way they already pay — MTN MoMo and Airtel Money accepted." },
               { title: "Found on Google", desc: `Google Business Profile setup and local SEO so customers in ${name} find you first.` },
               { title: "No Technical Headaches", desc: "Domain, hosting, SSL, email — handled for you. You focus on your business." },
             ].map((item, i) => (
