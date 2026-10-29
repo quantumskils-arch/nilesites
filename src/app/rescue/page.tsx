@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Website live in 5 days. UGX 350K flat. — NileSites Kampala",
     description:
-      "We fix it in 5 working days — domain, hosting, SEO included. Or we keep working free until it's done.",
+      "We fix it in 5 working days — domain, hosting, SEO included.",
     type: "website",
   },
   alternates: { canonical: "/rescue" },
@@ -20,10 +20,10 @@ const WA_TEARDOWN = whatsappLink("Hi NileSites! Send me the free website teardow
 const WA_BOOK = whatsappLink("Hi NileSites! I'd like to book a Website Rescue Sprint (UGX 350,000).");
 
 const included = [
-  "Custom design — no cheap theme, no template everyone has",
+  "Built from our proven layouts, customised to your brand",
   "Phone-first: loads fast on 4G, tested on real Android",
   "Click-to-chat WhatsApp button + tap-to-call",
-  "Google Business Profile set up or fixed",
+  "We guide you through Google Business verification",
   "Local SEO + schema so Google knows what you do, where",
   "Your own domain (.ug or .com) — year 1 included",
   "Hosting + SSL certificate — year 1 included",
@@ -39,7 +39,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What if it's not done in 5 days?",
-    a: "Then we keep working free until it is. The only thing we ever need from you is the content (photos, services, hours) — if that's ready on day one, the site is live by day five.",
+    a: "We aim for day five. The only thing we ever need from you is the content (photos, services, hours) — if that's ready on day one, the site is live by day five.",
   },
   {
     q: "Can I pay in instalments?",
@@ -135,7 +135,6 @@ export default function RescuePage() {
           <span><strong className="text-amber-400">5 days</strong> — not 5 weeks</span>
           <span><strong className="text-amber-400">Fixed price</strong> — quoted before we start</span>
           <span><strong className="text-amber-400">MoMo + Airtel</strong> — pay like a local</span>
-          <span><strong className="text-amber-400">Not happy by day 7?</strong> — we work free until you are</span>
         </div>
       </div>
 
@@ -191,27 +190,6 @@ export default function RescuePage() {
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      {/* Why now */}
-      <section className="py-20 bg-gray-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Why now</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Your customers ask Google before they ask you.</h2>
-          <p className="text-gray-300 max-w-3xl mb-10">A July 2026 audit of 11,582 African small businesses found that only <strong className="text-white">4.5%</strong> are fully readable by Google and AI assistants. Most businesses with a website still fail basic checks. The ones that are ready get the call.</p>
-          <div className="grid sm:grid-cols-3 gap-8">
-            {[
-              { b: "41%", s: "of map-listed African SMEs have a real website at all — the rest live on borrowed Facebook pages" },
-              { b: "85%", s: "of existing sites are missing the structured data Google needs to recommend them" },
-              { b: "1 client", s: "is usually enough to pay for the site — one patient, one case, one booking" },
-            ].map((stat) => (
-              <div key={stat.b} className="border-l-3 border-amber-400 pl-5" style={{ borderLeftWidth: 3 }}>
-                <p className="text-4xl font-bold text-amber-400 mb-1" style={{ fontFamily: "var(--font-playfair)" }}>{stat.b}</p>
-                <p className="text-sm text-gray-400 leading-relaxed">{stat.s}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
