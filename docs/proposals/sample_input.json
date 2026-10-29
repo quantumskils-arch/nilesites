@@ -1,0 +1,28 @@
+{
+  "client_name": "Jane Nakato",
+  "business_name": "Nakato Family Clinic",
+  "business_type": "Medical Clinic",
+  "location": "Ntinda, Kampala",
+  "contact_phone": "+256 7XX XXX XXX",
+  "contact_email": "jane@nakatoclinic.com",
+  "your_name": "NileSites",
+  "your_whatsapp": "+256 778 030 847",
+  "your_email": "hello@nilesites.com",
+  "services": [
+    {
+      "name": "Website Rescue Sprint",
+      "price": "UGX 350,000",
+      "desc": "One perfect page \u2014 services, about, contact, Google Business setup. Live in 5 working days."
+    },
+    {
+      "name": "Starter Plan",
+      "price": "UGX 450,000",
+      "desc": "1\u20135 page site, mobile responsive, WhatsApp button, basic SEO, 1 year hosting."
+    }
+  ],
+  "call_notes": "Needs a patient-booking info page and Google Business verification so local patients can find the clinic. Budget-conscious, wants to start small.",
+  "timeline": "5\u201310 business days",
+  "deposit": "50% to start, 50% on launch",
+  "payment_methods": "MTN MoMo / Airtel Money to 256778030847",
+  "validity": "14 days"
+}
