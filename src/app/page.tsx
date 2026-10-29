@@ -44,7 +44,7 @@ export default function HomePage() {
                 More Customers.<br /><span className="bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent font-normal italic">Less Headache.</span>
               </h1>
               <p className="text-[17px] sm:text-lg text-gray-300 leading-relaxed max-w-xl mb-7">
-                You don't want a website. You want more bookings and a business that runs without you. We design, host and maintain the tool that delivers it — <span className="text-white font-semibold">from UGX 450,000</span>.
+                You don&apos;t want a website. You want more bookings and a business that runs without you. We design, host and maintain the tool that delivers it — <span className="text-white font-semibold">from UGX 450,000</span>.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mb-8">
                 <Link href="/pricing" className="bg-gradient-to-r from-blue-500 to-amber-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all text-center">See Plans & Pricing →</Link>
