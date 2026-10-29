@@ -1,0 +1,18 @@
+[
+  {
+    "name": "OpportunityRadar (demo)",
+    "website": "https://opportunityradar.africa",
+    "place_id": "",
+    "contact": "own site",
+    "plan": "demo",
+    "consent": true
+  },
+  {
+    "name": "NileSites (own site)",
+    "website": "https://nilesites.vercel.app",
+    "place_id": "",
+    "contact": "own site",
+    "plan": "own",
+    "consent": true
+  }
+]

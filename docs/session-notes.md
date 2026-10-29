@@ -10,3 +10,27 @@
 
 2026-10-29 WATCHDOG VERIFIED on VPS quantum-server: weekly audit Mon 04:00 UTC (07:00 EAT) + daily ping 05:15 UTC (08:15 EAT) via seo_watchdog.py; files seo_watchdog.py+queue_worker.py+history.db+clients.json (2 consenting clients); /api/check-request returns {"configured":true}. => Watchdog claim VERIFIED running.
 2026-10-29 REVIEW WATCHER: NOT built yet — no implementation in repo/docs. Page marks it "◆ CUSTOM BUILD, 2-4 weeks, UGX 80k/mo" (honest framing) but it is a from-scratch build for first client. Reference scope documented below.
+
+2026-10-29 REVIEW WATCHER DEPLOYED to VPS quantum-server:
+- Script: /home/ubuntu/opportunityradar/seowatch/review_watcher.py
+- Mode: check (drafts replies to new Google reviews via Places API + Groq)
+- Delivery: Telegram drafts to operator for manual copy/paste to Google
+- Cron: 0 3 * * * (06:00 EAT daily) — installed in ubuntu crontab
+- Logs: /home/ubuntu/opportunityradar/logs/reviewwatcher.log
+- Requires: GOOGLE_PLACES_API_KEY in /home/ubuntu/opportunityradar/.env (NOT yet provisioned)
+- Clients: clients.json updated with place_id fields (empty — needs client Place IDs)
+- Syntax: OK
+
+2026-10-29 PROPOSAL DECK DEPLOYED to VPS quantum-server:
+- Script: /home/ubuntu/opportunityradar/seowatch/proposal_deck.py
+- Modes: build <input.json> [output.pdf] | sample
+- Uses fpdf2 + DejaVu fonts (Python 3.8 compatible)
+- Output: ./proposals/ directory (3-page branded PDF)
+- Deliver: operator sends PDF to client via WhatsApp/Telegram/email
+- Tested: sample PDF generated successfully (31KB, 3 pages)
+- Syntax: OK
+
+NEXT STEPS (user action required):
+1. Provision GOOGLE_PLACES_API_KEY at Google Cloud Console -> Places API, add to .env
+2. Add client Place IDs to clients.json (consent:true required)
+3. Review Watcher will then auto-draft replies on daily cron
