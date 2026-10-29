@@ -18,15 +18,14 @@ const plans = [
 ];
 
 const addOns = [
-  { name: "Website Health Watchdog", price: "80,000/mo", desc: "Weekly 0–100 scorecard + instant down-alerts (audit 150,000 once)" },
-  { name: "Review & Reputation Watcher", price: "80,000/mo", desc: "New-review alerts with drafted replies for your approval" },
+  { name: "Website Health Watchdog", price: "80,000/mo", desc: "Weekly 0–100 scorecard + down-alerts (audit 150,000 once)" },
+  { name: "Review & Reputation Watcher", price: "Build to order", desc: "New-review alerts with drafted replies for your approval. 2 to 4 weeks." },
   { name: "Custom AI Agent", price: "from 500,000", desc: "Radar, decks, shorts engine or inbox triage — built for your workflow" },
-  { name: "Akiba AI Telegram Bot", price: "150,000/mo", desc: "Telegram bot: FAQs, order intake, lead capture — messages queue to your phone" },
+  { name: "Akiba AI Telegram Bot", price: "900,000 + 100,000/mo", desc: "Telegram bot: FAQs, order intake, lead capture — messages queue to your phone. Setup UGX 900,000, then UGX 100,000/month." },
   { name: "Additional Page", price: "50,000", desc: "Extra page beyond your plan's limit" },
   { name: "Custom Domain (.ug)", price: "80,000/yr", desc: "Professional .ug domain for your business" },
   { name: "Business Email Setup", price: "60,000/yr", desc: "Professional email (@yourbusiness.com)" },
   { name: "Maintenance Retainer", price: "50,000/mo", desc: "Monthly updates, backups, and support" },
-  { name: "Social Media Management", price: "200,000/mo", desc: "Content creation and posting across platforms" },
 ];
 
 export default function PricingPage() {
