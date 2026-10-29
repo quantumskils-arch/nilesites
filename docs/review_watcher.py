@@ -1,26 +1,29 @@
 #!/usr/bin/env python3
-"""Review & Reputation Watcher v1 — drafts replies to new Google reviews, never auto-posts.
+"""Review & Reputation Watcher v2 — manual intake, zero third-party API cost.
+
+Google does not offer a free API for reading Google Business Profile reviews
+(the Places API requires a paid billing account). This version uses **manual
+intake**: you paste new reviews into `reviews_inbox.json` (or forward Google's
+review-notification email and paste the text), and the script drafts replies
+via Groq, sending them to Telegram for you to copy/paste into Google.
 
 Modes:
-  python review_watcher.py check   scan all consenting clients for new reviews + draft replies
-  python review_watcher.py posted  mark a review_id as manually posted by operator (interactive)
+  python review_watcher.py check     draft replies for all new inbox entries
+  python review_watcher.py posted    mark a review_id as manually posted
+  python review_watcher.py add       interactive: add a new review to the inbox
 
-Runs in the scrapers container via bind mount:
-  docker compose run --rm --no-deps -v .../seowatch:/app/seowatch -v .../.env:/run/secrets/or_env:ro \
-    scrapers python /app/seowatch/review_watcher.py check
+Runs in the scrapers container via bind mount, or directly on the host.
 
-Read-only. Only clients with consent:true AND a place_id in clients.json.
-Drafts go to Telegram for manual operator approval — never auto-posted to Google.
+Read-only. Drafts go to Telegram for manual operator approval — never auto-posted.
 """
-import os, re, json, sqlite3, logging, time, html as htmlmod
-from datetime import datetime, timezone
-import requests
+import json, os, re, sqlite3, logging, time, html as htmlmod, sys
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("reviewwatcher")
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-CLIENTS_PATH = os.path.join(BASE, "clients.json")
+INBOX_PATH = os.path.join(BASE, "reviews_inbox.json")
 DB_PATH = os.path.join(BASE, "history.db")
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 
@@ -37,7 +40,7 @@ def load_env():
                     k, v = line.split("=", 1)
                     env[k.strip()] = v.strip()
     except FileNotFoundError:
-        log.warning("env file not found at %s, using process env only", ENV_PATH)
+        pass
     return env
 
 
@@ -45,7 +48,6 @@ ENV = load_env()
 TG_TOKEN = ENV.get("TELEGRAM_BOT_TOKEN") or os.environ.get("TELEGRAM_BOT_TOKEN")
 CHAT_ID = ENV.get("SEOWATCH_CHAT_ID") or ENV.get("QUEUE_CHAT_ID") or "7935685275"
 GROQ_KEY = ENV.get("GROQ_API_KEY") or os.environ.get("GROQ_API_KEY")
-PLACES_KEY = ENV.get("GOOGLE_PLACES_API_KEY") or os.environ.get("GOOGLE_PLACES_API_KEY")
 
 
 def tg_send(text):
@@ -53,6 +55,7 @@ def tg_send(text):
         log.error("no TELEGRAM_BOT_TOKEN — printing instead:\n%s", text)
         print(text)
         return
+    import requests
     for i in range(0, len(text), 4000):
         chunk = text[i : i + 4000]
         r = requests.post(
@@ -63,17 +66,17 @@ def tg_send(text):
         log.info("telegram send -> %s", r.status_code)
 
 
-def load_clients():
-    with open(CLIENTS_PATH) as f:
-        return [c for c in json.load(f) if c.get("consent") and c.get("place_id")]
+def strip_tags(s):
+    return htmlmod.unescape(re.sub(r"<[^>]+>", "", s or "")).strip()
 
 
 def db():
     con = sqlite3.connect(DB_PATH)
     con.execute(
-        """CREATE TABLE IF NOT EXISTS reviewed (
-        review_id TEXT PRIMARY KEY, client TEXT, author TEXT, rating INTEGER,
-        text TEXT, ts INTEGER, status TEXT DEFAULT 'drafted'"""
+        "CREATE TABLE IF NOT EXISTS reviewed ("
+        "review_id TEXT PRIMARY KEY, "
+        "client TEXT, author TEXT, rating INTEGER, "
+        "text TEXT, ts INTEGER, status TEXT DEFAULT 'drafted')"
     )
     con.commit()
     return con
@@ -91,57 +94,6 @@ def mark(con, review_id, client, author, rating, text, status="drafted"):
     con.commit()
 
 
-def strip_tags(s):
-    return htmlmod.unescape(re.sub(r"<[^>]+>", "", s or "")).strip()
-
-
-def fetch_reviews(place_id):
-    """Return list of {review_id, author, rating, text, time, relative_time}. Needs PLACES_KEY."""
-    if not PLACES_KEY:
-        log.error("GOOGLE_PLACES_API_KEY not set — cannot fetch reviews")
-        return []
-    url = (
-        "https://maps.googleapis.com/maps/api/place/details/json"
-        f"?place_id={place_id}&fields=reviews,name&key={PLACES_KEY}"
-    )
-    try:
-        r = requests.get(url, timeout=30)
-    except Exception as e:
-        log.warning("places request failed for %s: %s", place_id, e)
-        return []
-    if r.status_code != 200:
-        log.warning("places API %s for %s", r.status_code, place_id)
-        return []
-    data = r.json()
-    if data.get("status") != "OK":
-        log.warning("places status %s for %s: %s", data.get("status"), place_id, data.get("error_message"))
-        return []
-    result = data.get("result") or {}
-    biz_name = result.get("name", "?")
-    out = []
-    for rv in (result.get("reviews") or []) or []:
-        author = strip_tags(rv.get("author_name", "?"))
-        text = strip_tags(rv.get("text", ""))
-        # review_id: Places doesn't return a stable ID; synthesize from author+time+text hash
-        import hashlib
-
-        rid = hashlib.sha256(
-            f"{place_id}|{author}|{rv.get('time',0)}|{text[:80]}".encode()
-        ).hexdigest()[:24]
-        out.append(
-            {
-                "review_id": rid,
-                "author": author,
-                "rating": rv.get("rating", 0),
-                "text": text,
-                "time": rv.get("time", 0),
-                "relative_time": rv.get("relative_time_description", ""),
-                "biz_name": biz_name,
-            }
-        )
-    return out
-
-
 def draft_reply(author, rating, text, business_name):
     """Draft a short, warm, professional reply via Groq. Falls back to a template."""
     fallback = (
@@ -150,6 +102,7 @@ def draft_reply(author, rating, text, business_name):
     )
     if not GROQ_KEY:
         return fallback
+    import requests
     prompt = (
         f"Write a short, warm, professional Google review reply for '{business_name}'.\n"
         f"Reviewer: {author}\nRating: {rating}/5 stars\nReview: {text}\n\n"
@@ -176,54 +129,85 @@ def draft_reply(author, rating, text, business_name):
     return fallback
 
 
-def run_check():
-    if not PLACES_KEY:
-        log.error("GOOGLE_PLACES_API_KEY is required but not set. Aborting.")
+def load_inbox():
+    if not os.path.exists(INBOX_PATH):
+        return []
+    with open(INBOX_PATH) as f:
+        data = json.load(f)
+    return data if isinstance(data, list) else []
+
+
+def save_inbox(items):
+    with open(INBOX_PATH, "w") as f:
+        json.dump(items, f, indent=2)
+
+
+def add_review_interactive():
+    """Add a new review to the inbox (manual intake)."""
+    client = input("Client/business name: ").strip()
+    author = input("Reviewer name: ").strip()
+    rating = input("Rating (1-5): ").strip()
+    print("Paste the review text (press Enter twice to finish):")
+    lines = []
+    while True:
+        line = input()
+        if line == "" and lines and lines[-1] == "":
+            break
+        lines.append(line)
+    text = "\n".join(lines).strip()
+    if not text:
+        print("Empty review text — not added.")
         return 1
+    items = load_inbox()
+    import hashlib
+    rid = hashlib.sha256(f"{client}|{author}|{text[:80]}".encode()).hexdigest()[:24]
+    items.append({
+        "review_id": rid,
+        "client": client,
+        "author": author,
+        "rating": int(rating) if rating.isdigit() else 0,
+        "text": text,
+        "added_at": datetime.utcnow().isoformat() + "Z",
+    })
+    save_inbox(items)
+    print(f"added review {rid} to inbox")
+    return 0
+
+
+def run_check():
+    items = load_inbox()
+    if not items:
+        log.info("inbox empty — nothing to draft")
+        return 0
     con = db()
     sent = 0
-    for client in load_clients():
-        place_id = client["place_id"]
-        name = client.get("name", "?")
-        contact = client.get("contact", "?")
-        log.info("checking reviews for %s (%s)", name, place_id)
-        try:
-            reviews = fetch_reviews(place_id)
-        except Exception as e:
-            log.warning("fetch failed for %s: %s", name, e)
+    remaining = []
+    for item in items:
+        rid = item["review_id"]
+        if already_done(con, rid):
             continue
-        for rv in reviews:
-            if already_done(con, rv["review_id"]):
-                continue
-            reply = draft_reply(rv["author"], rv["rating"], rv["text"], rv["biz_name"])
-            msg = (
-                f"⭐ New Google review for *{name}*\n"
-                f"{rv['author']} — {rv['rating']}/5 ⭐\n"
-                f"{rv['relative_time']}\n"
-                f"{rv['text']}\n\n"
-                f"📝 *Draft reply:*\n{reply}\n\n"
-                f"_Copy/paste this into Google manually. Operator: mark posted when done._\n"
-                f"(Contact: {contact})"
-            )
-            tg_send(msg)
-            mark(
-                con,
-                rv["review_id"],
-                name,
-                rv["author"],
-                rv["rating"],
-                rv["text"],
-                "drafted",
-            )
-            sent += 1
-            time.sleep(1)
+        reply = draft_reply(item["author"], item["rating"], item["text"], item["client"])
+        msg = (
+            f"⭐ New Google review for *{item['client']}*\n"
+            f"{item['author']} — {item['rating']}/5 ⭐\n"
+            f"{item['text']}\n\n"
+            f"📝 *Draft reply:*\n{reply}\n\n"
+            f"_Copy/paste this into Google manually. Mark posted when done._"
+        )
+        tg_send(msg)
+        mark(con, rid, item["client"], item["author"], item["rating"], item["text"], "drafted")
+        sent += 1
+        time.sleep(1)
+    # keep only not-yet-drafted items in inbox
+    drafted_ids = {r[0] for r in con.execute("SELECT review_id FROM reviewed").fetchall()}
+    remaining = [i for i in items if i["review_id"] not in drafted_ids]
+    save_inbox(remaining)
     con.close()
-    log.info("check complete — %d new review(s) drafted", sent)
+    log.info("check complete — %d new review(s) drafted, %d remaining in inbox", sent, len(remaining))
     return 0
 
 
 def run_posted(review_id):
-    """Mark a review_id as posted (operator confirms they copied it to Google)."""
     con = db()
     row = con.execute("SELECT client, author FROM reviewed WHERE review_id=?", (review_id,)).fetchone()
     if not row:
@@ -238,11 +222,18 @@ def run_posted(review_id):
 
 
 if __name__ == "__main__":
-    import sys
-
-    if len(sys.argv) > 1 and sys.argv[1] == "posted":
-        if len(sys.argv) < 3:
-            print("usage: review_watcher.py posted <review_id>")
-            raise SystemExit(1)
-        raise SystemExit(run_posted(sys.argv[2]))
-    raise SystemExit(run_check())
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1]
+        if cmd == "posted":
+            if len(sys.argv) < 3:
+                print("usage: review_watcher.py posted <review_id>")
+                sys.exit(1)
+            sys.exit(run_posted(sys.argv[2]))
+        if cmd == "add":
+            sys.exit(add_review_interactive())
+        if cmd == "check":
+            sys.exit(run_check())
+    print("usage: review_watcher.py check   # draft replies for new inbox entries")
+    print("       review_watcher.py add     # add a review to the inbox interactively")
+    print("       review_watcher.py posted <review_id>   # mark as manually posted to Google")
+    sys.exit(1)
