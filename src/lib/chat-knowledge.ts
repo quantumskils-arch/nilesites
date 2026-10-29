@@ -19,14 +19,14 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["what do you do", "services", "what services", "offer", "what can you", "help with", "capabilities"],
     answer: {
-      text: "We build professional websites AND run full-time AI agents for Ugandan businesses:\n\n🌐 Web Design & Development — Mobile-responsive, modern sites\n🤖 NileSites AI Agents — watchdogs, WhatsApp agents & radars that work 24/7 (from UGX 80,000/month)\n☁️ Hosting & Domain Setup — 99.9% uptime, SSL, email\n💳 Mobile Money Integration — MTN MoMo & Airtel Money\n📍 Google Business Profile Setup — Get found on Google Maps\n📈 SEO & Maintenance — Keep your site ranking and fresh\n\nWebsites from UGX 450,000. Which interests you most — a website, or an AI agent?",
+      text: "We build professional websites AND run AI agents for Ugandan businesses:\n\n🌐 Web Design & Development — Mobile-responsive, modern sites\n🤖 NileSites AI Agents — watchdogs & Telegram bots (from UGX 80,000/month)\n☁️ Hosting & Domain Setup — SSL, email\n📍 Google Business Profile Setup — Get found on Google Maps\n📈 SEO & Maintenance — Keep your site ranking and fresh\n\nWebsites from UGX 450,000. Which interests you most — a website, or an AI agent?",
       followUp: ["Tell me about AI Agents", "How much does a website cost?", "I want a free website check"],
     },
   },
   {
-    keywords: ["ai agents", "agents", "agent", "ai", "watchdog", "website watchdog", "monitoring", "monitor my site", "radar", "competitor", "never sleep", "24/7"],
+    keywords: ["ai agents", "agents", "agent", "ai", "watchdog", "website watchdog", "monitoring", "monitor my site", "radar", "competitor", "never sleep"],
     answer: {
-      text: "NileSites AI Agents are full-time agents that work for your business 24/7:\n\n🟢 Website Health Watchdog (LIVE NOW) — weekly 0–100 scorecard on WhatsApp + instant alert if your site goes down. UGX 150,000 audit, UGX 80,000/month.\n🤖 Akiba Telegram Agent (BUILD TO ORDER) — Telegram bot that answers FAQs and captures order details; messages queue to your phone. From UGX 900,000 + UGX 100,000/month.\n🟡 Custom builds (2–4 weeks) — Competitor Radar, Review Watcher, Proposal-Deck Automation, Shorts Engine. From UGX 500,000.\n\nNo tech skills needed — if you can use Telegram or WhatsApp, you can run agents. See the full team on our AI Agents page!",
+      text: "NileSites AI Agents run on a set schedule for your business:\n\n🟢 Website Health Watchdog (LIVE NOW) — weekly 0–100 scorecard on WhatsApp + alert if your site goes down. UGX 150,000 audit, UGX 80,000/month.\n🤖 Akiba Telegram Agent (BUILD TO ORDER) — Telegram bot that answers FAQs and captures order details; messages queue to your phone. From UGX 900,000 + UGX 100,000/month.\n🟡 Custom builds (2–4 weeks) — Competitor Radar, Review Watcher, Proposal-Deck Automation, Shorts Engine. From UGX 500,000.\n\nNo tech skills needed — if you can use Telegram or WhatsApp, you can run agents. See the full team on our AI Agents page!",
       followUp: ["How does the Website Watchdog work?", "I want a free website check", "How much do agents cost?", "Tell me about Akiba AI"],
     },
   },
@@ -68,14 +68,14 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["hosting", "domain", "host", "server", "uptime", "ssl", "email", "web hosting"],
     answer: {
-      text: "All our plans include 1 year of reliable hosting with:\n\n✅ 99.9% uptime guarantee\n✅ Free SSL certificate (padlock icon for your site)\n✅ Daily backups — never lose your content\n✅ Fast servers optimized for Ugandan visitors\n\nDomain registration is separate — UGX 50,000–100,000/yr depending on extension (.com, .ug, .org, etc). We handle the entire setup for you.",
+      text: "All our plans include 1 year of reliable hosting with:\n\n✅ Free SSL certificate (padlock icon for your site)\n✅ Daily backups — never lose your content\n✅ Fast servers optimized for Ugandan visitors\n\nDomain registration is separate — UGX 50,000–100,000/yr depending on extension (.com, .ug, .org, etc). We handle the entire setup for you.",
       followUp: ["What's a domain?", "Can I keep my domain if I leave?", "What happens after the first year?"],
     },
   },
   {
     keywords: ["akiba", "akiba ai", "bot", "chatbot", "telegram bot", "automation", "automated", "ai assistant", "ai bot"],
     answer: {
-      text: "Akiba AI is our Telegram bot for Ugandan businesses. It can:\n\n🤖 Answer customer FAQs instantly — day or night\n📝 Take order details and capture leads — messages queue to your phone\n🇺🇬 Speak English (Luganda/Swahili coming)\n🔗 Integrate with your website\n\nCustomers message your bot on Telegram. You confirm orders and payment by MoMo/Airtel yourself. Starting at UGX 900,000 + UGX 100,000/month.",
+      text: "Akiba AI is our Telegram bot for Ugandan businesses. It can:\n\n🤖 Answer customer FAQs — day or night\n📝 Take order details and capture leads — messages queue to your phone\n🇺🇬 Speak English\n🔗 Integrate with your website\n\nCustomers message your bot on Telegram. You confirm orders and payment by MoMo/Airtel yourself. Starting at UGX 900,000 + UGX 100,000/month.",
       followUp: ["How is Akiba AI different from a regular chatbot?", "Which businesses can use Akiba AI?", "Can I try Akiba AI?"],
     },
   },
@@ -110,21 +110,21 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["portfolio", "examples", "work", "past projects", "showcase", "samples", "previous work"],
     answer: {
-      text: "We've built websites for:\n\n🏫 Little Steps Kindergarten — Multi-page school site with gallery and parent portal\n⛪ Victory Chapel Church — Full church site with sermon archive and donations\n🌍 Opportunity Radar — A comprehensive AI-powered opportunity discovery platform\n\nWe'd love to add your business to our portfolio! Check our Portfolio page for details.",
+      text: "We've built websites for Ugandan businesses including:\n\n🌍 Opportunity Radar — A comprehensive AI-powered opportunity discovery platform\n\nWe'd love to add your business to our portfolio! Check our Portfolio page for details.",
       followUp: ["Can you build a church website?", "Do you work with schools?", "Can I see your work?"],
     },
   },
   {
     keywords: ["church", "church website", "religious", "ministry", "worship", "sermon", "pastor"],
     answer: {
-      text: "Yes! We specialize in church websites. Features include:\n\n⛪ Service times — Always visible above the fold\n🎙️ Sermon archive — Audio recordings organized by series\n📅 Events calendar — Services, events, conferences\n💳 Mobile money giving — Tithes and offerings via MoMo\n📱 WhatsApp integration — Prayer requests, inquiries\n📍 Service locations — Maps and directions\n\nStarting at UGX 450,000. We've built for Victory Chapel Church and others.",
+      text: "Yes! We specialize in church websites. Features include:\n\n⛪ Service times — Always visible above the fold\n🎙️ Sermon archive — Audio recordings organized by series\n📅 Events calendar — Services, events, conferences\n📱 WhatsApp integration — Prayer requests, inquiries\n📍 Service locations — Maps and directions\n\nStarting at UGX 450,000.",
       followUp: ["How much for a church site?", "Can I have a building campaign page?", "Do you integrate with giving platforms?"],
     },
   },
   {
     keywords: ["school", "education", "kindergarten", "primary", "secondary", "academy", "college", "university"],
     answer: {
-      text: "Absolutely! We build school websites including:\n\n🏫 School profile and history\n📸 Photo galleries of facilities and events\n📅 Academic calendar and term dates\n👨‍👩‍👧 Parent portal for updates\n📋 Online enrollment inquiries\n📢 News and announcements\n\nWe built Little Steps Kindergarten's site. Starting at UGX 450,000.",
+      text: "Absolutely! We build school websites including:\n\n🏫 School profile and history\n📸 Photo galleries of facilities and events\n📅 Academic calendar and term dates\n👨‍👩‍👧 Parent portal for updates\n📋 Online enrollment inquiries\n📢 News and announcements\n\nStarting at UGX 450,000.",
       followUp: ["Can parents pay fees online?", "Do you include a parent portal?", "How much for a school site?"],
     },
   },
@@ -285,7 +285,7 @@ const knowledge: KnowledgeEntry[] = [
   {
     keywords: ["mobile money", "momo", "airtel money", "payment gateway", "pay", "checkout", "transaction"],
     answer: {
-      text: "Our Mobile Money Integration lets your customers pay via MTN MoMo or Airtel Money directly on your site. Features:\n\n✅ Real-time payment confirmation\n✅ Automatic WhatsApp/SMS receipt\n✅ Order tracking dashboard\n✅ Transaction history\n✅ No monthly fees — pay per transaction only\n\nThis is included in our Standard and Premium plans (add-on for Starter).",
+      text: "We can help you accept payments on your site via MTN MoMo or Airtel Money — you confirm payments yourself and tell the customer the order is confirmed. No order tracking dashboard or transaction history yet; we add that as your business grows.",
       followUp: ["How do I track payments?", "What are the transaction fees?", "Can I use both MoMo and Airtel?"],
     },
   },

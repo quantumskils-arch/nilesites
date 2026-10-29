@@ -13,7 +13,7 @@ const fadeUp = {
 
 const plans = [
   { name: "Starter", price: "450,000", desc: "Perfect for new businesses starting their online presence", popular: false, delivery: "3–5 business days", specs: "1GB storage · SSL · 1 email account", features: ["1–5 page static site", "Mobile responsive design", "WhatsApp contact button", "Basic SEO setup", "1 round of revisions", "1 year hosting included", "Free .com domain (1 year)"] },
-  { name: "Standard", price: "900,000", desc: "Best for growing businesses ready to scale", popular: true, delivery: "5–10 business days", specs: "5GB storage · SSL · 5 email accounts", features: ["Up to 10 pages with CMS", "MoMo payment integration", "Google Business Profile setup", "Photo gallery & catalog", "Contact form with auto-reply", "SEO optimization", "3 rounds of revisions", "Free .com domain (1 year)"] },
+  { name: "Standard", price: "900,000", desc: "Best for growing businesses ready to scale", popular: true, delivery: "5–10 business days", specs: "5GB storage · SSL · 5 email accounts", features: ["Up to 10 pages with CMS", "Google Business Profile setup", "Photo gallery & catalog", "Contact form with auto-reply", "SEO optimization", "3 rounds of revisions", "Free .com domain (1 year)"] },
   { name: "Premium", price: "1,500,000", desc: "Industry-specific solutions with custom features", popular: false, delivery: "10–20 business days", specs: "15GB storage · SSL · 10 email accounts", features: ["Booking/inventory systems", "E-commerce cart", "Custom forms & workflows", "Advanced SEO package", "Unlimited revisions", "Priority support", "Custom integrations", "Free .com domain (1 year)"] },
 ];
 

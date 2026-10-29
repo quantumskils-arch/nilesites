@@ -21,7 +21,7 @@ const fadeUp = {
 };
 
 const marqueeItems = [
-  "24/7 monitoring", "Telegram reports", "No tech skills needed", "UGX pricing",
+  "Daily monitoring", "Telegram reports", "No tech skills needed", "UGX pricing",
   "MoMo payments", "Same-week setup", "Human review always", "Cancel anytime",
 ];
 
@@ -79,7 +79,7 @@ const agents = [
 
 const steps = [
   { n: "01", title: "We plug in", desc: "You share your website and WhatsApp number. Setup takes days, not months — no tech skills needed from you." },
-  { n: "02", title: "Agents watch 24/7", desc: "They check your site, rivals, reviews and inbox around the clock — including Sundays and public holidays." },
+  { n: "02", title: "Agents watch daily", desc: "The Watchdog checks your site every morning at 08:15 EAT, plus a full audit every Monday at 07:00 EAT. Reports land in your Telegram." },
   { n: "03", title: "You get Telegram reports", desc: "Short, plain-English updates with exactly what to do. Forward them, approve them, or ignore them." },
 ];
 
@@ -171,7 +171,7 @@ export default function AgentsPage() {
             <h2 className="text-3xl sm:text-5xl font-bold mb-4" style={{ fontFamily: "var(--font-playfair)" }}>
               Meet your new <span className="bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent italic">full-time staff</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Each agent has one job, works 24/7, and reports on WhatsApp. Green badges are live today — gold badges are built to order in 2–4 weeks.</p>
+            <p className="text-gray-400 max-w-2xl mx-auto">Each agent has one job, runs on a set schedule, and reports on WhatsApp. Green badges are live today — gold badges are built to order in 2–4 weeks.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {agents.map((agent, i) => (
