@@ -59,7 +59,7 @@ export default function TelegramBotPage() {
                   <div>
                     <h3 className="text-white font-semibold">Answers FAQs — 24/7</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      Your bot replies to common questions from your knowledge base, any time of day or night. English only (Luganda/Swahili coming later).
+                      Your bot replies to common questions from your knowledge base, any time of day or night. English only.
                     </p>
                   </div>
                 </li>
@@ -139,8 +139,7 @@ export default function TelegramBotPage() {
               { t: "No instant MoMo confirmation", d: "You confirm payment yourself via MoMo/Airtel and tell the customer the order is confirmed." },
               { t: "No analytics dashboard", d: "Messages go to your Telegram. No charts, no conversation metrics yet." },
               { t: "No catalog cart or checkout", d: "Customers describe what they want in words — no product images, cart, or payment button." },
-              { t: "Not on WhatsApp", d: "This is a Telegram bot. WhatsApp Business API needs Meta verification — that&rsquo;s Phase 2." },
-              { t: "Luganda/Swahili not ready", d: "English only for now. Local languages are being tested." },
+              { t: "Not on WhatsApp", d: "This is a Telegram bot only. WhatsApp is not offered." },
               { t: "No autonomous fulfillment", d: "You fulfill the order. The bot captures the request — it doesn&rsquo;t deliver goods." },
             ].map((item, i) => (
               <motion.div
