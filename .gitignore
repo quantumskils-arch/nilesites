@@ -5,3 +5,6 @@ next-env.d.ts
 .vercel
 .data/
 .env*
+docs/__pycache__/
+docs/proposals/*.pdf
+docs/proposals/*.json
