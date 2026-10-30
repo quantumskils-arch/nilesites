@@ -144,7 +144,7 @@ export default function ClientTelegramBot() {
             ].map((item, i) => (
               <motion.div
                 key={item.t}
-                className="bg-white/[0.04] border border-white/10 rounded-xl p-6"
+                className="card-lift bg-white/[0.04] border border-white/10 rounded-xl p-6"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -177,7 +177,7 @@ export default function ClientTelegramBot() {
             ].map((item, i) => (
               <motion.div
                 key={item.t}
-                className="flex items-start gap-4 bg-white/[0.04] border border-white/10 rounded-xl p-6"
+                className="card-lift flex items-start gap-4 bg-white/[0.04] border border-white/10 rounded-xl p-6"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -211,7 +211,7 @@ export default function ClientTelegramBot() {
             ].map((step, i) => (
               <motion.div
                 key={step.n}
-                className="bg-white rounded-xl p-6 border border-gray-200"
+                className="card-lift bg-white rounded-xl p-6 border border-gray-200"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

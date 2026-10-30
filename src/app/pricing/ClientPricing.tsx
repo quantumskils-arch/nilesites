@@ -39,7 +39,7 @@ export default function ClientPricing() {
           <h2 className="text-3xl font-bold text-center text-navy-900 mb-12">Plans</h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {plans.map((plan) => (
-              <div key={plan.name} className={`rounded-xl p-8 border ${plan.popular ? "border-2 border-gold-500 shadow-lg" : "border-gray-200 shadow-sm hover:shadow-lg"}`}>
+              <div key={plan.name} className={`card-lift rounded-xl p-8 border ${plan.popular ? "border-2 border-gold-500 shadow-lg" : "border-gray-200 shadow-sm hover:shadow-xl"}`}>
                 <h3 className="font-semibold mb-1">{plan.name}</h3>
                 <p className="text-sm text-gray-500 mb-3">{plan.desc}</p>
                 <p className="text-3xl font-bold text-blue-700 mb-1">UGX {plan.price}</p>
@@ -60,7 +60,7 @@ export default function ClientPricing() {
           <h2 className="text-2xl font-bold text-center text-navy-900 mb-8">Add-Ons</h2>
           <div className="divide-y divide-gray-100 border rounded-xl overflow-hidden">
             {addOns.map((a) => (
-              <div key={a.name} className="flex justify-between p-4 hover:bg-gray-50">
+              <div key={a.name} className="card-lift flex justify-between p-4 hover:bg-gray-50">
                 <div><h3 className="font-medium text-navy-900">{a.name}</h3><p className="text-sm text-gray-500">{a.desc}</p></div>
                 <span className="font-semibold text-gold-600 whitespace-nowrap">{a.price}</span>
               </div>

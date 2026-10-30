@@ -10,13 +10,6 @@ export const metadata: Metadata = {
     "Websites for Ugandan businesses. Starting at UGX 450,000. Hosting included for the first year.",
 };
 
-const heroParticles = Array.from({ length: 20 }, () => ({
-  left: `${Math.random() * 100}%`,
-  top: `${Math.random() * 100}%`,
-  duration: 4 + Math.random() * 2,
-  delay: Math.random() * 3,
-}));
-
 const services: { title: string; desc: string; kind: ServiceArtKind; icon: string }[] = [
   { title: "Website Design & Build", desc: "Mobile-responsive, modern websites that turn visitors into customers. From 1-page to full multi-page with CMS.", kind: "design", icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
   { title: "Hosting & Domain Setup", desc: "Reliable hosting with custom domain, SSL, and email. We handle all the technical setup so you don't have to.", kind: "hosting", icon: "M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" },
@@ -33,21 +26,24 @@ const stats = [
 
 export default function HomePage() {
   return (
-    <>
+    <div className="page-fade">
       <section className="relative overflow-hidden bg-gray-900">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-amber-500/10 to-gray-900" />
+        {/* hero glow orbs — richer depth */}
+        <div className="absolute -top-20 left-1/4 w-[600px] h-[600px] bg-blue-500/10 hero-glow rounded-full blur-[100px]" />
+        <div className="absolute -bottom-24 right-1/5 w-[560px] h-[560px] bg-amber-500/8 hero-glow rounded-full blur-[96px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-8 items-center">
             <div className="text-left lg:text-right">
               <span className="bg-gradient-to-r from-blue-500 to-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">✨ PREMIUM</span>
-              <h1 className="text-[40px] sm:text-5xl lg:text-[64px] font-bold text-white leading-[0.95] tracking-tight mb-5">
+              <h1 className="text-[40px] sm:text-5xl lg:text-[68px] font-bold text-white leading-[0.95] tracking-tight mb-5">
                 More Customers.<br /><span className="bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent font-normal italic">Less Headache.</span>
               </h1>
               <p className="text-[17px] sm:text-lg text-gray-300 leading-relaxed max-w-xl mb-7">
                 You don&apos;t want a website. You want more bookings and a business that runs without you. We design, host and maintain the tool that delivers it — <span className="text-white font-semibold">from UGX 450,000</span>.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                <Link href="/pricing" className="bg-gradient-to-r from-blue-500 to-amber-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all text-center">See Plans & Pricing →</Link>
+                <Link href="/pricing" className="bg-gradient-to-r from-blue-500 to-amber-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all btn-glow text-center">See Plans & Pricing →</Link>
                 <a href={whatsappLink("Hi NileSites! I'd like to get a website for my business.")} target="_blank" rel="noopener noreferrer" className="bg-white/10 backdrop-blur-md text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-white/20 transition-all text-center border border-white/20">Chat on WhatsApp</a>
               </div>
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-6 border-t border-white/10">
@@ -63,7 +59,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat) => (
-              <div key={stat.label} className="flex flex-col items-center gap-2">
+              <div key={stat.label} className="card-lift flex flex-col items-center gap-2">
                 <span className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-500 to-amber-500 bg-clip-text text-transparent">{stat.value}</span>
                 <div className="text-sm text-gray-500">{stat.label}</div>
               </div>
@@ -85,7 +81,7 @@ export default function HomePage() {
           <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-amber-600 bg-clip-text text-transparent text-center mb-16">What We Build</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
-              <div key={service.title} className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all">
+              <div key={service.title} className="card-lift bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all">
                 <div className="h-40 bg-gradient-to-br from-blue-100 to-amber-100 relative overflow-hidden">
                   <ServiceArt kind={service.kind} className="w-full h-full" />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
@@ -100,6 +96,6 @@ export default function HomePage() {
         </div>
       </section>
       <CTASection />
-    </>
+    </div>
   );
 }

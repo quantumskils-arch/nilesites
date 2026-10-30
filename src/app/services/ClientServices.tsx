@@ -37,12 +37,12 @@ export default function ClientServices() {
               <h2 className="text-3xl font-bold text-white mb-3">NileSites AI Agents</h2>
               <p className="text-gray-300 leading-relaxed max-w-xl">Full-time agents that watch your website and report to you. From UGX 80,000/month.</p>
             </div>
-            <Link href="/ai-agents" className="shrink-0 bg-gradient-to-r from-blue-500 to-amber-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all">Meet the agents</Link>
+            <Link href="/ai-agents" className="shrink-0 bg-gradient-to-r from-blue-500 to-amber-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all btn-glow">Meet the agents</Link>
           </div>
         </section>
         {services.map((service, i) => (
           <section key={service.title} className="py-20">
-            <div className={`max-w-7xl mx-auto px-4 flex flex-col gap-12 items-center ${i % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+            <div className={`card-lift max-w-7xl mx-auto px-4 flex flex-col gap-12 items-center ${i % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
               <div className="flex-1">
                 <h2 className="text-3xl font-bold text-navy-900 mb-4">{service.title}</h2>
                 <p className="text-gray-600 mb-6 leading-relaxed">{service.desc}</p>
